@@ -1,0 +1,21 @@
+.navbar-container{
+    background-color: aliceblue;
+    
+   
+}
+
+.container{
+    text-align: center;
+    background-color: beige;
+    padding: 10px;
+    
+}
+
+.login-container{
+    background-color: aqua;
+    
+}
+
+.input{
+    border-radius: 10px;
+}
