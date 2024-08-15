@@ -4,31 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./PWCI DB/css/main.css">
+    <link rel="stylesheet" href="./PWCI DB/css/bootstrap.min.css">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="./PWCI DB/js/bootstrap.js"></script>
     <title>Log In</title>
 </head>
 <body>
 
-    <div class="navbar-container">
+    <nav class="navbar navbar-expand-lg mi-navbar">
+        <div style="background-color: #88aaa3;"class="container-fluid">
 
+          <a class="navbar-brand" href="#">
+            <img class="icon-logo"src="https://i.redd.it/klho2y2vh1nb1.jpg"/>
+            D&B</a>
 
-        <h1>TIENDA</h1>
-        <label>¿No tienes cuenta?</label><button>Sign Up</button>
-    </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
-    <div class="container">
-        LOGIN
-        <div class="login-container">
-           
+      <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
-            <label>User/email</label><input type="text" class="input" id="login-user">
-            <label>Contraseña</label><input type="password" class="input "id="login-password">
-            <a href="#"><label>¿Olvidaste tu contraseña?</label></a>
-            <input type="checkbox" class="input" id="remember-me"> <label>Recuerdame</label>
-            <button>Log In</button>
+        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+
+        <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background-image: #3C3D37;">
+
+            <div class="featured-image mb-3">
+                <img src="PWCI DB/src/login1.png" alt="" class="img-fluid" style="width: 600px; border-radius: 25px;">
+
+            </div>
 
         </div>
-        
-    </div>
-    
+
+        <div class="col-md-6 right-box">
+        <div class="row align-items-center">
+
+            <div class="header-text mb-4">
+                <h2>Bienvenido a D&B</h2>
+                <p>Nos alegra que gastes aquí</p>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username / E-mail">
+                </div>
+                <div class="input-group mb-1">
+                    <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">
+                </div>
+                <div class="input-group mb-5 d-flex justify-content-between">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="formCheck">
+                        <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
+
+                    </div>
+
+                    <div class="forgot">
+                        <small><a href="#">¿Olvidaste tu contraseña?</a></small>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <button style="background-color: #88aaa3; border-style: none; border-radius: 20px;" class="btn btn-lg btn-primary w-100 fs-6">Iniciar sesión</button>
+                </div>
+
+            </div>
+        </div>
+       
+
+        </div>
+
+      </div>
+  
 </body>
 </html>

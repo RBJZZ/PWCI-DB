@@ -1,21 +1,55 @@
-.navbar-container{
-    background-color: aliceblue;
-    
-   
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    background-image: url(https://t3.ftcdn.net/jpg/01/72/90/92/360_F_172909278_plxmQjlUaw14rJv7qyHrrlc8UJMh0weg.jpg);
+    overflow: hidden;
 }
 
-.container{
-    text-align: center;
-    background-color: beige;
-    padding: 10px;
-    
+.mi-navbar{
+    background-color: #88aaa3;
 }
 
-.login-container{
-    background-color: aqua;
-    
+.icon-logo{
+    width: 30px;
+    border-radius: 50%;
 }
 
-.input{
-    border-radius: 10px;
+.box-area{
+    width: 930px;
+}
+
+h2{
+    margin-left:19%;
+    font-family:"Poppins", sans-serif;
+    font-weight:bold;
+}
+p{
+    margin-left:25%;
+    font-family:"Poppins", sans-serif;
+}
+
+@media only screen and(max-width:768px){
+    .box-area{
+        margin:0 10px;
+    }
+
+    .left-box{
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .right-box{
+        padding: 20px;
+    }
+
+    h2{
+        margin-left:0;
+        font-family:"Poppins", sans-serif;
+        font-weight:bold;
+    }
+    p{
+        margin-left:0;
+        font-family:"Poppins", sans-serif;
+    }
+    
 }
