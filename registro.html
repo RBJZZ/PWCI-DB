@@ -42,58 +42,104 @@
         </div>
       </nav>
 
+     
 <!--CONTAINER DEL FORM DE REGISTRO PARA CLIENTES-->
-      <div class="container bg-light p-5" style="margin-top: 180px; border-radius: 30px; border-style:dashed;">
+      <div class="container p-5 container-clientR" style="margin-top: 180px;">
+        
+        
         <div class="row justify-content-center">
             <div class="col-lg-9 bg-light text-center">
-                <div class="row justify-content-center">
-                    <!--LADO DERECHO-->
-                    <div class="col-lg-6 bg-secondary">
-                        Side 1
-
-                    </div>
-
-
-
-                    <!--LADO IZQUIERDO-->
-                    <div class="col-lg-6 bg-primary">
-                        Side 2
+                <div class="row justify-content-start" style="background-color: #88aaa3; border-radius: 20px;">
                         
-                        <div class="row justify-content-center bg-light p-2 m-2" style="border-radius: 20px;">
-                            <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png" alt="" style="width: 250px; border-radius: 50%;">
-                            <h3 class="mt-3 text-center" style="margin-left: 0%;">Datos personales</h3>
-                            <form action="#" method="post" id="register-client" enctype="multipart/form-data">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link-active" id="nav-client-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-client" type="button" role="tab" aria-controls="nav-client"
+                        aria-selected="true">Cliente</button>
+                    
 
-                                <input type="text" class="form-control form-control-lg mt-3" placeholder="Nombre">
+                    
+                        <button class="nav-link" id="nav-seller-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-seller" type="button" role="tab" aria-controls="nav-seller"
+                        aria-selected="false">Cliente</button>
+                    
 
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control form-control-lg mt-3" placeholder="Apellido Paterno"> 
-                                        <input type="date" class="form-control-lg form-control mt-3">
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control form-control-lg mt-3" placeholder="Apellido Materno"> 
-                                        <select class="form-select form-select-lg mt-3" aria-label="Default select example">
-                                            <option selected>Sexo</option>
-                                            <option value="1">Masculino</option>
-                                            <option value="2">Femenino</option>
-                                            <option value="3">No binario</option>
-                                        </select>
-                                    </div>
-                                   
-                                </div>
-                                
-
-
-                            </form>
-                            
                         </div>
-                    </div>
+                    </nav>
+                </div>
+
+                <div class="row justify-content-center p-4" style="border-radius: 20px; background-color: white;">
+
+                    
+                    <!--LADO DERECHO-->
+                    
+                        <div class="col-lg-6 bg-light">
+                            Side 1
+                            <div class="row justify-items-center bg-light p-3 m-2" style="border-radius: 20px;">
+                                <h3 class="mt-3 text-center">Registro estándar</h3>
+                                <p style="margin: 0%;">Bienvenido a D&B</p>
+                                <input type="text" class="form-control form-control-lg mt-3" placeholder="E-mail">
+                                <input type="text" class="form-control form-control-lg mt-3" placeholder="Username">
+                                <input type="text" class="form-control form-control-lg mt-3" placeholder="Contraseña">
+                                <input type="text" class="form-control form-control-lg mt-3" placeholder="Confirmar contraseña">
+                                
+                                <div>
+                                    <div class="pass-checkbar mt-3 col-lg-12" style="height: 10px; background-color: gray; border-radius: 20px;"></div>
+                                </div>
+
+                                <p class="pass-checkbar mt-1 m-1">¿la contraseña es segura?</p>
+
+                            </div>
+                        </div>
+
+
+
+                        <!--LADO IZQUIERDO-->
+                        <div class="col-lg-6 bg-light">
+                            Side 2
+                            
+                            <div class="row justify-content-center bg-light p-2 m-2" style="border-radius: 20px;">
+                            <!--   <h4 class="mt-3 text-center" style="margin-left: 0%;">Datos personales</h4>-->
+                                <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png" alt="" style="width: 250px; border-radius: 50%;">
+                                
+                                <form action="#" method="post" id="register-client" enctype="multipart/form-data">
+
+                                    <input type="text" class="form-control form-control-lg mt-3" placeholder="Nombre">
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control form-control-lg mt-3" placeholder="Apellido Paterno"> 
+                                            <input type="date" class="form-control-lg form-control mt-3">
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control form-control-lg mt-3" placeholder="Apellido Materno"> 
+                                            <select class="form-select form-select-lg mt-3" aria-label="Default select example">
+                                                <option selected>Sexo</option>
+                                                <option value="1">Masculino</option>
+                                                <option value="2">Femenino</option>
+                                                <option value="3">No binario</option>
+                                            </select>
+                                        </div>
+                                    
+                                    </div>
+                                    
+
+
+                                </form>
+                                
+                            </div>
+                        </div>
+
+                        
+                        
+                    
                 </div>
             </div>
         </div>
       </div>
+
+
     <!--FIN CONTAINER REGISTRO CLIENTES-->
 </body>
 </html>
