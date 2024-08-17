@@ -3,7 +3,7 @@
 
 body{
     background-image: url(https://t3.ftcdn.net/jpg/01/72/90/92/360_F_172909278_plxmQjlUaw14rJv7qyHrrlc8UJMh0weg.jpg);
-    overflow: hidden;
+    
 }
 
 .mi-navbar{
@@ -48,7 +48,6 @@ p{
 
     .left-box{
         height: 100px;
-        overflow: hidden;
     }
 
     .right-box{
