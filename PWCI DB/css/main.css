@@ -37,6 +37,10 @@ p{
     font-family:"Poppins", sans-serif;
 }
 
+.dashboard-img{
+    height: 500px;
+}
+
 @media only screen and(max-width:768px){
 
     body{
@@ -54,5 +58,5 @@ p{
         padding: 20px;
     }
 
-    
+
 }
