@@ -26,8 +26,14 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-10">
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                    <a href="./profile.html" class="nav-link">@username</a>
+                  </li>
+
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="dashboard.html">Home</a>
               </li>
@@ -40,26 +46,55 @@
               <li class="nav-item">
                 <a class="nav-link disabled" aria-disabled="true">Disabled</a>
               </li>
+              <button type="button" class="btn btn-light rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Buscar
+              </button>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
+
+            
+
           </div>
         </div>
       </nav>
+
+      <!--VENTANA MODAL DE BUSQUEDA-->
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" style="background-color:#a7d6c4;">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:#2c523d">¿Qué es lo que buscas?</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="" method="get">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><box-icon name='search-alt-2' rotate='90' color='#2c523d' ></box-icon></span>
+                  <input type="text" class="form-control" placeholder="Escribe algo..." aria-label="search-bar" aria-describedby="basic-addon1">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid justify-content-center text-center" style="margin-top: 60px;">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <!--FIN DE VENTANA MODAL DE BUSQUEDA-->
     
       <div class="profile-container container-fluid justify-content-center">
 
         <div class="row justify-content-center text-center">
-            <div class="col-lg-8" style="background-color: white; border-radius: 30px;">
+            <div class="col-lg-8 shadow-lg" style="background-color: white; border-radius: 30px;">
                 <div class="row justify-content-start">
-                    <div class="col-lg-3">
-                        <img class="m-4 rounded-circle object-fit-fill" src="./PWCI DB/src/avatar.png" alt="" style="width: 300px; height: 300px;">
+                    <div class="col-lg-3 rounded-5" style="background-color: #cfe0dc;">
+                        <img class="m-1 my-5 rounded-circle object-fit-fill" src="./PWCI DB/src/avatar.png" alt="" style="width: 200px; height: 200px;">
                         <p style="margin-top: 20px; margin-left:0px">Bienvenido nuevamente, @username</p>
+                        <a href="./index.html"><button class="btn btn-light rounded-pill m-3">Cerrar sesión</button></a>
                     </div>
                     <div class="col-lg-9 justify-content-center">
-                        <div class="col-lg-11 m-3 p-1" style="background-color: white;">
+                        <div class="col-lg-11 m-3 p-1">
                             <form action="" class="edit-profile" method="post">
                                 <input type="text" class="form-control my-2" placeholder="Username">
                                 <input type="text" class="form-control my-2" placeholder="E-mail">
@@ -86,6 +121,7 @@
                                     <option value="3">No binario</option>
                                   </select>
                                 <input type="file" name="picture-profile" id="" class="form-control my-2">
+                                
 
                                 <button type="submit" class="btn btn-secondary rounded-pill my-1" disabled>Guardar</button>
                                 
