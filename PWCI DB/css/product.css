@@ -20,11 +20,11 @@
 
 
 }
-
+/*
 body{
     background-image: url(https://t3.ftcdn.net/jpg/01/72/90/92/360_F_172909278_plxmQjlUaw14rJv7qyHrrlc8UJMh0weg.jpg);
     
-}
+}*/
 
 .mi-navbar{
     background-color: #88aaa3;
@@ -44,33 +44,5 @@ body{
 }
 .box-area{
     width: 930px;
-}
-
-h2{
-
-    margin-left:17%;
-    font-family:"Poppins", sans-serif;
-    font-weight:bold;
-}
-p{
-    margin-left:19%;
-    font-family:"Poppins", sans-serif;
-}
-    
-
-.dashboard-img{
-    height: 500px;
-}
-
-.card-body p{
-    margin-left: 10px;
-}
-
-.categories-ball{
-    border-radius: 50%; 
-}
-
-.profile-container{
-    margin-top: 100px;
 }
 
