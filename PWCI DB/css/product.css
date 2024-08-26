@@ -1,30 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
-
-@media only screen and(max-width:768px){
-
-    body{
-        overflow: visible;
+@media (max-width: 1600px) {
+    .product-thumbnail {
+      display: none;
     }
-    .box-area{
-        margin:0 10px;
-    }
+  
+}
 
-    .left-box{
-        height: 100px;
+@media (max-width: 768px) {
+    .rating {
+      width: 60vw;
     }
-
-    .right-box{
-        padding: 20px;
-    }
-
 
 }
-/*
+
+
+
 body{
-    background-image: url(https://t3.ftcdn.net/jpg/01/72/90/92/360_F_172909278_plxmQjlUaw14rJv7qyHrrlc8UJMh0weg.jpg);
+   background-color: white;
     
-}*/
+}
+.hidden{
+    display: none;
+}
 
 .mi-navbar{
     background-color: #88aaa3;
@@ -32,6 +30,7 @@ body{
 
 .icon-logo{
     width: 30px;
+    height: 30px;
     border-radius: 50%;
     
 }
@@ -46,3 +45,163 @@ body{
     width: 930px;
 }
 
+.btn-action{
+    transition: transform 0.3s ease;
+}
+
+.btn-action:hover{
+    transform: scale(1.03);
+}
+
+/* STAR RATING CSS */
+
+
+.star{
+    font-size: 3rem;
+    color:#ff9800;
+    text-align: center;
+}
+
+.star:hover{
+    cursor:pointer;
+
+}
+
+/* USER STAR BAR */
+
+.app{
+    min-height: 30vh;
+    background-color: #ffffff;
+    display:grid;
+    place-items: center;
+    border-radius: 25px;
+}
+
+.rating{
+    width: 40vw;
+    display:flex;
+    align-items: center;
+    column-gap: 2rem;
+}
+
+.rating__average{
+    width: 25%;
+    background-color: #aeaeae35;
+    padding:1rem;
+    border-radius:.8rem;
+    text-align: center;
+}
+
+.rating__average_top{
+    width: 25%;
+    background-color: #aeaeae35;
+    padding:1rem;
+    border-radius:.8rem;
+    text-align: center;
+}
+
+.rating__average h2{
+    font-size:3rem;
+}
+
+.rating__average .star-outer{
+    position:relative;
+    font-size: 2rem;
+    display: inline-block;
+}
+
+.rating__average_top .star-outer-top{
+    position:relative;
+    font-size: 2rem;
+    display: inline-block;
+}
+
+.rating__average_top .star-outer-top::before{
+    content:"\2605 \2605 \2605 \2605 \2605";
+    color:#fff8;
+}
+
+.rating__average .star-outer::before{
+    content:"\2605 \2605 \2605 \2605 \2605";
+    color:#fff8;
+}
+
+.rating__average .star-inner{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width: 50%;
+    overflow: hidden;
+    
+}
+
+.rating__average .star-inner::before{
+    content:"\2605 \2605 \2605 \2605 \2605";
+    color:gold;
+}
+
+.rating__average_top .star-inner-top{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width: 50%;
+    overflow: hidden;
+    
+}
+
+.rating__average_top .star-inner-top::before{
+    content:"\2605 \2605 \2605 \2605 \2605";
+    color:gold;
+}
+
+
+
+
+.rating__average p{
+    font-size:.7rem;
+    letter-spacing: .1rem;
+}
+
+.rating__progress{
+    width: 70%;
+}
+
+.rating__progress-value{
+    height: 2rem;
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+    column-gap: 1rem;
+}
+
+.rating__progress-value .star{
+    font-size:1.2rem;
+    color:gold;
+}
+
+.rating__progress-value p:last-child{
+    width: 10%;
+}
+
+.rating__progress .prog{
+    flex:1 1 0;
+    height: .5rem;
+    border-radius: .5rem;
+    background-color: #ff02;
+}
+
+.bar{
+    height: 100%;
+    background-color: gold;
+    border-radius: .5rem;
+}
+/* SECCION DE MÁS PRODUCTOS... */
+.card{
+    transition: transform 0.3s ease;
+}
+
+.card:hover{
+    transform:rotateZ(0.7deg);
+}

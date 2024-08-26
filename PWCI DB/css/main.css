@@ -20,12 +20,12 @@
 
 
 }
-
+/*
 body{
     background-image: url(https://t3.ftcdn.net/jpg/01/72/90/92/360_F_172909278_plxmQjlUaw14rJv7qyHrrlc8UJMh0weg.jpg);
     
 }
-
+*/
 .mi-navbar{
     background-color: #88aaa3;
 }
@@ -68,9 +68,21 @@ p{
 
 .categories-ball{
     border-radius: 50%; 
+    transition: transform 0.3s ease;
+}
+
+.categories-ball:hover{
+    transform: scale(1.03);
 }
 
 .profile-container{
     margin-top: 100px;
 }
 
+.card{
+    transition: transform 0.3s ease;
+}
+
+.card:hover{
+    transform:rotateZ(0.7deg);
+}
