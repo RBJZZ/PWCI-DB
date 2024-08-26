@@ -22,8 +22,12 @@
   
 }
 
-
-
+.search-btn{
+    transition: width 0.3 ease;
+}
+.search-btn:hover{
+    width: 110px;
+}
 
 body{
    background-color: white;
