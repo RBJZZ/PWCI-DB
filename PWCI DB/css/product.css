@@ -216,5 +216,5 @@ body{
 }
 
 .card:hover{
-    transform:rotateZ(0.7deg);
+    transform:rotateZ(0.7deg) scale(1.03);
 }

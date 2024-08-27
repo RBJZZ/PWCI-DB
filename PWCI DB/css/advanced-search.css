@@ -1,0 +1,18 @@
+
+#btn-check-ranking{
+    color:rgb(75, 75, 75);
+}
+
+
+#btn-check-ranking:active{
+    color:gold !important;
+}
+
+#btn-filter{
+    transition: transform 0.3s ease;
+}
+
+#btn-filter:hover{
+    transform: scale(1.03);
+    color:rgb(38, 144, 91);
+}
