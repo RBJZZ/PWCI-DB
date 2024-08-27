@@ -1,0 +1,14 @@
+
+
+/* Se revela cuando OTRA persona quiere ver nuestro perfil y está bloqueado */
+.hidden-profile{
+    display:none;
+}
+/*Se revela solo cuando el usuario actual COINCIDE con el del perfil*/
+.edit-profile{
+    display:none;
+}
+.edit-pf{
+    display:none;
+}
+
