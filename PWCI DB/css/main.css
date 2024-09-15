@@ -86,3 +86,11 @@ p{
 .card:hover{
     transform:rotateZ(0.7deg) scale(1.03);
 }
+
+.hide-column{
+    visibility: hidden;
+}
+
+.item-select{
+    width: 20px;
+}

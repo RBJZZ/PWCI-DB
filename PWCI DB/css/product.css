@@ -218,3 +218,9 @@ body{
 .card:hover{
     transform:rotateZ(0.7deg) scale(1.03);
 }
+
+/*VENTANA MODAL, FORMULARIO DE CREACION DE LISTAS*/
+
+.create-list{
+    display:none;
+}
