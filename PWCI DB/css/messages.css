@@ -1,0 +1,19 @@
+.balloon {
+    max-width: 60%;
+    word-wrap: break-word;
+}
+.balloon-left {
+    align-self: flex-start;
+    background-color: #f1f0f0;
+}
+.balloon-right {
+    align-self: flex-end;
+    background-color: #88aaa3 !important;
+    color: white !important;
+}
+.input-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+}
