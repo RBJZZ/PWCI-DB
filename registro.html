@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./PWCI DB/css/main.css">
     <link rel="stylesheet" href="./PWCI DB/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./PWCI DB/css/registro.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="./PWCI DB/js/bootstrap.js"></script>
     <link rel="icon" href="./PWCI DB/src/logo1.png" type="image/x-icon">
@@ -67,7 +68,7 @@
                     
                         <button class="nav-link" id="nav-seller-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-seller" type="button" role="tab" aria-controls="nav-seller"
-                        aria-selected="false">Vendedor</button>
+                        aria-selected="false" style="display:none">Vendedor</button>
                     
 
                         </div>
@@ -80,57 +81,59 @@
                     <!--FORM CLIENTE-->
                     
                         <div class="col-lg-8 tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
-                            <form action="" method="post">
+                            <form id="register-form" action="" method="post" class="needs-validation">
                               <div class="row justify-items-center justify-content-center p-3 m-2" style="border-radius: 20px;">
                                 <h3 class="mt-3 text-center">Registro estándar</h3>
                                 <p style="margin: 0%;">Bienvenido a D&B</p>
 
-                                <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png" alt="" style="width: 250px; border-radius: 50%;">
+                                <img id="pic-preview" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png" alt="" style="width: 250px; border-radius: 50%;">
 
-                                <input type="file" name="" id="" class="form-control form-control-lg mt-3">
-                                <input type="text" class="form-control form-control-lg mt-3" placeholder="E-mail">
-                                <input type="text" class="form-control form-control-lg mt-3" placeholder="Username">
-                                <input type="text" class="form-control form-control-lg mt-3" placeholder="Contraseña">
-                                <input type="text" class="form-control form-control-lg mt-3" placeholder="Confirmar contraseña">
+                                <input type="file" id="pic-input" name="pic-register"  class="form-control form-control-lg mt-3 border focus-ring" accept="image/*" required>
+                                <input type="text" id="email-input" name="email-register" class="form-control form-control-lg mt-3 focus-ring" placeholder="E-mail" required>
+                                <input type="text" id="user-input" name="username-register" class="form-control form-control-lg mt-3 border focus-ring" placeholder="Username" required oninput="CheckUserFormat()">
+                                <input type="password" id="pass-input" name="password-register" class="form-control form-control-lg mt-3 focus-ring border" placeholder="Contraseña" required oninput="CheckPassword()">
+                                <input type="password" id="pass-input2" name="checkpassword-register" class="form-control form-control-lg mt-3 focus-ring border" placeholder="Confirmar contraseña" required oninput="ConfirmPassword()">
                                 
+                                <div class="mt-1 mb-0">
+                                  <p id="no-spaces" class="mb-0" style="margin-left:0; display: none;">¡La contraseña no debe tener espacios!</p>
+                                  <p id="pass-confirm" class="mb-0" style="margin-left:0; display: none;">¡Las contraseñas no coinciden!</p>
+                              </div>
+
                                 <div>
-                                    <div class="pass-checkbar mt-3 col-lg-12" style="height: 10px; background-color: green; border-radius: 20px;"></div>
+                                    <div id="pass-bar" class="pass-checkbar mt-3 col-lg-12" style="height: 10px; border-radius: 20px;"></div>
                                 </div>
 
                                 <p class="pass-checkbar mt-1 m-1">¿la contraseña es segura?</p>
-
-                                
-                                
-                                    
                                     
                                     <div class="row justify-content-center m-0" style="background-color: white; padding:0%; border-radius: 20px;">
                                       <h4 style="margin-top:10px; margin-bottom: 10px;">Datos personales</h4>
                                         <div class="col-lg-6">
                                           
-                                            <input type="text" class="form-control form-control-lg mt-3" placeholder="Nombre">
-                                            <input type="text" class="form-control form-control-lg my-3" placeholder="Apellido Paterno"> 
-                                            <input type="date" class="form-control-lg form-control my-3">
+                                            <input id="name-input" name="name-register" type="text" class="form-control form-control-lg mt-3 border focus-ring" placeholder="Nombre" required oninput="NameCheck()">
+                                            <input id="lname-input" name="lname-register" type="text" class="form-control form-control-lg my-3 border focus-ring" placeholder="Apellido Materno" required oninput="LastCheck()"> 
+                                            <input id="date-input" type="date" class="form-control-lg form-control my-3" required>
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control form-control-lg my-3" placeholder="Apellido Materno"> 
-                                            <select class="form-select form-select-lg mt-3" aria-label="Default select example">
-                                                <option selected>Género</option>
+                                            <input id="fname-input" name="fname-register" type="text" class="form-control form-control-lg my-3 border focus-ring" placeholder="Apellido Paterno" required oninput="FirstCheck()"> 
+                                            <select id="gender-input" class="form-select form-select-lg mt-3" aria-label="Form for gender selection" required>
+                                                <option value="" selected disabled>Género</option>
                                                 <option value="1">Masculino</option>
                                                 <option value="2">Femenino</option>
                                                 <option value="3">Otro</option>
                                             </select>
 
-                                            <select class="form-select form-select-lg mt-3" aria-label="Default select example">
-                                              <option selected>Rol de usuario</option>
+                                            <select id="role-selection" class="form-select form-select-lg mt-3" aria-label="Form for role selection" required>
+                                              <option value="" selected disabled>Rol de usuario</option>
                                               <option value="1">Cliente</option>
                                               <option value="2">Vendedor</option>
+                                              
                                           </select>
                                             
                                         </div>
 
-                                        <input type="button" class="btn btn-secondary mt-3 rounded-pill" value="Registrar" style="width: 150px; margin-bottom:20px ;">
-                                    
+                                        <input type="submit" id="button-register" class="btn btn-secondary mt-3 rounded-pill" value="Registrar" style="width: 150px; margin-bottom:20px;">
+                                        
                                     </div>
                                     
                             </div>
@@ -144,7 +147,7 @@
 
                         <!--FORM VENDEDOR-->
 
-                        <div class="col-lg-8 tab-pane fade" id="nav-seller" role="tabpanel" aria-labelledby="nav-seller-tab">
+                        <div class="col-lg-8 tab-pane fade" id="nav-seller" role="tabpanel" aria-labelledby="nav-seller-tab" style="display:none">
                           <form action="" method="post">
                             <div class="row justify-items-center justify-content-center p-3 m-2" style="border-radius: 20px;">
                               <h3 class="mt-3 text-center">Registro vendedor</h3>
@@ -213,5 +216,7 @@
 
 
     <!--FIN CONTAINER REGISTRO CLIENTES-->
+
+    <script src="./PWCI DB/js/registro.js"></script>
 </body>
 </html>
