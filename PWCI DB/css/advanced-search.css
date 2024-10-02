@@ -9,10 +9,20 @@
 }
 
 #btn-filter{
+    color:rgb(131, 131, 131);
     transition: transform 0.3s ease;
 }
 
 #btn-filter:hover{
     transform: scale(1.03);
-    color:rgb(38, 144, 91);
+    color:rgb(0, 0, 0);
 }
+
+.btn-card{
+    background-color: rgb(228, 228, 228) !important;
+}
+
+.btn-card:hover{
+    background-color: rgb(213, 213, 213) !important;
+}
+  

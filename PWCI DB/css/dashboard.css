@@ -1,0 +1,48 @@
+.horizontal-scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .horizontal-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  
+  .horizontal-scroll {
+    display: inline-flex;
+  }
+  
+  .card {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+
+  .horizontal-scroll-container2 {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .horizontal-scroll-container2::-webkit-scrollbar {
+    display: none;
+  }
+  
+  
+  .horizontal-scroll2 {
+    display: inline-flex;
+  }
+  
+.btn-card{
+    background-color: rgb(228, 228, 228) !important;
+}
+
+.btn-card:hover{
+    background-color: rgb(213, 213, 213) !important;
+}
+  
