@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: ../index.php"); 
+    exit();
+}
+
+$user_id = $_SESSION["user_id"];
+$user_name = $_SESSION["user_name"];
+$user_type = $_SESSION["user_type"];
+$type_desc = $_SESSION["type_desc"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +50,7 @@
                    1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 
                    11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 
                    5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg></span> Usuario</a>
+                </svg></span> <?php echo htmlspecialchars($user_name);?> </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="./shopping-cart.html">
@@ -113,7 +127,7 @@
 
       <div class="container-fluid bg-white" style="margin-top:58px">
         <div class="row justify-content-center text-center">
-            <h4 class="m-3 p-2"> <span><img class="m-1 p-1" src="./src/src/avatar.png" alt="admin-pic" style="height: 60px; border-radius: 50%;"></span> Bienvenido, <span style="text-decoration: underline;">Admin-001</span></h4>
+            <h4 class="m-3 p-2"> <span><img class="m-1 p-1" src="./src/src/avatar.png" alt="admin-pic" style="height: 60px; border-radius: 50%;"></span> Bienvenido, <span style="text-decoration: underline;"><?php echo htmlspecialchars($user_name);?></span></h4>
         </div>
         <div class="row justify-content-center text-center border">
             <h5 class="m-2"><span><i class="bi bi-bell-fill"></i></span> Notificaciones <span><span class="badge text-bg-danger rounded-pill">1589</span></span></h5>

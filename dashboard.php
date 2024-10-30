@@ -53,7 +53,7 @@
                   </svg></i> Carrito</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./advanced-search.html"><span><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                <a class="nav-link" href="#"><button class="btn border-0 p-0 mt-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><span><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
                   <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 
                   1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 
                   4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 
@@ -62,7 +62,7 @@
                   <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1
                    1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 
                    0 0 0 1.414 0l.043-.043z"/>
-                </svg></span> Categorías</a>
+                </svg></span> Categorías</button></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="./lists.html"><span><svg style="margin-bottom:2px"xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
@@ -116,6 +116,32 @@
       </div>
 
       <!--FINAL DE VENTANA MODAL-->
+
+      <!--CATEGORIAS OFFCANVAS-->
+
+      <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasTopLabel">Categorías</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="row justify-content-center mx-5">
+            <div class="col-lg-3 bg-primary">
+              hola
+            </div>
+            <div class="col-lg-3 bg-secondary">
+              hola2
+            </div> 
+            <div class="col-lg-3 bg-danger">
+              hola3
+            </div>
+            <div class="col-lg-3 bg-warning">
+              hola4
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <div class="container-fluid justify-content-center text-center" style="margin-top: 60px;">
         <div class="row justify-content-center">

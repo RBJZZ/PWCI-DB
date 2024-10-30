@@ -70,10 +70,9 @@
           <div class="header-text mb-4">
             <h2 style="margin-top: 50px">Bienvenido a <span id="brand">D&B</span></h2>
             <p>Nos alegramos de verte de nuevo.</p>
-            <form id="loginForm">
 
-              
-        
+            <!--LOGIN FORM START-->
+            <form id="loginForm" method="post" action="./php/login.php">
                 <div class="input-group mb-3">
                     <input id="userName" name="userName" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username / E-mail" required>
                 </div>
@@ -96,6 +95,7 @@
                 </div>
         
             </form>
+            <!--LOGIN FORM END-->
          
 
             </div>

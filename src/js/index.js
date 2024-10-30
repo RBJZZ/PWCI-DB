@@ -1,4 +1,5 @@
 // Función para manejar el inicio de sesión
+/**
 function Login(event) {
     // Evitar el envío del formulario por defecto
     event.preventDefault();
@@ -18,12 +19,12 @@ function Login(event) {
         }
 
         // Simular redirección a dashboard.html (puedes hacer un envío real)
-        window.location.href = "./dashboard.html";
+        window.location.href = "./php/login.php";
     } else {
         alert("Por favor, completa ambos campos.");
     }
 }
-
+**/
 // Función para cargar el nombre de usuario si se guardó
 function checkRememberedUser() {
     var rememberedUser = localStorage.getItem('username');
