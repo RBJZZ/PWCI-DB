@@ -10,6 +10,6 @@
 }
 /*Se revela solo cuando el usuario actual COINCIDE con el del perfil*/
 .edit-profile{
-    display:none;
+    display:all;
 }
 

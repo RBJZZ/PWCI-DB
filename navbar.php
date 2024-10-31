@@ -9,11 +9,16 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = $_SESSION["user_id"];
 $user_name = $_SESSION["user_name"];
+$user_AP = $_SESSION["user_AP"];
+$user_AM = $_SESSION["user_AM"];
+$user_bday=$_SESSION["user_bday"];
+$user_email=$_SESSION["user_email"];
 $user_type = $_SESSION["user_type"];
 $type_desc = $_SESSION["type_desc"];
 $user_logdate=$_SESSION["user_logdate"];
 $user_pic=$_SESSION["user_pic"];
 $username=$_SESSION["username"];
+$user_gender=$_SESSION["usergender"];
 ?>
 
 <nav class="navbar navbar-expand-lg mi-navbar fixed-top">

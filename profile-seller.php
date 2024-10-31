@@ -69,7 +69,7 @@
                       <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <div class="row justify-content-start my-2">
-                                <a href="./consult-sales.html">Consulta de ventas</a>
+                                <a href="./consult-sales.php">Consulta de ventas</a>
                             </div>
 
                         </div>
@@ -85,7 +85,7 @@
                         <div class="accordion-body">
 
                             <div class="row justify-content-start my-2">
-                                <a href="./publish-product.html">Publicar</a>
+                                <a href="./publish-product.php">Publicar</a>
                             </div>
 
                             <div class="row justify-content-start my-2">
@@ -105,7 +105,7 @@
                         <div class="accordion-body">
 
                             <div class="row justify-content-start my-2">
-                                <a href="./messages.html">Mensajes</a>
+                                <a href="./messages.php">Mensajes</a>
                             </div>
 
                         </div>
@@ -131,7 +131,7 @@
                         
                         <div class="card-group">
                             <div class="card mx-1">
-                              <a href="./product-view.html"><img src="./src/src/img1.png" class="card-img-top" alt="..."></a>
+                              <a href="./product-view.php"><img src="./src/src/img1.png" class="card-img-top" alt="..."></a>
                               <div class="card-body">
                                 <h5 class="card-title">Producto</h5>
                               </div>
@@ -140,7 +140,7 @@
                               </div>
                             </div>
                             <div class="card mx-1">
-                              <a href="./product-view.html"><img src="./src/src/img2.png" class="card-img-top" alt="..."></a>
+                              <a href="./product-view.php"><img src="./src/src/img2.png" class="card-img-top" alt="..."></a>
                               <div class="card-body">
                                 <h5 class="card-title">Producto</h5>
                               </div>
@@ -149,7 +149,7 @@
                               </div>
                             </div>
                             <div class="card mx-1">
-                              <a href="./product-view.html"><img src="./src/src/img3.png" class="card-img-top" alt="..."></a>
+                              <a href="./product-view.php"><img src="./src/src/img3.png" class="card-img-top" alt="..."></a>
                               <div class="card-body">
                                 <h5 class="card-title">Producto</h5>
                               </div>
@@ -158,7 +158,7 @@
                               </div>
                             </div>
                             <div class="card mx-1">
-                                <a href="./product-view.html"><img src="./src/src/img4.png" class="card-img-top" alt="..."></a>
+                                <a href="./product-view.php"><img src="./src/src/img4.png" class="card-img-top" alt="..."></a>
                                 <div class="card-body">
                                   <h5 class="card-title">Producto</h5>
                                 </div>
@@ -168,7 +168,7 @@
                               </div>
 
                               <div class="card mx-1">
-                                <a href="./product-view.html"><img src="./src/src/img1.png" class="card-img-top" alt="..."></a>
+                                <a href="./product-view.php"><img src="./src/src/img1.png" class="card-img-top" alt="..."></a>
                                 <div class="card-body">
                                   <h5 class="card-title">Producto</h5>
                                  

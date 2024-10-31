@@ -127,7 +127,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0 ">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0 ">Go somewhere</a>
                 </div>
               </div>
   
@@ -136,7 +136,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -145,7 +145,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -154,7 +154,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -164,7 +164,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -174,7 +174,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -184,7 +184,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -194,7 +194,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -203,7 +203,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -212,7 +212,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -237,7 +237,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -246,7 +246,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -255,7 +255,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -264,7 +264,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -274,7 +274,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -284,7 +284,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -294,7 +294,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -304,7 +304,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -313,7 +313,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   
@@ -322,7 +322,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">$$$</p>
-                  <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
+                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
                 </div>
               </div>
   

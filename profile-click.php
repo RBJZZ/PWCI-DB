@@ -23,45 +23,45 @@
                 <div class="row justify-items-center justify-content-center text-center p-2">
 
                     <div class="col-lg-8 bg-light p-4 rounded-4">
-                        <img class="img-fluid border m-1" src="./src/src/avatar.png" alt="user(name) profile" style="width: auto;">
-                        <h2 class="m-0 mb-2">Profile name</h2>
+                        <img id="img-preview" class="img-fluid border border-rounded rounded-pill m-1" src="./<?php echo htmlspecialchars($user_pic)?>" alt="user(name) profile" style="width: 200px;">
+                        <h2 class="m-0 mb-2"><?php echo htmlspecialchars($user_name);?></h2>
 
                         <div class="justify-items-center text-start">
-                          <p class="text-bold"> Se unió en: <span class="text-primary">FECHA DATABASE</span></p>
+                          <p class="text-bold"> Se unió el: <span class="text-primary"><?php echo htmlspecialchars($user_logdate);?></span></p>
                         </div>
 
                         <form action="" class="edit-profile" method="post">
-                            <input type="text" class="form-control my-2" placeholder="Username">
-                            <input type="text" class="form-control my-2" placeholder="E-mail">
+                            <input type="text" class="form-control my-2" value="<?php echo htmlspecialchars($username);?>" disabled>
+                            <input type="text" class="form-control my-2" value="<?php echo htmlspecialchars($user_email);?>" disabled>
                             
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <input type="text" name="name-profile" id="" class="form-control my-2" placeholder="Nombre">
+                            <div class="row mx-1">
+                                <div class="col-lg-4 mx-0 px-0">
+                                    <input type="text" name="name-profile" id="" class="form-control my-2" value="<?php echo htmlspecialchars($user_name);?>" disabled>
                                 </div>
-                                <div class="col-lg-4">
-                                    <input type="text" name="ln1-profile" id="" class="form-control my-2" placeholder="Apellido Paterno">
+                                <div class="col-lg-4 mx-0 px-0">
+                                    <input type="text" name="ln1-profile" id="" class="form-control my-2" value="<?php echo htmlspecialchars($user_AP);?>" disabled>
                                 </div>
-                                <div class="col-lg-4">
-                                    <input type="text" name="ln2-profile" id="" class="form-control my-2" placeholder="Apellido Materno">
+                                <div class="col-lg-4 mx-0 px-0">
+                                    <input type="text" name="ln2-profile" id="" class="form-control my-2" value="<?php echo htmlspecialchars($user_AM);?>" disabled>
                                 </div>
                             </div>
                             
-                            <input type="password" name="pass-profile" id="" class="form-control my-2" placeholder="Contraseña">
+                            <input type="password" name="pass-profile" id="" class="form-control my-2" placeholder="Contraseña" disabled>
                             <input type="password" name="passconfirm-profile" id="" class="form-control my-2" placeholder="Confirmación de contraseña" disabled>
-                            <input type="date" name="bday-profile" id="" class="form-control my-2">
-                            <select class="form-select my-2" aria-label="Default select example">
-                                <option selected>Género</option>
-                                <option value="1">Masculino</option>
-                                <option value="2">Femenino</option>
-                                <option value="3">No binario</option>
+                            <input type="date" name="bday-profile" id="" class="form-control my-2" value="<?php echo htmlspecialchars(date('Y-m-d', strtotime($user_bday))); ?>" disabled>
+                            <select class="form-select my-2" aria-label="Default select example" disabled>
+                                <option value="" disabled>Género</option>
+                                <option value="1" <?php echo ($user_gender == '1') ? 'selected' : '';?>>Femenino</option>
+                                <option value="2" <?php echo ($user_gender == '2') ? 'selected' : '';?>>Masculino</option>
+                                <option value="3" <?php echo ($user_gender == '3') ? 'selected' : '';?>>Otro</option>
                               </select>
-                            <input type="file" name="picture-profile" id="" class="form-control my-2">
+                            <input type="file" name="picture-profile" id="input-npfp" class="form-control my-2" accept="image/*">
                             
-
+                            
                             <button type="submit" class="btn btn-secondary rounded-pill my-1" disabled>Guardar</button>
                             
                         </form>
-                        <button class="btn rounded-pill my-1 mb-4" hidden>Editar</button>
+                        <button class="btn rounded-pill my-1 mb-4">Editar</button>
                         
 
 
@@ -246,6 +246,7 @@
       </div>
 
       <script src="./src/js/bootstrap.bundle.min.js"></script>
+      <script src="./src/js/profile-click.js"></script>
 
 </body>
 </html>

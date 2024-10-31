@@ -23,11 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($pass, $userlog['us_pass'])) {
             $_SESSION["user_id"] = $userlog["id"];
             $_SESSION["user_name"] = $userlog["nombre"];
+            $_SESSION["user_AP"] = $userlog["apellidoP"];
+            $_SESSION["user_AM"] = $userlog["apellidoM"];
+            $_SESSION["user_bday"] = $userlog["bday"];
+            $_SESSION["user_email"] = $userlog["email"];
             $_SESSION["user_type"] = $userlog["tipo_usuario"];
             $_SESSION["type_desc"] = $userlog["descripcion_rol"];
             $_SESSION["user_logdate"] = $userlog["us_fecha"];
-            $_SESSION["user_pic"]=$userlog["photo_path"];
-            $_SESSION["username"]=$userlog["username"];
+            $_SESSION["user_pic"] = $userlog["photo_path"];
+            $_SESSION["username"] = $userlog["username"];
+            $_SESSION["usergender"]=$userlog["user_gender"];
+            
 
             switch ($_SESSION["user_type"]) {
                 case "admin": 
