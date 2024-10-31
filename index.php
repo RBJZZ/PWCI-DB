@@ -30,23 +30,11 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               
-            <!--
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-            -->
-              
               <li class="nav-item">
                 <a class="nav-link disabled" aria-disabled="true" style="color: white;">¿No tienes una cuenta?</a>
               </li>
             </ul>
-            <a href="./registro.html"><button class="btn btn-light mx-1 rounded-pill">Regístrate</button></a>
+            <a href="./registro.php"><button class="btn btn-light mx-1 rounded-pill">Regístrate</button></a>
           </div>
         </div>
       </nav>

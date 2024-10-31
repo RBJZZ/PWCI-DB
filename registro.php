@@ -81,7 +81,7 @@
                     <!--FORM CLIENTE-->
                     
                         <div class="col-lg-8 tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
-                            <form id="register-form" action="" method="post" class="needs-validation">
+                            <form id="register-form" action="./php/registro_.php" method="post" class="needs-validation" enctype="multipart/form-data">
                               <div class="row justify-items-center justify-content-center p-3 m-2" style="border-radius: 20px;">
                                 <h3 class="mt-3 text-center">Registro estándar</h3>
                                 <p style="margin: 0%;">Bienvenido a D&B</p>
@@ -111,22 +111,22 @@
                                           
                                             <input id="name-input" name="name-register" type="text" class="form-control form-control-lg mt-3 border focus-ring" placeholder="Nombre" required oninput="NameCheck()">
                                             <input id="lname-input" name="lname-register" type="text" class="form-control form-control-lg my-3 border focus-ring" placeholder="Apellido Materno" required oninput="LastCheck()"> 
-                                            <input id="date-input" type="date" class="form-control-lg form-control my-3" required>
+                                            <input id="date-input" name="date-register"type="date" class="form-control-lg form-control my-3" required>
                                         </div>
 
                                         <div class="col-lg-6">
                                             <input id="fname-input" name="fname-register" type="text" class="form-control form-control-lg my-3 border focus-ring" placeholder="Apellido Paterno" required oninput="FirstCheck()"> 
-                                            <select id="gender-input" class="form-select form-select-lg mt-3" aria-label="Form for gender selection" required>
+                                            <select id="gender-input" name="gender-register" class="form-select form-select-lg mt-3" aria-label="Form for gender selection" required>
                                                 <option value="" selected disabled>Género</option>
-                                                <option value="1">Masculino</option>
-                                                <option value="2">Femenino</option>
+                                                <option value="1">Femenino</option>
+                                                <option value="2">Masculino</option>
                                                 <option value="3">Otro</option>
                                             </select>
 
-                                            <select id="role-selection" class="form-select form-select-lg mt-3" aria-label="Form for role selection" required>
+                                            <select id="role-selection" name="role-selection" class="form-select form-select-lg mt-3" aria-label="Form for role selection" required>
                                               <option value="" selected disabled>Rol de usuario</option>
-                                              <option value="1">Cliente</option>
-                                              <option value="2">Vendedor</option>
+                                              <option value="2">Cliente</option>
+                                              <option value="3">Vendedor</option>
                                               
                                           </select>
                                             
