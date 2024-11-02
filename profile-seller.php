@@ -57,7 +57,8 @@
         </div>
         <!--SECCION DE OPCIONES PARA EL VENDEDOR-->
         <div class="row justify-content-center px-3">
-            <div class="col-lg-3 bg-light seller-options" style="display:block">
+          
+            <div class="col-lg-3 bg-light seller-options" style="display:<?php echo ($user_type === 'seller') ? 'block' : 'none'; ?>">
 
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">

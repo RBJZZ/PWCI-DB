@@ -14,7 +14,7 @@
     <title>Búsqueda</title>
 </head>
 <body>
-
+  <?php include '../PWCI-DB/php/obtenercategorias.php';?>
   <?php include 'navbar.php';?>
     
 
@@ -98,12 +98,6 @@
                   </div>
                 </div>
               </div>
-        
-              
-              
-        
-        
-        
             </div>
   
             
@@ -183,8 +177,35 @@
           </div>
           <div class="offcanvas-body justify-content-center justify-items-center ms-3">
             <div class="row">
+
+            <?php
+        $count = 0;
+        $maxPerColumn = 5;
+
+        foreach ($categorias as $categoria) {
+            if ($count % $maxPerColumn == 0) {
+                if ($count > 0) {
+                    echo '</div>'; 
+                }
+                echo '<div class="col-lg-6">'; 
+            }
+            ?>
+
+            <input type="checkbox" class="btn-check" id="categoria-<?php echo $categoria['cat_ID']; ?>" autocomplete="off">
+            <label class="btn btn-outline-secondary rounded-pill mb-1" for="categoria-<?php echo $categoria['cat_ID']; ?>">
+            <?php echo "#" . htmlspecialchars(strtoupper($categoria['cat_name'])); ?>
+            </label><br>
+
+            <?php
+            $count++;
+        }
+
+        
+        echo '</div>';
+        ?>
+              <!--
               <div class="col-lg-6">
-                <!--SELECCION CATEGORIAS-->
+               
                   <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
                   <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-outlined">#JARDINERÍA</label><br>
 
@@ -230,6 +251,8 @@
                 <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-14-outlined">#PERIFERICOS</label><br>
 
               </div>
+
+-->
 
             </div>
 

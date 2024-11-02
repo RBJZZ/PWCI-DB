@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name-register'];
     $lname = $_POST['fname-register'];
     $fname = $_POST['lname-register'];
+    $email=$_POST['email-register'];
     $bday = $_POST['date-register'];
     $gender = $_POST['gender-register'];
     $estatus = 1;
@@ -49,9 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     
-    $user_register = $db->conn->prepare("CALL sp_registro_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $user_register = $db->conn->prepare("CALL sp_registro_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $user_register->bind_param(
-        "ssissssssi",
+        "ssisssssssi",
         $username, 
         $password, 
         $role, 
@@ -59,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name, 
         $lname, 
         $fname, 
+        $email,
         $bday, 
         $gender, 
         $estatus

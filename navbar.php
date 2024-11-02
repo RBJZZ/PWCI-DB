@@ -38,7 +38,7 @@ $user_gender=$_SESSION["usergender"];
                     if ($user_type == "admin") {
                         echo "admin-dashboard.php";
                     } elseif ($user_type == "user") {
-                        echo "profile.php";
+                        echo "profile-click.php";
                     } elseif ($user_type == "seller") {
                         echo "profile-seller.php";
                     } else {
