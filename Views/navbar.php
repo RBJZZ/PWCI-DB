@@ -24,8 +24,8 @@ $user_gender=$_SESSION["usergender"];
 <nav class="navbar navbar-expand-lg mi-navbar fixed-top">
         <div style="background-color: #88aaa3;"class="container-fluid">
     
-          <a class="navbar-brand" href="dashboard.php">
-            <img class="icon-logo" src="./src/src/logo1.png">
+          <a class="navbar-brand" href="../Controllers/ProductosController.php">
+            <img class="icon-logo" src="../Views/src/src/logo1.png">
             <span id="brand">D&B</span></a>
     
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,13 +36,13 @@ $user_gender=$_SESSION["usergender"];
               <li class="nav-item">
                 <a href="<?php
                     if ($user_type == "admin") {
-                        echo "admin-dashboard.php";
+                        echo "../Views/admin-dashboard.php";
                     } elseif ($user_type == "user") {
-                        echo "profile-click.php";
+                        echo "../Views/profile-click.php";
                     } elseif ($user_type == "seller") {
-                        echo "profile-seller.php";
+                        echo "../Views/profile-seller.php";
                     } else {
-                        echo "../index.php";
+                        echo "../Views/index.php";
                     }
                 ?>" class="nav-link"><span><svg style="margin-bottom:2px" xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -53,7 +53,7 @@ $user_gender=$_SESSION["usergender"];
                 </svg></span> <?php echo htmlspecialchars($user_name);?> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="./shopping-cart.php">
+                <a class="nav-link" aria-current="page" href="../Views/shopping-cart.php">
                   <span><svg style="margin-bottom:5px" xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 
                     .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5
@@ -65,7 +65,7 @@ $user_gender=$_SESSION["usergender"];
                   </svg></i> Carrito</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./advanced-search.php"><span><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                <a class="nav-link" href="../Views/advanced-search.php"><span><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
                   <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 
                   1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 
                   4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 
@@ -77,7 +77,7 @@ $user_gender=$_SESSION["usergender"];
                 </svg></span> Categorías</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./lists.php"><span><svg style="margin-bottom:2px"xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
+                <a class="nav-link" href="../Views/lists.php"><span><svg style="margin-bottom:2px"xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 
                   .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 
                   0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 
@@ -114,7 +114,7 @@ $user_gender=$_SESSION["usergender"];
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="./advanced-search.php" method="get">
+              <form action="../Views/advanced-search.php" method="get">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon1"><box-icon name='search-alt-2' rotate='90' color='#2c523d' ></box-icon></span>
                   <input type="text" class="form-control" placeholder="Escribe algo..." aria-label="search-bar" aria-describedby="basic-addon1">

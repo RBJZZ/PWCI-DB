@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $db = new Conexion();
 
-    $login = $db->conn->prepare("CALL sp_login_usuario(?)");
+    $login = $db->conn->prepare(query: "CALL sp_login_usuario(?)");
     $login->bind_param("s",$user);
     $login->execute();
 
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location:../admin-dashboard.php");
                     break;
                 case "user":
-                    header("Location: ../dashboard.php");
+                    header("Location: ../Controllers/ProductosController.php");
                     break;
                 case "seller":
                     header("Location: ../profile-seller.php");

@@ -81,7 +81,7 @@
                     <!--FORM CLIENTE-->
                     
                         <div class="col-lg-8 tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
-                            <form id="register-form" action="./php/registro_.php" method="post" class="needs-validation" enctype="multipart/form-data">
+                            <form id="register-form" action="../Controllers/UsuarioController.php?action=registrar" method="post" class="needs-validation" enctype="multipart/form-data">
                               <div class="row justify-items-center justify-content-center p-3 m-2" style="border-radius: 20px;">
                                 <h3 class="mt-3 text-center">Registro estándar</h3>
                                 <p style="margin: 0%;">Bienvenido a D&B</p>

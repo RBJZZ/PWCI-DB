@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-    <link rel="stylesheet" href="./src/css/product.css">
-    <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Views/src/css/product.css">
+    <link rel="stylesheet" href="../Views/src/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="./src/js/bootstrap.js"></script>
-    <link rel="icon" href="./src/src/logo1.png" type="image/x-icon">
-    <title>PRODUCT NAME</title>
+    <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
+    <?php if (isset($producto)): ?>
+    <title>Vista previa</title>
 </head>
 <body>
 
@@ -21,24 +22,27 @@
         <div class="row justify-content-center">
 
             <div class="col-lg-1 col-sm-3 m-2 product-thumbnail">
-                <img class="img-thumbnail m-1 mt-5" src="https://t4.ftcdn.net/jpg/05/81/84/71/360_F_581847176_eF540XqFGHDdGPZxyh5NtWHNzgs0XFk6.jpg" alt="">
-                <img class="img-thumbnail m-1" src="https://t4.ftcdn.net/jpg/05/81/84/71/360_F_581847176_eF540XqFGHDdGPZxyh5NtWHNzgs0XFk6.jpg" alt="">
-                <img class="img-thumbnail m-1" src="https://t4.ftcdn.net/jpg/05/81/84/71/360_F_581847176_eF540XqFGHDdGPZxyh5NtWHNzgs0XFk6.jpg" alt="">
-                <img class="img-thumbnail m-1" src="https://t4.ftcdn.net/jpg/05/81/84/71/360_F_581847176_eF540XqFGHDdGPZxyh5NtWHNzgs0XFk6.jpg" alt="">
+              <div class="mt-5 p-0">
+
+              <?php foreach($producto['imgs'] as $imagen):?>
+                <img class="img-thumbnail m-1" src="../Views/<?php echo htmlspecialchars($imagen['img_url']);?>" alt="">
+                <?php endforeach;?>
+
+              </div>
+                
             </div>
 
             <div class="col-lg-5 m-2">
                 <div id="carouselExample" class="carousel slide mt-5">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="https://t4.ftcdn.net/jpg/05/17/53/57/360_F_517535712_q7f9QC9X6TQxWi6xYZZbMmw5cnLMr279.jpg" class="d-block w-100" alt="...">
+                        <img src="../Views/<?php echo htmlspecialchars($producto['dt']['icon']);?>" class="d-block w-100 img-fluid" alt="...">
                       </div>
+                      <?php foreach($producto['imgs'] as $imagen):?>
                       <div class="carousel-item">
-                        <img src="https://t4.ftcdn.net/jpg/05/17/53/57/360_F_517535712_q7f9QC9X6TQxWi6xYZZbMmw5cnLMr279.jpg" class="d-block w-100" alt="...">
+                        <img src="../Views/<?php echo htmlspecialchars($imagen['img_url']);?>" class="d-block w-100 img-fluid" alt="...">
                       </div>
-                      <div class="carousel-item">
-                        <img src="https://t4.ftcdn.net/jpg/05/17/53/57/360_F_517535712_q7f9QC9X6TQxWi6xYZZbMmw5cnLMr279.jpg" class="d-block w-100" alt="...">
-                      </div>
+                      <?php endforeach;?>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -51,8 +55,8 @@
                   </div>
             </div>
             <div class="col-lg-4 m-2">
-              <a class="link-secondary text-decoration-none" href="./profile-seller.html"><h5 class="mx-3">USERSELLER001</h5></a>
-                <h2 class="mx-3" style="background-color: white; margin-bottom: 0%;">PRODUCT NAME</h2>
+              <a class="link-secondary text-decoration-none" href="./profile-seller.html"><h5 class="mx-3"><?php echo htmlspecialchars($producto['dt']['seller_name'])?></h5></a>
+                <h2 class="mx-3" style="background-color: white; margin-bottom: 0%;"><?php echo htmlspecialchars($producto['dt']['title']);?></h2>
 
 
                 <div class="row justify-content-start px-3">
@@ -104,12 +108,12 @@
                     <!--FIN DE LAS ESTRELLAS PARA CALIFICAR-->
 
 
-                    <a class="link-secondary text-decoration-none" href="#"><h5>#category</h5></a>
+                    <a class="link-secondary text-decoration-none" href="#"><h5>#<?php echo htmlspecialchars($producto['dt']['category']);?></h5></a>
                   </div>
                 </div>
 
 
-                <h4 class="m-2 px-2" style=>$00.00</h4>
+                <h4 class="m-2 px-2" style=>$<?php echo htmlspecialchars($producto['dt']['price']);?></h4>
               <div class="row justify-content-center justify-items-center text-center">
                 <div class="col-lg-9">
                   <button onclick="quitItem()" class="btn-action btn bg-light border shadow-sm" id="minus">-</button>
@@ -122,7 +126,7 @@
                     <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
                   </svg></span></button>
                 </div>
-                <p class="mb-0 mt-2 fw-bold">Pieza(s) disponible(s): ?</p>
+                <p class="mb-0 mt-2 fw-bold">Pieza(s) disponible(s): <?php echo htmlspecialchars($producto['dt']['stock']);?></p>
                 <p class="mb-3">¿Deseas hacer una cotización? Solicitala <span class="fw-bold"><a class="text-decoration-none" href="./messages.html">aquí</a></span></p>
               </div>
 
@@ -315,7 +319,7 @@
                       </h2>
                       <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae omnis reiciendis quibusdam maxime quo asperiores aperiam qui rem ipsa! At, assumenda. Eos distinctio iusto praesentium maiores temporibus harum quae ipsam!</p>
+                          <p><?php echo htmlspecialchars($producto['dt']['product_desc']);?></p>
                         </div>
                       </div>
                     </div>
@@ -339,7 +343,9 @@
                       </h2>
                       <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure incidunt ab quo sunt voluptas, ullam consequatur quae. Minima, tenetur deleniti.</p>
+                        <?php foreach ($producto['mp'] as $metodo): ?>
+                        <li><?php echo htmlspecialchars($metodo['method_type']); ?></li>
+                        <?php endforeach; ?>
                         </div>
                       </div>
                     </div>
@@ -355,7 +361,7 @@
           <div class="col-lg-6 app">
             <div class="rating">
               <div class="rating__average">
-                <h2>4.5</h1>
+                <h2><?php echo htmlspecialchars($producto['stars']);?></h1>
                   <div class="star-outer">
                     <div class="star-inner">
 
@@ -609,8 +615,9 @@
 
       </div>
 
-      
-
+      <?php else: ?>
+        <p>No se encontraron detalles del producto</p>
+      <?php endif; ?>
 
 
 </body>

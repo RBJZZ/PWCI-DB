@@ -224,3 +224,14 @@ body{
 .create-list{
     display:none;
 }
+
+/* AJUSTES DE CARRUSEL */
+.carousel-inner{
+    max-height: 600px;
+    min-height: 600px;
+}
+.carousel-inner img{
+    object-fit:cover;
+    height: 100%;
+    width: auto;
+}

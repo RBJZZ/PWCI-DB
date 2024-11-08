@@ -46,3 +46,17 @@
     background-color: rgb(213, 213, 213) !important;
 }
   
+.img-container{
+  width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+}

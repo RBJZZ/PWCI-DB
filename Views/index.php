@@ -60,7 +60,7 @@
             <p>Nos alegramos de verte de nuevo.</p>
 
             <!--LOGIN FORM START-->
-            <form id="loginForm" method="post" action="./php/login.php">
+            <form id="loginForm" method="post" action="../Controllers/UsuarioController.php?action=login">
                 <div class="input-group mb-3">
                     <input id="userName" name="userName" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username / E-mail" required>
                 </div>
