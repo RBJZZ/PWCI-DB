@@ -12,7 +12,7 @@
     <script src="./src/js/bootstrap.js"></script>
     <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
     <?php if (isset($producto)): ?>
-    <title>Vista previa</title>
+    <title>Vista de producto</title>
 </head>
 <body>
 
@@ -25,8 +25,11 @@
               <div class="mt-5 p-0">
 
               <?php foreach($producto['imgs'] as $imagen):?>
-                <img class="img-thumbnail m-1" src="../Views/<?php echo htmlspecialchars($imagen['img_url']);?>" alt="">
+                <div class="mini-thumb m-1 p-0">
+                <img class="img-thumbnail" src="../Views/<?php echo htmlspecialchars($imagen['img_url']);?>" alt="">
+                </div>
                 <?php endforeach;?>
+                <!--/div-->
 
               </div>
                 
@@ -36,7 +39,7 @@
                 <div id="carouselExample" class="carousel slide mt-5">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="../Views/<?php echo htmlspecialchars($producto['dt']['icon']);?>" class="d-block w-100 img-fluid" alt="...">
+                        <img src="../<?php echo htmlspecialchars($producto['dt']['icon']);?>" class="d-block w-100 img-fluid" alt="...">
                       </div>
                       <?php foreach($producto['imgs'] as $imagen):?>
                       <div class="carousel-item">

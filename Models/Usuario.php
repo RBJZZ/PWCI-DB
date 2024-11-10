@@ -27,7 +27,7 @@ class Usuario{
             $img_tmp = $file['tmp_name'];
             $img_ext = pathinfo($file['name'], PATHINFO_EXTENSION);
             $img_name = $this->username . "_" . uniqid() . "." . $img_ext;
-            $this->pfp = "../Views/userprofiles/" . $img_name;
+            $this->pfp = "../userprofiles/" . $img_name;
     
             if (!move_uploaded_file($img_tmp, $this->pfp)) {
                 $this->pfp = "path/to/default-profile.png";

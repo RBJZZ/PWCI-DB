@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/css/main.css">
-    <link rel="stylesheet" href="./src/css/advanced-search.css">
-    <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Views/src/css/main.css">
+    <link rel="stylesheet" href="../Views/src/css/advanced-search.css">
+    <link rel="stylesheet" href="../Views/src/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="./src/js/bootstrap.js"></script>
-    <link rel="icon" href="./src/src/logo1.png" type="image/x-icon">
+    <script src="../Views/src/js/bootstrap.js"></script>
+    <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
     <title>Búsqueda</title>
 </head>
 <body>
-  <?php include '../PWCI-DB/php/obtenercategorias.php';?>
+
   <?php include 'navbar.php';?>
     
 
@@ -182,7 +182,7 @@
         $count = 0;
         $maxPerColumn = 5;
 
-        foreach ($categorias as $categoria) {
+        foreach ($cat as $categoria) {
             if ($count % $maxPerColumn == 0) {
                 if ($count > 0) {
                     echo '</div>'; 

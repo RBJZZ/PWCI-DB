@@ -19,7 +19,7 @@
 </head>
 <body>
 
-    <?php include 'navbar.php';?>
+<?php include '../Views/navbar.php';?>
 
       <!--CATEGORIAS OFFCANVAS-->
 

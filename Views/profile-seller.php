@@ -86,7 +86,7 @@
                         <div class="accordion-body">
 
                             <div class="row justify-content-start my-2">
-                                <a href="./publish-product.php">Publicar</a>
+                                <a href="../Controllers/CategoryController.php?view=publicar">Publicar</a>
                             </div>
 
                             <div class="row justify-content-start my-2">

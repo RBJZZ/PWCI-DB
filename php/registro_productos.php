@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 include 'Conexion.php';
 
@@ -18,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    // Variables del formulario
     $productName = $_POST['product-name'];
     $productDesc = $_POST['product-desc'];
     $productPrice = $_POST['product-price'];
@@ -28,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $videoLink = $_POST['product-video'];
     
 
-    // Subir y asignar ruta de miniatura
     $thumbnailPath = "";
     if (isset($_FILES['thumbnail-upload']) && $_FILES['thumbnail-upload']['error'] == UPLOAD_ERR_OK) {
         $thumbnailTmpPath = $_FILES['thumbnail-upload']['tmp_name'];
@@ -37,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         move_uploaded_file($thumbnailTmpPath, $thumbnailPath);
     }
 
-    // Insertar el producto
     $query = $db->conn->prepare("CALL sp_insertar_producto(?, ?, ?, ?, ?, ?, 'Disponible', ?, ?, ?)");
     $query->bind_param("issdiisss", 
     $sellerId, 
@@ -68,7 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    // Subir imágenes adicionales
     if (isset($productId) && $productId > 0) {
         if (isset($_FILES['multiple-pic-input'])) {
             foreach ($_FILES['multiple-pic-input']['tmp_name'] as $key => $tmpName) {
@@ -97,7 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $paymentQuery->bind_param("is", $productId, $method);
             $paymentQuery->execute();
             
-            // Agrega una verificación de éxito o error para la inserción
             if ($paymentQuery->error) {
                 echo "Error al insertar método de pago $method: " . $paymentQuery->error;
             }

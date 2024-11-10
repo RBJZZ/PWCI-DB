@@ -235,3 +235,15 @@ body{
     height: 100%;
     width: auto;
 }
+
+.mini-thumb{
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.mini-thumb img{
+    max-height: 100px;
+    max-width: 100px;
+    object-fit: scale-down;
+    height: auto;
+}

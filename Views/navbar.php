@@ -1,6 +1,9 @@
 
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../index.php"); 
@@ -65,7 +68,7 @@ $user_gender=$_SESSION["usergender"];
                   </svg></i> Carrito</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../Views/advanced-search.php"><span><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                <a class="nav-link" href="../Controllers/CategoryController.php?view=buscador"><span><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
                   <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 
                   1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 
                   4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 
@@ -114,7 +117,7 @@ $user_gender=$_SESSION["usergender"];
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Views/advanced-search.php" method="get">
+              <form action="../Controllers/CategoryController.php?view=buscador" method="get">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon1"><box-icon name='search-alt-2' rotate='90' color='#2c523d' ></box-icon></span>
                   <input type="text" class="form-control" placeholder="Escribe algo..." aria-label="search-bar" aria-describedby="basic-addon1">
