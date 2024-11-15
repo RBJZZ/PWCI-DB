@@ -27,7 +27,7 @@ $user_gender=$_SESSION["usergender"];
 <nav class="navbar navbar-expand-lg mi-navbar fixed-top">
         <div style="background-color: #88aaa3;"class="container-fluid">
     
-          <a class="navbar-brand" href="../Controllers/ProductosController.php">
+          <a class="navbar-brand" href="../Controllers/ProductosController.php" style="height:43px !important;">
             <img class="icon-logo" src="../Views/src/src/logo1.png">
             <span id="brand">D&B</span></a>
     
@@ -43,7 +43,7 @@ $user_gender=$_SESSION["usergender"];
                     } elseif ($user_type == "user") {
                         echo "../Views/profile-click.php";
                     } elseif ($user_type == "seller") {
-                        echo "../Views/profile-seller.php";
+                        echo "../Controllers/SellerController.php?id=$user_id";
                     } else {
                         echo "../Views/index.php";
                     }
@@ -68,7 +68,7 @@ $user_gender=$_SESSION["usergender"];
                   </svg></i> Carrito</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../Controllers/CategoryController.php?view=buscador"><span><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                <a class="nav-link" href="../Controllers/SearchController.php?view=buscador"><span><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
                   <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 
                   1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 
                   4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 
@@ -117,10 +117,10 @@ $user_gender=$_SESSION["usergender"];
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controllers/CategoryController.php?view=buscador" method="get">
+              <form action="../Controllers/SearchController.php?view=buscador" method="POST">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon1"><box-icon name='search-alt-2' rotate='90' color='#2c523d' ></box-icon></span>
-                  <input type="text" class="form-control" placeholder="Escribe algo..." aria-label="search-bar" aria-describedby="basic-addon1">
+                  <input type="text" name="keyword" class="form-control" placeholder="Escribe algo..." aria-label="search-bar" aria-describedby="basic-addon1">
                 </div>
               </form>
             </div>

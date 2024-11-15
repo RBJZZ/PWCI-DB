@@ -10,7 +10,6 @@
     <link rel="icon" href="./src/src/logo1.png" type="image/x-icon">
     <title>Log In</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <!--CREDITS: REBECA EVANGELISTA & DAVID AGUILAR-->
 </head>

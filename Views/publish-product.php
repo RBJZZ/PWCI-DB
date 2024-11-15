@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Views/src/css/main.css">
     <link rel="stylesheet" href="../Views/src/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="../Views/src/js/bootstrap.js"></script>
     <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
@@ -15,6 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>Publicar</title>
 </head>
 <body>
@@ -38,31 +38,31 @@
                                   <ul class="list-group border mt-2">
                                       <li class="list-group-item border-0">
                                         <input class="form-check-input me-1" type="checkbox" value="" id="filter1" disabled>
-                                        <label class="form-check-label" for="firstCheckbox">Tu producto debe tener un nombre y una descripción</label>
+                                        <label class="form-check-label" for="filter1">Tu producto debe tener un nombre y una descripción</label>
                                       </li>
                                       <li class="list-group-item border-0">
                                         <input class="form-check-input me-1" type="checkbox" value="" id="filter2" disabled>
-                                        <label class="form-check-label" for="secondCheckbox">Debe tener una miniatura</label>
+                                        <label class="form-check-label" for="filter2">Debe tener una miniatura</label>
                                       </li>
                                       <li class="list-group-item border-0">
                                         <input class="form-check-input me-1" type="checkbox" value="" id="filter3" disabled>
-                                        <label class="form-check-label" for="thirdCheckbox">Debe tener un precio, o ser etiquetado como cotizable</label>
+                                        <label class="form-check-label" for="filter3">Debe tener un precio, o ser etiquetado como cotizable</label>
                                       </li>
                                       <li class="list-group-item border-0">
                                         <input class="form-check-input me-1" type="checkbox" value="" id="filter4" disabled>
-                                        <label class="form-check-label" for="forthCheckbox">Debe tener al menos 3 imágenes</label>
+                                        <label class="form-check-label" for="filter4">Debe tener al menos 3 imágenes</label>
                                       </li>
                                       <li class="list-group-item border-0">
                                         <input class="form-check-input me-1" type="checkbox" value="" id="filter5" disabled>
-                                        <label class="form-check-label" for="fifthCheckbox">Debe tener al menos 1 vídeo</label>
+                                        <label class="form-check-label" for="filter5">Debe tener al menos 1 vídeo</label>
                                       </li>
                                       <li class="list-group-item border-0">
                                         <input class="form-check-input me-1" type="checkbox" value="" id="filter6" disabled>
-                                        <label class="form-check-label" for="sixthCheckbox">Debes seleccionar los métodos de pago (<span style="text-decoration: underline;">PayPal obligatorio</span>)</label>
+                                        <label class="form-check-label" for="filter6">Debes seleccionar los métodos de pago (<span style="text-decoration: underline;">PayPal obligatorio</span>)</label>
                                       </li>
                                       <li class="list-group-item border-0">
                                         <input class="form-check-input me-1" type="checkbox" value="" id="filter7" disabled>
-                                        <label class="form-check-label" for="seventhCheckbox">Debes seleccionar/crear una categoría</label>
+                                        <label class="form-check-label" for="filter7">Debes seleccionar/crear una categoría</label>
                                       </li>
                                       
                                     </ul>
@@ -89,7 +89,7 @@
 
                                   <div class="row justify-content-center">
            
-                                    <label for="form-check" class="form-label">Si es cotizable, activa el campo:</label>
+                                    <label for="quotable" class="form-label">Si es cotizable, activa el campo:</label>
                                       <div class="form-check form-switch d-flex justify-content-center">
                                         
                                         <input class="form-check-input p-2 border" type="checkbox" role="switch" id="quotable">
@@ -180,8 +180,8 @@
 
                                   <div class="mb-3">
                                     <label for="category-select" class="form-label">Selecciona una categoría</label>
-                                    <select class="form-select" id="category-select" name="category-select" aria-label="Default select example">
-                                      <option selected disabled>Categoría</option>
+                                    <select class="form-select select2" id="category-select" name="category-select" aria-label="Default select example" multiple="multiple">
+                                      
                                       <?php 
                                       if(isset($cat) && !empty($cat)){
                                       foreach ($cat as $categoria): ?>
@@ -193,7 +193,14 @@
                                       <option value="0">No encontré nada jasjja</option>
                                       
                                       <?php }?>
+                                      
                                     </select>
+
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('.select2').select2();
+                                        });
+                                    </script>
 
                                     
                                   </div>
@@ -266,16 +273,23 @@
                                 </div>
   
                                 <div class="col-11 mb-3">
-                                  <form action="#" method="post" class="create-list ms-4">
+                                  <form id="categoryForm" class="create-list ms-4">
   
                                     <div class="mb-3 pt-2 pb-2">
                                       <label for="Catname" class="form-label">Nombre de la categoría</label>
-                                      <input type="text" class="form-control" id="Catname" placeholder="Ej:'Electrónica'">
+                                      <input type="text" class="form-control" id="Catname" name="cat-title" placeholder="Ej:'Electrónica'">
                                     </div>
                                     <div class="mb-3">
-                                      <label for="CatDesc" class="form-label">Descripcion</label>
-                                      <textarea class="form-control" id="CatDesc" rows="3" placeholder="Ej:'Productos tecnológicos'"></textarea>
+                                      <label for="CatDesc" class="form-label">Descripción</label>
+                                      <textarea class="form-control" id="CatDesc" name="cat-description" rows="3" placeholder="Ej:'Productos tecnológicos'"></textarea>
                                     </div>
+                                    <div class="row align-items-center">
+                                      <div class="col-10">
+                                        <button class="btn btn-light border shadow-sm" type="button" onclick="addCategory()">Registrar</button>
+                                      </div>
+                                    </div>
+
+                                    
 
                                   </form>
                                  
@@ -283,9 +297,6 @@
                               </div>
                               
                             </div>
-  
-                            
-  
   
                           </div>
                         </div>

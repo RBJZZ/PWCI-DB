@@ -6,9 +6,6 @@
     <link rel="stylesheet" href="../Views/src/css/main.css">
     <link rel="stylesheet" href="../Views/src/css/dashboard.css">
     <link rel="stylesheet" href="../Views/src/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="../Views/src/js/bootstrap.js"></script>
     <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
@@ -87,29 +84,15 @@
         </div>
         <div class="row justify-content-center m-2" style=" border-radius: 40px;">
 
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #88aaa3; height: 200px; width: 200px;">
-          
-            </div>
-
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #0D7C66; height: 200px; width: 200px;">
-            </div>
             
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #41B3A2; height: 200px; width: 200px;">
-            </div>
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #BDE8CA; height:200px; width: 200px;">
-            </div>
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #D7C3F1; height: 200px; width: 200px;">
-            </div>
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #cfbfe2; height: 200px; width: 200px;">
-            </div>
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #7b678c; height: 200px; width: 200px;">
-            </div>
-            <!--
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #674188;">
-            </div>
-            <div class="col-lg-1 col-md-4 m-3 shadow-sm categories-ball" style="background-color: #421a64;">
-            </div>
-          -->
+          
+          <a class="col-lg-1 col-md-2 mb-0 tag" id="starter" href="../Controllers/SearchController.php?c=Consolas"><div class="border shadow-sm categories-ball" style="background-image:url('../Views/src/src/consolas.png'); background-position:center; background-size:cover; height: 200px; width: 200px;"></div></a>
+          <a class="col-lg-1 col-md-2 ms-5 mb-0 tag" href="../Controllers/SearchController.php?c=Telefonía"><div class="border shadow-sm categories-ball" style="background-image:url('../Views/src/src/telefonia.png'); background-position:center; background-size:cover; height:200px; width: 200px;"></div></a>
+          <a class="col-lg-1 col-md-2 ms-5 mb-0 tag" href="../Controllers/SearchController.php?c=Jardinería"><div class="border shadow-sm categories-ball" style="background-image:url('../Views/src/src/jardinería.png'); background-position:center; background-size:cover; height: 200px; width: 200px;"></div></a>
+          <a class="col-lg-1 col-md-2 ms-5 mb-0 tag" href="../Controllers/SearchController.php?c=Musica"><div class="border shadow-sm categories-ball" style="background-image:url('../Views/src/src/audio.png'); background-position:center; background-size:cover; height:200px; width: 200px;"></div></a>
+          <a class="col-lg-1 col-md-2 ms-5 mb-0 tag" href="../Controllers/SearchController.php?c=Ropa"><div class="border shadow-sm categories-ball" style="background-image:url('../Views/src/src/ropa.png'); background-position:center; background-size:cover; height: 200px; width: 200px;"></div></a>
+          <a class="col-lg-1 col-md-2 ms-5 mb-0 tag" href="../Controllers/SearchController.php?c=Cosmeticos"><div class="border shadow-sm categories-ball" style="background-image:url('../Views/src/src/cosmeticos.png'); background-position:center; background-size:cover; height: 200px; width: 200px;"></div></a>
+          <a class="col-lg-1 col-md-2 ms-5 mb-0 tag" href="../Controllers/SearchController.php?c=Electrodomesticos"><div class="border shadow-sm categories-ball" style="background-image:url('../Views/src/src/electrodomesticos.png'); background-position:center; background-size:cover; height: 200px; width: 200px;"></div></a>
             
         </div>
 

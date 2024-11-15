@@ -149,6 +149,35 @@ class Productos{
         }
     }
 
+    public function getProductosPorVendedor($seller) {
+        $stmt = $this->conexion->prepare("CALL sp_fetch_posts(?)");
+        $stmt->bind_param("i", $seller);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $productos = [];
+        while ($row = $result->fetch_assoc()) {
+            $productos[] = $row;
+        }
+
+        $stmt->close();
+        return $productos;
+    }
+    public function buscarProductos($keyword){
+        $stmt = $this->conexion->prepare("CALL sp_buscar_productos(?)");
+        $stmt->bind_param("s", $keyword);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $productos = [];
+        
+            while ($row = $result->fetch_assoc()) {
+                $productos[] = $row;
+            }
+
+        $stmt->close();
+        return $productos;
+    }
     /////////////////////////////////////////////////////////// MÉTODOS SETTERS
     public function setSeller($seller){
         $this->seller= $seller;

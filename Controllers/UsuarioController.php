@@ -3,6 +3,9 @@
 include_once '../Models/Usuario.php';
 include_once '../Models/Conexion.php';
 
+$conexion=new Conexion();
+$usuario=new Usuario($conexion->conn);
+
 /////////////////////////////////// REGISTRO
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['action']) && $_GET['action'] == 'registrar') {
     $conexion = new Conexion;
@@ -33,10 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['action']) && $_GET['act
 
     if ($resultado === "admin") {
         header("Location: ../Views/admin-dashboard.php");
+        exit();
     } elseif ($resultado === "user") {
         header("Location: ../Controllers/ProductosController.php");
+        exit();
     } elseif ($resultado === "seller") {
-        header("Location: ../Views/profile-seller.php");
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $id=$_SESSION['user_id'];
+        header("Location: ../Controllers/SellerController.php?id=$id");
+        exit();
     } else {
         echo $resultado; // Mostrar mensaje de error como "Contraseña incorrecta" o "No se pudo iniciar sesión"
     }
@@ -45,5 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['action']) && $_GET['act
 } else {
     echo "Operación no válida.";
 }
+
+
 
 ?>

@@ -6,6 +6,7 @@ session_start();
 $conexion=new Conexion();
 $productosModel=new Productos($conexion->conn);
 
+
 if (isset($_GET['id'])) {
     $product_id = htmlspecialchars($_GET['id']);
     $producto = $productosModel->previewProductos($product_id);

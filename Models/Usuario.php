@@ -2,6 +2,8 @@
 
 class Usuario{
     private $conexion;
+    private $id;
+    private $log;
     private $username;
     private $email;
     private $password;
@@ -13,6 +15,7 @@ class Usuario{
     private $gender;
     private $status;
     private $pfp;
+    private $posts;
 
     public function __construct($conexion){
         $this->conexion=$conexion;
@@ -27,7 +30,7 @@ class Usuario{
             $img_tmp = $file['tmp_name'];
             $img_ext = pathinfo($file['name'], PATHINFO_EXTENSION);
             $img_name = $this->username . "_" . uniqid() . "." . $img_ext;
-            $this->pfp = "../userprofiles/" . $img_name;
+            $this->pfp = "../Views/userprofiles/" . $img_name;
     
             if (!move_uploaded_file($img_tmp, $this->pfp)) {
                 $this->pfp = "path/to/default-profile.png";
@@ -44,7 +47,7 @@ class Usuario{
             }
         }
     
-        
+        $this->pfp = str_replace("../Views/", "../", $this->pfp);
         $stmt = $this->conexion->prepare("CALL sp_registro_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT); 
         $stmt->bind_param(
@@ -108,7 +111,41 @@ class Usuario{
         }
     }
 
+    public function getSeller($id){
+        $stmt=$this->conexion->prepare("CALL sp_sellerpf(?)");
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        $result=$stmt->get_result();
+        $seller=$result->fetch_assoc();
+
+        if($seller && $seller["seller_status"]==1){
+            $stmt->close();
+           
+            $this->username=$seller['seller_usname'];
+            $this->id=$seller['seller_id'];
+            $this->name=$seller['seller_name'];
+            $this->email=$seller['seller_email'];
+            $this->pfp=$seller['us_pic'];
+            $this->log=$seller['seller_log'];
+            $this->status=$seller['seller_status'];
+            $this->role=$seller['seller_role'];
+            $this->posts=$seller['total_productos'];
+
+            return true;
+        }else{
+            $stmt->close();
+            echo "No se encontró el usuario.";
+            return false;
+        }
+    }
+
+
    ////////////////////////////////////////////////////////// MÉTODOS GETTERS /////////////////////////////////
+    
+    public function getId(){
+        return $this->id;
+    }
+   
     public function getUsername(){
         return $this->username;
     }
@@ -142,8 +179,15 @@ class Usuario{
     public function getPfp(){
         return $this->pfp;
     }
+    public function getLog(){
+        return $this->log;
+    }
+    public function getPosts(){
+        return $this->posts;
+    }
 
     ///////////////////////////////////////////////////////////////// MÉTODOS SETTERS ////////////////////////
+    
     public function setUsuario($username, $email, $password, $role, $name, $fname, $lname, $bday, $gender, $pfp, $status){
         $this->username=$username;
         $this->email=$email;
@@ -158,6 +202,9 @@ class Usuario{
         $this->status=$status;
     }
 
+    public function setId($id){
+        $this->id=$id;
+    }
     public function setUsername($username){
         $this->username = $username;
     }
@@ -190,6 +237,12 @@ class Usuario{
     }
     public function setPfp($pfp){
         $this->pfp = $pfp;
+    }
+    public function setLog($log){
+        $this->log = $log;
+    }
+    public function setPosts($posts){
+        $this->posts = $posts;
     }
 
 }

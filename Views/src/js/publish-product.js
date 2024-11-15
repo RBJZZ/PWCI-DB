@@ -1,6 +1,6 @@
 
 
-//Precio o cotizacion switch
+
 document.addEventListener("DOMContentLoaded", function() {
     const quotableSwitch = document.getElementById("quotable");
     const productPrice = document.getElementById("product-price");
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-//thumbnail preview 1:1
+
 document.getElementById('thumbnail-upload').addEventListener('change', function(event){
 
     const file=event.target.files[0];
@@ -35,7 +35,7 @@ document.getElementById('thumbnail-upload').addEventListener('change', function(
     }
 });
 
-//4 imagenes preview 1:1
+
 document.getElementById("multiple-pic-input").addEventListener("change", function(event) {
     const files = event.target.files;
     
@@ -57,7 +57,7 @@ document.getElementById("multiple-pic-input").addEventListener("change", functio
     }
 });
 
-//Checar nombre de producto
+
 function checkName(){
     const namevalue=document.getElementById('product-name').value;
     const nameinput=document.getElementById('product-name');
@@ -71,18 +71,21 @@ function checkName(){
         nameinput.classList.remove('focus-ring-success', 'border-success');
         formbtn.disabled = true;
         
+        return false;
 
     }else if(namevalue.length>0 && namevalue.length>5 && validPattern.test(namevalue)){
 
         nameinput.classList.add('focus-ring-success','border-success');
         nameinput.classList.remove('focus-ring-danger','border-danger');
         formbtn.disabled=false;
+
+        return true;
     }
 
 
 }
 
-//Checar descripcion
+
 function checkDesc() {
     const descvalue = document.getElementById('product-desc').value;
     const descinput = document.getElementById('product-desc'); 
@@ -94,15 +97,16 @@ function checkDesc() {
         descinput.classList.add('focus-ring-danger', 'border-danger');
         descinput.classList.remove('focus-ring-success', 'border-success');
         formbtn.disabled = true;
-        return;
+        return false;
     }else{
         descinput.classList.add('focus-ring-success', 'border-success');
         descinput.classList.remove('focus-ring-danger', 'border-danger');
         formbtn.disabled = false; 
+        return true;
     }
 }
 
-//Checar formato del precio
+
 function checkPrice() {
     const pricevalue = document.getElementById('product-price').value; 
     const priceinput = document.getElementById('product-price');
@@ -116,12 +120,16 @@ function checkPrice() {
             priceinput.classList.add('focus-ring-danger', 'border-danger');
             priceinput.classList.remove('focus-ring-success', 'border-success');
             formbtn.disabled = true; 
+
+            return false;
             
         }else{
     
             priceinput.classList.add('focus-ring-success', 'border-success');
             priceinput.classList.remove('focus-ring-danger', 'border-danger');
             formbtn.disabled = false;
+
+            return true;
     
         }
     
@@ -130,7 +138,7 @@ function checkPrice() {
  
 }
 
-//checar formato del stock
+
 function checkStock(){
     const stockvalue=document.getElementById('product-stock').value;
     const stockinput=document.getElementById('product-stock');
@@ -142,14 +150,16 @@ function checkStock(){
         stockinput.classList.add('focus-ring-danger', 'border-danger');
         stockinput.classList.remove('focus-ring-success', 'border-success');
         formbtn.disabled = true; 
+        return false;
     }else{
         stockinput.classList.add('focus-ring-success', 'border-success');
         stockinput.classList.remove('focus-ring-danger', 'border-danger');
         formbtn.disabled = true; 
+        return true;
     }
 }
 
-//Checar URL de video
+
 function checkURL(){
         const linkvalue = document.getElementById('product-video').value;
         const linkinput = document.getElementById('product-video');
@@ -161,10 +171,58 @@ function checkURL(){
             linkinput.classList.add('focus-ring-danger', 'border-danger');
             linkinput.classList.remove('focus-ring-success', 'border-success');
             formbtn.disabled = true; 
+            return false;
         }else{
 
             linkinput.classList.add('focus-ring-success', 'border-success');
             linkinput.classList.remove('focus-ring-danger', 'border-danger');
             formbtn.disabled = false;
+            return true;
         }
+}
+
+function addCategory() {
+    const formData = new FormData(document.getElementById('categoryForm'));
+    
+    fetch('../Controllers/CategoryController.php?action=registro', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(result => {
+        if (result.includes("Categoría registrada exitosamente")) {
+            alert(result);
+            updateCategories();
+            document.getElementById('categoryForm').reset();
+            
+        } else {
+            alert("Error: " + result);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function updateCategories() {
+    fetch('../Controllers/CategoryController.php?action=getCategories')
+    .then(response => response.json())
+    .then(categories => {
+        const select = document.getElementById('category-select');
+        select.innerHTML = '<option selected disabled>Categoría</option>';
+        
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.cat_ID;
+            option.textContent = category.cat_name;
+            select.appendChild(option);
+        });
+        
+        if ($('.select2').data('select2')) {
+            $('#category-select').select2();
+        }
+    })
+    .catch(error => console.error('Error al actualizar las categorías:', error));
+}
+
+function SetCheck(){
+    
 }

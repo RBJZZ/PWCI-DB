@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="../Views/src/css/main.css">
     <link rel="stylesheet" href="../Views/src/css/advanced-search.css">
     <link rel="stylesheet" href="../Views/src/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="../Views/src/js/bootstrap.js"></script>
     <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
@@ -31,75 +29,51 @@
             </div>
   
             <div class="result-product-row row justify-content-center text-center m-3 p-2" id="producttype">
-  
-              <h2 class="mb-4" style="margin-left: 0%;">Resultados en: #tubúsqueda</h2>
-              <div class="col-lg-2 col-md-6 mb-3">
-                <div class="card shadow-md border rounded-0" style="width: 18rem;">
-                  <img src="./src/src/img1.png" class="card-img-top rounded-0" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-        
-              <div class="col-lg-2 col-md-6 mb-3">
-                <div class="card shadow-md border rounded-0" style="width: 18rem;">
-                  <img src="./src/src/img2.png" class="card-img-top rounded-0" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-        
-              <div class="col-lg-2 col-md-6 mb-3">
-                <div class="card shadow-md rounded-0 border" style="width: 18rem;">
-                  <img src="./src/src/img3.png" class="card-img-top rounded-0" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-        
-              <div class="col-lg-2 col-md-6 mb-3">
-                <div class="card shadow-md rounded-0 border" style="width: 18rem;">
-                  <img src="./src/src/img4.png" class="card-img-top rounded-0" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
+            <h2 class="mb-4" style="margin-left: 0%;">
+              
+            <?php if (!empty($keyword)): ?>
+            Resultados en: "<?php echo htmlspecialchars($keyword); ?>"
+            <?php else: ?>
+            Todos los productos
+            <?php endif; ?>
 
-              <div class="col-lg-2 col-md-6 mb-3">
-                <div class="card shadow-md rounded-0 border" style="width: 18rem;">
-                  <img src="./src/src/img1.png" class="card-img-top rounded-0" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
-                  </div>
+            <?php 
+            $count = 0;
+            foreach ($productos as $producto): 
+               
+                if ($count % 6 === 0): ?>
+                    <div class="result-product-row row justify-content-center text-center m-3 p-2" id="producttype">
+                <?php endif; ?>
+                
+                <div class="col-lg-2 col-md-6 mb-3">
+                    <div class="card shadow-md border rounded-0" style="width: 18rem;">
+                        <div class="simg-container">
+                        <img src="../Views/<?php echo htmlspecialchars($producto['pic']); ?>" class="card-img-top rounded-0" alt="Imagen del producto">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo htmlspecialchars($producto['namep']); ?></h5>
+                            <a href="../Controllers/ProductosController.php?id=<?php echo htmlspecialchars($producto['id']); ?>" class="btn btn-card rounded-0">Ver Producto</a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-body-secondary">$<?php echo htmlspecialchars($producto['price']); ?></small>
+                        </div>
+                    </div>
                 </div>
-              </div>
 
-              <div class="col-lg-2 col-md-6 mb-3">
-                <div class="card shadow-md rounded-0 border" style="width: 18rem;">
-                  <img src="./src/src/img2.png" class="card-img-top rounded-0" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="./product-view.html" class="btn btn-card rounded-0">Go somewhere</a>
-                  </div>
+                <?php 
+                $count++;
+                
+                if ($count % 6 === 0): ?>
+                    </div>
+                <?php endif; 
+                endforeach; 
+
+            
+                if ($count % 6 !== 0): ?>
                 </div>
-              </div>
+            <?php endif; ?>
+
             </div>
-  
             
             <div class="result-pf-row row justify-content-center text-center m-3 p-2" id="usertype" style="display:none">
               <h2 class="ms-0 mt-3 mb-4">Usuarios de D&B</h2>

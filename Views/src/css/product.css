@@ -52,8 +52,15 @@ body{
 {
     font-family: "Bodoni Moda SC", serif;
     font-weight: bold;
+    height: 31px !important;
+    width: auto;
 
 }
+
+.navbar-brand{
+    height: 44px !important;
+}
+
 .box-area{
     width: 930px;
 }

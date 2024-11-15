@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <link rel="stylesheet" href="../Views/src/css/product.css">
     <link rel="stylesheet" href="../Views/src/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="./src/js/bootstrap.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="../Views/src/js/bootstrap.js"></script>
     <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
     <?php if (isset($producto)): ?>
     <title>Vista de producto</title>
@@ -58,7 +58,7 @@
                   </div>
             </div>
             <div class="col-lg-4 m-2">
-              <a class="link-secondary text-decoration-none" href="./profile-seller.html"><h5 class="mx-3"><?php echo htmlspecialchars($producto['dt']['seller_name'])?></h5></a>
+              <a class="link-secondary text-decoration-none" href="../Controllers/SellerController.php?view=sellerpf&uid=<?php echo htmlspecialchars($producto['dt']['seller_id'])?>"><h5 class="mx-3"><?php echo htmlspecialchars($producto['dt']['seller_name'])?></h5></a>
                 <h2 class="mx-3" style="background-color: white; margin-bottom: 0%;"><?php echo htmlspecialchars($producto['dt']['title']);?></h2>
 
 
@@ -234,7 +234,7 @@
 
 
                             <div class="card text-bg-dark checkbox" id="1" onclick="ListClick(this)">
-                              <img src="./src/src/img2.png" class="card-img" alt="...">
+                              <img src="../Views/src/src/img2.png" class="card-img" alt="...">
                               <div class="card-img-overlay">
                                 <h5 class="card-title">LISTA 1</h5>
                                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -244,7 +244,7 @@
 
 
                             <div class="card text-bg-dark checkbox" id="2" onclick="ListClick(this)">
-                              <img src="./src/src/img4.png" class="card-img" alt="...">
+                              <img src="../Views/src/src/img4.png" class="card-img" alt="...">
                               <div class="card-img-overlay">
                                 <h5 class="card-title">LISTA 2</h5>
                                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -253,7 +253,7 @@
                             </div>
 
                             <div class="card text-bg-dark checkbox" id="3" onclick="ListClick(this)">
-                              <img src="./src/src/img1.png" class="card-img" alt="...">
+                              <img src="../Views/src/src/img1.png" class="card-img" alt="...">
                               <div class="card-img-overlay">
                                 <h5 class="card-title">LISTA 3</h5>
                                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -546,7 +546,7 @@
         <!--OTROS ARTICULOS-->
         <div class="row justify-content-center text-center mx-5">
           
-          <h2 class="my-5">Otros artículos similares de <span><a href="./profile-seller.html">USERSELLER001</a></span></h2>
+          <h2 class="my-5">Otros artículos similares de <span><a href="./profile-seller.html"><?php echo htmlspecialchars($producto['dt']['seller_name']);?></a></span></h2>
           <div class="col-lg-2 col-md-6 mb-3">
             <div class="card shadow-lg" style="width: 18rem;">
               <img src="./src/src/img1.png" class="card-img-top" alt="...">

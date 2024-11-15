@@ -23,27 +23,27 @@
 
         <div class="row justify-content-center p-3 mt-5">
             <div class="col-lg-3 col-sm-10 bg-light d-flex justify-content-center p-2">
-                <img src="../Views/<?php echo htmlspecialchars($user_pic);?>" alt="seller profile picture" class="rounded-5" style="width: 200px;">
+                <img src="../Views/<?php echo htmlspecialchars($usuario->getPfp());?>" alt="seller profile picture" class="rounded-5" style="width: 200px;">
             </div>
             <div class="col-lg-9 col-sm-10 bg-light border border-rounded rounded-3">
                 <div class="row justify-content-center">
 
-                    <h1 class="ms-5 mt-3"><span><i class="bi bi-patch-check-fill" style="color:blue"></i></span> <?php echo htmlspecialchars($user_name);?></h1>
-                    <h4 class="ms-5 mb-2"> @<?php echo htmlspecialchars($username);?></h4>
+                    <h1 class="ms-5 mt-3"><span><i class="bi bi-patch-check-fill" style="color:blue"></i></span> <?php echo htmlspecialchars($usuario->getName());?></h1>
+                    <h4 class="ms-5 mb-2"> @<?php echo htmlspecialchars($usuario->getUsername());?></h4>
                     <div class="col-lg-4 pt-2 border text-center">
-                        <h3><span><i class="bi bi-bag-check"></i></span> Articulos publicados: <?php echo htmlspecialchars($usuario->getPosts());?></h3>
+                        <h3><span><i class="bi bi-bag-check"></i></span> Articulos publicados: <?php echo htmlspecialchars($usuario->getPosts())?></h3>
                     </div>
                     <div class="col-lg-4 pt-2 border text-center">
                         <h3><span><i class="bi bi-award"></i></span> Preferencia: 98%</h3>
                     </div>
                     <div class="col-lg-4 pt-2 border text-center">
-                        <h3><span><i class="bi bi-calendar-date"></i></span> Desde <?php echo htmlspecialchars($user_logdate);?></h3>
+                        <h3><span><i class="bi bi-calendar-date"></i></span> Desde <?php echo htmlspecialchars($usuario->getLog());?></h3>
                     </div>
 
                 </div>
 
                 <div class="row justify-content-center text-center pt-3 pb-2">
-                    <h5>"Descripcion del vendedor"</h5>
+                    <h5>""</h5>
                 </div>
 
 
@@ -55,7 +55,7 @@
         <!--SECCION DE OPCIONES PARA EL VENDEDOR-->
         <div class="row justify-content-center px-3">
           
-            <div class="col-lg-3 bg-light seller-options" style="display:<?php echo ($user_type === 'seller') ? 'block' : 'none'; ?>">
+            <div class="col-lg-3 bg-light seller-options" style="display:none">
 
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
@@ -127,8 +127,7 @@
 
                       <div class="row justify-content-center my-3">
                         
-                        <div class="card-group">
-                           
+                      <div class="card-group">
                         <?php foreach ($publicaciones as $producto): ?>
                             <div class="card mx-1" style="width: 18rem;">
 
@@ -146,8 +145,7 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
-
-                        </div>
+                    </div>
 
                       </div>
 

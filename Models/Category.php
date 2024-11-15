@@ -38,7 +38,30 @@ class Category {
         return $categorias;
     }
 
-    public function CreateCategory(){
+    public function CreateCategory($title, $description, $author){
+        try {
+            
+            $query = "CALL sp_crear_categoría(?, ?, ?)";
+            $stmt = $this->conexion->prepare($query);
+    
+            
+            $stmt->bind_param("ssi", $title, $description, $author); 
+    
+            
+            if ($stmt->execute()) {
+                return true;
+                
+            } else {
+                error_log("No se pudo crear la categoría: " . $stmt->error);
+                return false;
+            }
+
+           
+        } catch (Exception $e) {
+            error_log("Excepción al crear la categoría: " . $e->getMessage());
+            return false;
+        }
+        
 
     }
 }
