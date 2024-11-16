@@ -57,7 +57,8 @@ if (isset($_GET['id'])) {
 
 } else {
 
-    $productos=$productosModel->obtenerProductos();
+    $resultado=$productosModel->obtenerProductos();
+    $productos=$resultado['productos'];
     include '../Views/dashboard.php';
 }
 

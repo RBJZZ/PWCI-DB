@@ -23,12 +23,15 @@ class Productos{
 
     public function obtenerProductos() {
         $productos = [];
+        $precios = ['precio_minimo' => null, 'precio_maximo' => null];
+
         $stmt = $this->conexion->prepare("CALL sp_FetchProductos()");
         
         if ($stmt) {
             $stmt->execute();
+            
+            
             $result = $stmt->get_result();
-    
             if ($result) {
                 while ($row = $result->fetch_assoc()) {
                     $productos[] = $row;
@@ -37,13 +40,21 @@ class Productos{
             } else {
                 echo "Error al obtener resultados: " . $this->conexion->error;
             }
-    
+
+            if ($stmt->next_result()) {
+                $result = $stmt->get_result();
+                if ($result) {
+                    $precios = $result->fetch_assoc();
+                    $result->free();
+                }
+            }
+
             $stmt->close();
         } else {
             echo "Error en la preparación de la consulta: " . $this->conexion->error;
         }
-    
-        return $productos;
+
+        return ['productos' => $productos, 'precios' => $precios];
     }
 
     public function previewProductos($id){
@@ -164,18 +175,65 @@ class Productos{
         return $productos;
     }
     public function buscarProductos($keyword){
+        $productos = [];
+        $precios = ['precio_minimo' => null, 'precio_maximo' => null];
+    
         $stmt = $this->conexion->prepare("CALL sp_buscar_productos(?)");
         $stmt->bind_param("s", $keyword);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    
+        if ($stmt) {
+            $stmt->execute();
+    
+          
+            $result = $stmt->get_result();
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $productos[] = $row;
+                }
+                $result->free();
+            }
+    
+            
+            if ($stmt->next_result()) {
+                $result = $stmt->get_result();
+                if ($result) {
+                    $precios = $result->fetch_assoc();
+                    $result->free();
+                }
+            }
+    
+            $stmt->close();
+        } else {
+            echo "Error en la preparación de la consulta: " . $this->conexion->error;
+        }
+    
+        return ['productos' => $productos, 'precios' => $precios];
+    }
 
-        $productos = [];
-        
-            while ($row = $result->fetch_assoc()) {
+    public function buscarAvanzado($keyword, $category, $minPrice, $maxPrice, $rating){
+
+        $productos=[];
+        $catSQL = $category ? implode(',', $category) : null;
+        $stmt=$this->conexion->prepare("CALL sp_buscar_avanzado(?,?,?,?,?)");
+        $stmt->bind_param("ssddi", 
+        $keyword,
+        $catSQL,
+        $minPrice,
+        $maxPrice,
+        $rating
+        );
+
+        if($stmt){
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            while( $row = $result->fetch_assoc() ) {
                 $productos[] = $row;
             }
 
-        $stmt->close();
+            $stmt->close();
+
+        }
         return $productos;
     }
     /////////////////////////////////////////////////////////// MÉTODOS SETTERS

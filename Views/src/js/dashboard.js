@@ -56,4 +56,4 @@ const scrollContainer2=document.querySelector('.horizontal-scroll-container2');
     scrollContainer2.scrollLeft = scrollLeft - walk;
   });
 
-  
+ 

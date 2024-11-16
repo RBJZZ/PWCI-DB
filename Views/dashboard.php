@@ -18,6 +18,19 @@
 
 <?php include '../Views/navbar.php';?>
 
+<script>
+              function adjustClasses() {
+                const element = document.getElementById('starter');
+                if (window.innerWidth < 768) {
+                    element.classList.add('ms-5');
+                } else {
+                    element.classList.remove('ms-5');
+                }
+            }
+            window.addEventListener('resize', adjustClasses);
+            window.addEventListener('load', adjustClasses);
+    </script>
+
       <!--CATEGORIAS OFFCANVAS-->
 
       <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">

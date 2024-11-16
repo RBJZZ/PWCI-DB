@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="../Views/src/css/main.css">
     <link rel="stylesheet" href="../Views/src/css/advanced-search.css">
     <link rel="stylesheet" href="../Views/src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="../Views/src/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.js"></script>
     <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
     <title>Búsqueda</title>
 </head>
@@ -15,8 +17,10 @@
 
   <?php include 'navbar.php';?>
     
+    
 
       <!--CONTENIDO-->
+
       <div class="container-fluid" style="margin-top: 58px;">
 
         <div class="row justify-content-center">
@@ -27,22 +31,26 @@
                 <button class="btn btn-lg border shadow-sm rounded-0" id="btn-filter" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Filtrar búsqueda</button>
               </div>
             </div>
-  
-            <div class="result-product-row row justify-content-center text-center m-3 p-2" id="producttype">
+            <div class="row justify-content-center text-center m-3 p-2">
             <h2 class="mb-4" style="margin-left: 0%;">
+              <?php if (!empty($keyword)): ?>
+              Resultados en: "<?php echo htmlspecialchars($keyword); ?>"
+              <?php else:?>
+              Todos los productos
+              <?php endif; ?>
+            </h2>
+            </div>
+            <div class="result-product-row row justify-content-center text-center m-3 p-2 productcontainer" id="product-container">
+            
               
-            <?php if (!empty($keyword)): ?>
-            Resultados en: "<?php echo htmlspecialchars($keyword); ?>"
-            <?php else: ?>
-            Todos los productos
-            <?php endif; ?>
-
+           
             <?php 
             $count = 0;
             foreach ($productos as $producto): 
                
                 if ($count % 6 === 0): ?>
-                    <div class="result-product-row row justify-content-center text-center m-3 p-2" id="producttype">
+                    
+                    <div class="result-product-row row justify-content-center text-center m-3 p-2" id="producttype-<?php echo $count?>">
                 <?php endif; ?>
                 
                 <div class="col-lg-2 col-md-6 mb-3">
@@ -70,8 +78,9 @@
 
             
                 if ($count % 6 !== 0): ?>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
+              </div>
+            
 
             </div>
             
@@ -139,8 +148,8 @@
             </div>
   
   
-          </div>
-        </div>
+      </div>
+        
 
         <!--OFF CANVAS FILTROS DE BUSQUEDA + CATEGORIAS-->
 
@@ -152,6 +161,11 @@
           <div class="offcanvas-body justify-content-center justify-items-center ms-3">
             <div class="row">
 
+            <form id="filterForm" action="../Controllers/SearchController.php?action=advanced" method="POST">
+
+            <input type="hidden" name="keyword" id="keywordInput" value="<?php echo htmlspecialchars($keyword); ?>">
+            <input type="hidden" name="minPrice" value="" id="minPrice">
+            <input type="hidden" name="maxPrice" value="" id="maxPrice">
             <?php
         $count = 0;
         $maxPerColumn = 5;
@@ -165,8 +179,8 @@
             }
             ?>
 
-            <input type="checkbox" class="btn-check" id="categoria-<?php echo $categoria['cat_ID']; ?>" autocomplete="off">
-            <label class="btn btn-outline-secondary rounded-pill mb-1" for="categoria-<?php echo $categoria['cat_ID']; ?>">
+            <input type="checkbox" class="btn-check" name="categorias[]" value="<?php echo htmlspecialchars($categoria['cat_ID'])?>" id="<?php echo htmlspecialchars($categoria['cat_ID']);?>" autocomplete="off">
+            <label class="btn btn-outline-secondary rounded-pill mb-1" for="<?php echo $categoria['cat_ID']; ?>">
             <?php echo "#" . htmlspecialchars(strtoupper($categoria['cat_name'])); ?>
             </label><br>
 
@@ -177,93 +191,75 @@
         
         echo '</div>';
         ?>
-              <!--
-              <div class="col-lg-6">
-               
-                  <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-                  <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-outlined">#JARDINERÍA</label><br>
 
-                  <input type="checkbox" class="btn-check" id="btn-check-2-outlined" autocomplete="off">
-                  <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-2-outlined">#LINEA BLANCA</label><br>
-
-                  <input type="checkbox" class="btn-check" id="btn-check-3-outlined" autocomplete="off">
-                  <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-3-outlined">#COCINA</label><br>
-
-                  <input type="checkbox" class="btn-check" id="btn-check-4-outlined" autocomplete="off">
-                  <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-4-outlined">#ELECTRÓNICA</label><br>
-
-                  <input type="checkbox" class="btn-check" id="btn-check-5-outlined" autocomplete="off">
-                  <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-5-outlined">#DECORACION</label><br>
-
-                  <input type="checkbox" class="btn-check" id="btn-check-6-outlined" autocomplete="off">
-                  <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-6-outlined">#HERRAMIENTA</label><br>
-
-                  <input type="checkbox" class="btn-check" id="btn-check-7-outlined" autocomplete="off">
-                  <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-7-outlined">#ROPA</label><br>
-              </div>
-              <div class="col-lg-6">
-
-                <input type="checkbox" class="btn-check" id="btn-check-8-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-8-outlined">#ZAPATOS</label><br>
-
-                <input type="checkbox" class="btn-check" id="btn-check-9-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-9-outlined">#LIBROS</label><br>
-
-                <input type="checkbox" class="btn-check" id="btn-check-10-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-10-outlined">#VIDEOJUEGOS</label><br>
-
-                <input type="checkbox" class="btn-check" id="btn-check-11-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-11-outlined">#MAYOREO</label><br>
-
-                <input type="checkbox" class="btn-check" id="btn-check-12-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-12-outlined">#BACK2SCHOOL</label><br>
-
-                <input type="checkbox" class="btn-check" id="btn-check-13-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-13-outlined">#TELEFONÍA</label><br>
-
-                <input type="checkbox" class="btn-check" id="btn-check-14-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-14-outlined">#PERIFERICOS</label><br>
-
-              </div>
-
--->
-
-            </div>
+        </div>
 
             <div class="row justify-content-center justify-items-center m-2 p-4" style="border-radius: 25px; background-color: rgba(205, 205, 205, 0.24);">
               <h5 class="mb-3">Opinión de los clientes</h5>
-              <input type="checkbox" class="btn-check" id="btn-check-ranking" autocomplete="off">
+              <input type="checkbox" class="btn-check" name="rating" id="btn-check-ranking" value="4" autocomplete="off">
               <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-ranking">&#9733;&#9733;&#9733;&#9733;+
               </label><br>
 
-              <h5 class="mb-3 mt-3">Rango de precio</h5>
-              <label for="price-range" class="form-label">$0.00 - $10.00</label>
-              <input type="range" class="form-range" min="0" max="5" id="price-range">
+              <div class="mt-4 mb-2" id="priceRangeSlider"></div>
+              <span>Precio mínimo:$<span id="minPriceDisplay"></span></span>
+              <span>Precio máximo:$<span id="maxPriceDisplay"></span></span>
 
               <h5 class="mt-3">Filtrar por</h5>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
                 <label class="form-check-label" for="flexCheckDefault">
                   Más vendidos
                 </label>
               </div>
 
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
                 <label class="form-check-label" for="flexCheckDefault">
                   Menos vendidos
                 </label>
               </div>
-
-
-
-
+              <button type="submit" class="btn-secondary border btn-md btn mt-2">Filtrar</button>
+              </form>
             </div>
+            
           </div>
         </div>
 
       </div>
-     
+     <script>
+      const precioMinimo = parseFloat(<?php echo json_encode($precios['precio_minimo']); ?>);
+      const precioMaximo = parseFloat(<?php echo json_encode($precios['precio_maximo']); ?>);
 
+      var slider = document.getElementById('priceRangeSlider');
+
+      noUiSlider.create(slider, {
+          start: [precioMinimo, precioMaximo], 
+          connect: true,
+          range: {
+              'min': precioMinimo,
+              'max': precioMaximo  
+          },
+          step: 10
+      });
+
+      
+      var minPriceDisplay = document.getElementById('minPriceDisplay');
+      var maxPriceDisplay = document.getElementById('maxPriceDisplay');
+
+      slider.noUiSlider.on('update', function(values, handle) {
+          if (handle === 0) {
+              minPriceDisplay.textContent = Math.round(values[0]);
+          } else {
+              maxPriceDisplay.textContent = Math.round(values[1]);
+          }
+      });
+
+      
+      slider.noUiSlider.on('change', function(values) {
+          document.getElementById('minPrice').value = Math.round(values[0]);
+          document.getElementById('maxPrice').value = Math.round(values[1]);
+      });
+     </script>
+     <script src="../Views/src/js/advanced-search.js"></script>
 </body>
 </html>

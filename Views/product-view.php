@@ -111,7 +111,7 @@
                     <!--FIN DE LAS ESTRELLAS PARA CALIFICAR-->
 
 
-                    <a class="link-secondary text-decoration-none" href="#"><h5>#<?php echo htmlspecialchars($producto['dt']['category']);?></h5></a>
+                    <a class="link-secondary text-decoration-none" href="../Controllers/SearchController.php?c=<?php echo htmlspecialchars($producto['dt']['category'])?>"><h5>#<?php echo htmlspecialchars($producto['dt']['category']);?></h5></a>
                   </div>
                 </div>
 
