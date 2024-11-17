@@ -1,6 +1,5 @@
 document.getElementById('filterForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar el comportamiento predeterminado
-
+    event.preventDefault(); 
     const form = document.getElementById('filterForm');
     const formData = new FormData(form);
 
@@ -11,20 +10,20 @@ document.getElementById('filterForm').addEventListener('submit', function(event)
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        updateProductContainer(data); // Actualiza la interfaz
+        updateProductContainer(data);
     })
     .catch(error => console.error('Error:', error));
 });
 
 function updateProductContainer(productos) {
-    const container = document.getElementById('product-container'); // Selector específico por ID
-    container.innerHTML = ''; // Limpiar contenido previo
+    const container = document.getElementById('product-container'); 
+    container.innerHTML = ''; 
 
-    let row; // Variable para controlar filas dinámicas
+    let row; 
     productos.forEach((producto, index) => {
         if (index % 6 === 0) {
-            if (row) container.appendChild(row); // Agrega la fila anterior al contenedor
-            row = document.createElement('div'); // Nueva fila
+            if (row) container.appendChild(row); 
+            row = document.createElement('div'); 
             row.className = 'row justify-content-center text-center m-3 p-2 productcontainer';
         }
 
@@ -47,5 +46,5 @@ function updateProductContainer(productos) {
         row.innerHTML += productCard;
     });
 
-    if (row) container.appendChild(row); // Agrega la última fila
+    if (row) container.appendChild(row); 
 }

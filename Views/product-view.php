@@ -120,9 +120,9 @@
               <div class="row justify-content-center justify-items-center text-center">
                 <div class="col-lg-9">
                   <button onclick="quitItem()" class="btn-action btn bg-light border shadow-sm" id="minus">-</button>
-                  <button class="btn-action btn bg-light border shadow-sm" id="items" disabled>1</button>
+                  <button class="btn-action btn bg-light border shadow-sm" id="items" disabled>1</button>   
                   <button onclick="addItem()" class="btn-action btn bg-light border shadow-sm" id="plus">+</button>
-                  <button class="btn-action btn bg-light border shadow-sm"><span><svg style="margin-bottom:3px;"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                  <button class="btn-action btn bg-light border shadow-sm" onclick="agregarACarrito(<?php echo $user_id?>,<?php echo $producto['dt']['id']?>,items)"><span><svg style="margin-bottom:3px;"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
                     <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
                   </svg></span> Agregar al carrito</button>
                   <button class="btn-action btn bg-light border shadow-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart" viewBox="0 0 16 16">
@@ -301,6 +301,7 @@
                   function toggleSelection(){
                     if(selectionID!=null){
                       console.log("Se enviará a la base de datos el ID:",selectionID);
+                      agregarALista(selectionID, <?php echo $producto['dt']['id']?>, <?php echo $user_id?>);
                     }else{
                       console.log("No seleccionaste nada jaja");
                     }
@@ -546,7 +547,7 @@
         <!--OTROS ARTICULOS-->
         <div class="row justify-content-center text-center mx-5">
           
-          <h2 class="my-5">Otros artículos similares de <span><a href="./profile-seller.html"><?php echo htmlspecialchars($producto['dt']['seller_name']);?></a></span></h2>
+          <h2 class="my-5">Otros artículos similares de <span><a href="#"><?php echo htmlspecialchars($producto['dt']['seller_name']);?></a></span></h2>
           <div class="col-lg-2 col-md-6 mb-3">
             <div class="card shadow-lg" style="width: 18rem;">
               <img src="./src/src/img1.png" class="card-img-top" alt="...">
@@ -622,6 +623,7 @@
         <p>No se encontraron detalles del producto</p>
       <?php endif; ?>
 
+      <script src="../Views/src/js/product.js"></script>
 
 </body>
 </html>

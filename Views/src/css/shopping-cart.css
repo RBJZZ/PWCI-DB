@@ -1,0 +1,5 @@
+.table .img-thumbnail {
+    width: 80px !important; 
+    height: 80px !important; 
+    object-fit: cover !important; 
+}

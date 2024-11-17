@@ -1,0 +1,13 @@
+{
+    "name": "pwci/comercio",
+    "description": "Es un sitio web para pwci",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "RBJZZ",
+            "email": "rebequeen16@gmail.com"
+        }
+    ],
+    "require": {}
+}

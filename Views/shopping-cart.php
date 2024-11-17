@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/css/main.css">
     <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./src/css/shopping-cart.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="./src/js/bootstrap.js"></script>
@@ -35,7 +36,7 @@
           <thead>
             <tr>
               <th scope="col" class="item-select hide-column" style="width: 20px;"><span><i class="bi bi-check2-square"></i></span></th>
-              <th scope="col">Producto</th>
+              <th scope="col">Cantidad</th>
               <th scope="col">Thumbnail</th>
               <th scope="col">Nombre del producto</th>
               <th scope="col">Precio</th>
@@ -95,12 +96,11 @@
 
         <script>
 
-          /**eliminar**/
 
           var Editactive=false;
           var rowsToDelete=[];
           
-          document.getElementById('editButton').addEventListener('click', function() {
+              document.getElementById('editButton').addEventListener('click', function() {
                   Editactive=!Editactive;
 
                   var checkboxes = document.querySelectorAll('.delete-checkbox');
@@ -118,15 +118,20 @@
               });
 
               document.getElementById('deleteButton').addEventListener('click', function() {
-                  rowsToDelete=[];
-                  var checkboxes = document.querySelectorAll('.delete-checkbox:checked');
-                  checkboxes.forEach(function(checkbox) {
-                      rowsToDelete.push(checkbox.closest('tr'));
-                  });
-
-                
-                  var modal =new bootstrap.Modal(document.getElementById('ModalConfirmDelete'));
+                  const seleccionados=obtenerSeleccionados();
+                  if(seleccionados.length===0){
+                    alert('No hay items seleccionados');
+                    return
+                  }
+                  
+                  const modal =new bootstrap.Modal(document.getElementById('ModalConfirmDelete'));
                   modal.show();
+
+                  document.querySelector('.modal-confirm').addEventListener('click', function() {
+                    eliminarSeleccionados(seleccionados); 
+                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('ModalConfirmDelete'));
+                    modalInstance.hide();
+                  });
 
               });
 
@@ -259,11 +264,12 @@
     function Payment(){
       window.location.href="./payment-page.html";
     }
+
   </script>
 
 
 
-
+<script src="../Views/src/js/shopping-cart.js"></script>
 </body>
 </html>
 
