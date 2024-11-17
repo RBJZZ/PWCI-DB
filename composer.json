@@ -9,5 +9,7 @@
             "email": "rebequeen16@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "paypal/paypal-server-sdk": "^0.6.0"
+    }
 }

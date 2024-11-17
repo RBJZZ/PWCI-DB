@@ -1,6 +1,5 @@
 <?php 
-/*Rebeca Evangelista Jasso
-David Aguilar Acosta*/
+/* API de Carrito -PWCI */
 require_once '../Models/Carrito.php';
 require_once '../Models/Conexion.php';
 session_start();

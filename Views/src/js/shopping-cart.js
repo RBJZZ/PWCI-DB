@@ -23,7 +23,7 @@ function renderizarTabla(items) {
     if (items.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="5" class="text-center">Tu carrito está vacío.</td>
+                <td colspan="5" class="text-center"><h2 style="margin-left:0%;">Tu carrito está vacío.</h2></td>
             </tr>
         `;
         return;
