@@ -28,7 +28,7 @@
           <button id="editButton" class="btn btn-light btn-md border shadow-sm rounded-3 user-active mb-2 mt-2" style="width: 200px;">Editar lista</button>
           <button id="deleteButton" class="btn btn-danger border shadow-sm rounded-3 mb-2 ms-2 mt-2" style="display: none; width:200px;">Eliminar</button>
 
-      </div>
+        </div>
       
       <div class="table-responsive-sm">
 
@@ -163,7 +163,7 @@
             <tbody>
               
               <tr>
-                <td><h2>$500.00</h2></td>
+                <td><h2 id="totalAmount">$0.00</h2></td>
               </tr>
               
             </tbody>
@@ -172,7 +172,7 @@
       </div>
       
       <div class="d-flex justify-content-center">
-        <button class="btn btn-primary btn-lg shadow-lg border" id="button-redirect" onclick="Payment()">Proceder a los métodos de pago</button>
+        <button class="btn btn-primary btn-lg shadow-lg border" id="button-redirect" data-bs-toggle="modal" data-bs-target="#paymentModal">Proceder al Pago</button>
       </div>
       
 
@@ -180,7 +180,9 @@
       
       
 
-    </div>
+    </div><!--FIN DEL ROW-->
+
+
 
     <div class="row justify-content-center text-center m-3 p-2">
 
@@ -259,13 +261,76 @@
 
   </div>
 
-  <script>
 
-    function Payment(){
-      window.location.href="./payment-page.html";
-    }
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Seleccione un método de pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="PaypalPM" id="PaypalPM" checked onclick="PaymentMethod()">
+                                <label class="form-check-label" for="PaypalPM"><i class="bi bi-paypal"></i> PayPal</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="DebitPM" id="DebitPM" onclick="PaymentMethod()">
+                                <label class="form-check-label" for="DebitPM"><i class="bi bi-credit-card-fill"></i> Tarjeta de Débito</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="CreditPM" id="CreditPM" onclick="PaymentMethod()">
+                                <label class="form-check-label" for="CreditPM"><i class="bi bi-credit-card-fill"></i> Tarjeta de Crédito</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-  </script>
+               
+                <div id="credit-debit-form" class="mt-4" style="display:none;">
+                <form id="paymentForm">
+                  <div class="mb-3">
+                      <label for="cardName" class="form-label">Nombre Completo</label>
+                      <input type="text" class="form-control" id="cardName" placeholder="Nombre Completo">
+                  </div>
+                  <div class="mb-3">
+                      <label for="cardNumber" class="form-label">Número de Tarjeta</label>
+                      <input type="text" class="form-control" id="cardNumber" placeholder="**** **** **** ****">
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6 mb-3">
+                          <label for="cardExpiry" class="form-label">Fecha de Expiración</label>
+                          <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA">
+                      </div>
+                      <div class="col-md-6 mb-3">
+                          <label for="cardCVV" class="form-label">CVV</label>
+                          <input type="text" class="form-control" id="cardCVV" placeholder="***">
+                      </div>
+                  </div>
+                  <div class="mb-3">
+                      <label for="cardEmail" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="cardEmail" placeholder="correo@ejemplo.com">
+                  </div>
+                  <div class="text-center">
+                      <button type="submit" class="btn btn-primary" id="confirmPaymentButton">Confirmar Pago</button>
+                  </div>
+              </form>
+                </div>
+
+                
+                <div id="paypal-redirect" class="mt-4 text-center" style="display:none;">
+                    <p style="margin-left:0%">Serás redirigido a la página de PayPal para completar el pago.</p>
+                    <button class="btn btn-primary" onclick="redirigirPayPal()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 

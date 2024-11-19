@@ -32,7 +32,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['action']) && $_GET['act
     $conexion = new Conexion();
     $usuario = new Usuario($conexion->conn);
 
-    $resultado = $usuario->login($_POST["userName"], $_POST["password"]);
+    if(isset($_POST['key'])){
+        $clave=$_POST['key'];
+
+        if (filter_var($clave, FILTER_VALIDATE_EMAIL)) {
+           
+            $resultado=$usuario->loginE($clave, $_POST["password"]);
+            //si es correo
+          
+        } else {
+           //no es correo
+            $resultado = $usuario->login($clave, $_POST["password"]);
+        }
+    }
+
+    
 
     if ($resultado === "admin") {
         header("Location: ../Views/admin-dashboard.php");
@@ -49,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['action']) && $_GET['act
         header("Location: ../Controllers/SellerController.php?id=$id");
         exit();
     } else {
-        echo $resultado; // Mostrar mensaje de error como "Contraseña incorrecta" o "No se pudo iniciar sesión"
+        echo $resultado;
     }
 
     exit();

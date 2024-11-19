@@ -236,7 +236,162 @@ class Productos{
         }
         return $productos;
     }
+
+    public function editarProducto($paymentMethods) {
+        $stmt = $this->conexion->prepare(
+            "CALL sp_update_product(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+        $stmt->bind_param(
+            "issdiisss",
+            $this->id,
+            $this->title,
+            $this->desc,
+            $this->price,
+            $this->stock,
+            $this->category,
+            $this->quotable,
+            $this->videourl,
+            $this->thumbnail
+        );
+    
+        if ($stmt->execute()) {
+            if ($paymentMethods && is_array($paymentMethods)) {
+                $this->conexion->query("DELETE FROM PRODUCTOS_METODOSPAGO WHERE prod_ID = {$this->id}");
+    
+                foreach ($paymentMethods as $method) {
+                    $paymentQuery = $this->conexion->prepare("INSERT INTO PRODUCTOS_METODOSPAGO (prod_ID, method_type) VALUES (?, ?)");
+                    $paymentQuery->bind_param("is", $this->id, $method);
+                    $paymentQuery->execute();
+                    $paymentQuery->close();
+                }
+            }
+    
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
+    public function insertarImagen($productId, $imagePath) {
+        try {
+            $query = $this->conexion->prepare("INSERT INTO PRODUCTOS_IMG (prod_ID, img_path) VALUES (?, ?)");
+            $query->bind_param("is", $productId, $imagePath);
+            if (!$query->execute()) {
+                error_log("Error al insertar imagen en la base de datos: " . $query->error);
+                throw new Exception("Error al insertar imagen en la base de datos.");
+            }
+        } catch (Exception $e) {
+            error_log("Error al insertar imagen: " . $e->getMessage());
+            throw new Exception("Error al insertar imagen.");
+        }
+    }
+   
+    public function actualizarImagenes($additionalImages) {
+        $this->conexion->begin_transaction();
+    
+        try {
+           
+            $deleteQuery = $this->conexion->prepare("DELETE FROM PRODUCTOS_IMG WHERE prod_ID = ?");
+            $deleteQuery->bind_param("i", $this->id);
+            $deleteQuery->execute();
+    
+            foreach ($additionalImages['tmp_name'] as $key => $tmpName) {
+                if ($additionalImages['error'][$key] == UPLOAD_ERR_OK) {
+                    $imageExt = pathinfo($additionalImages['name'][$key], PATHINFO_EXTENSION);
+                    $imagePath = "../Views/uploads/" . uniqid() . "." . $imageExt;
+    
+                    if (!move_uploaded_file($tmpName, $imagePath)) {
+                        throw new Exception("Error al mover el archivo: $tmpName");
+                    }
+    
+                    $insertQuery = $this->conexion->prepare("INSERT INTO PRODUCTOS_IMG (prod_ID, img_path) VALUES (?, ?)");
+                    $insertQuery->bind_param("is", $this->id, $imagePath);
+                    $insertQuery->execute();
+                }
+            }
+    
+            $this->conexion->commit();
+        } catch (Exception $e) {
+            $this->conexion->rollback();
+            error_log("Error en actualizarImagenes: " . $e->getMessage());
+            throw new Exception("Error al actualizar imágenes: " . $e->getMessage());
+        }
+    }
+    
+    
+     public function eliminarImagenes($productId) {
+        try {
+            
+            $query = $this->conexion->prepare("SELECT img_path FROM PRODUCTOS_IMG WHERE prod_ID = ?");
+            $query->bind_param("i", $productId);
+            $query->execute();
+            $result = $query->get_result();
+    
+            while ($row = $result->fetch_assoc()) {
+                $imagePath = $row['img_path'];
+                if (file_exists($imagePath)) {
+                    unlink($imagePath); 
+                }
+            }
+    
+            
+            $deleteQuery = $this->conexion->prepare("DELETE FROM PRODUCTOS_IMG WHERE prod_ID = ?");
+            $deleteQuery->bind_param("i", $productId);
+            $deleteQuery->execute();
+        } catch (Exception $e) {
+            error_log("Error al eliminar imágenes: " . $e->getMessage());
+            throw new Exception("Error al eliminar imágenes.");
+        }
+    }
+    
+
+    private function actualizarMetodosPago($paymentMethods) {
+       
+        $this->conexion->query("DELETE FROM PRODUCTOS_METODOSPAGO WHERE prod_ID = $this->id");
+    
+        foreach ($paymentMethods as $method) {
+            $paymentQuery = $this->conexion->prepare("INSERT INTO PRODUCTOS_METODOSPAGO (prod_ID, method_type) VALUES (?, ?)");
+            $paymentQuery->bind_param("is", $this->id, $method);
+            $paymentQuery->execute();
+            $paymentQuery->close();
+        }
+    }
+    
+    public function obtenerProductoID($id, $seller){
+        try {
+            $stmt = $this->conexion->prepare("CALL sp_fetch_productdata(?, ?)");
+            $stmt->bind_param("ii", $id, $seller);
+            $stmt->execute();
+    
+            $result = [];
+            
+            $mainResult = $stmt->get_result();
+            $result['main'] = $mainResult->fetch_assoc();
+            $mainResult->close();
+    
+            $stmt->next_result();
+            $imagesResult = $stmt->get_result();
+            $result['images'] = $imagesResult->fetch_all(MYSQLI_ASSOC);
+            $imagesResult->close();
+    
+            $stmt->next_result();
+            $methodsResult = $stmt->get_result();
+            $result['methods'] = $methodsResult->fetch_all(MYSQLI_ASSOC);
+            $methodsResult->close();
+    
+            $stmt->close();
+            return $result;
+        } catch (Exception $e) {
+            error_log('Error al obtener detalles del producto: ' . $e->getMessage());
+            return false;
+        }
+    }
+
     /////////////////////////////////////////////////////////// MÉTODOS SETTERS
+    public function setProductId($id){
+        $this->id = $id;
+    }
     public function setSeller($seller){
         $this->seller= $seller;
     }
@@ -280,6 +435,9 @@ class Productos{
     }
 
     /////////////////////////////////////////////////////////// MÉTODOS GETTERS
+    public function getProductId(){
+        return $this->id;
+    }
     public function getSeller(){
         return $this->seller;
     }

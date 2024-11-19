@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/css/main.css">
-    <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Views/src/css/main.css">
+    <link rel="stylesheet" href="../Views/src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Views/src/css/consult-client.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="./src/js/bootstrap.js"></script>
-    <link rel="icon" href="./src/src/logo1.png" type="image/x-icon">
+    <script src="../Views/src/js/bootstrap.js"></script>
+    <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <title>Consultar compras</title>
 </head>
@@ -38,32 +38,28 @@
             <div class="row justify-content-center mt-2">
 
                 <div class="col-lg-2">
-                    <select class="form-select" id="consult-type" aria-label="Default select example" onchange="ChangeFilters()">
+                    <select class="form-select" id="consult-type" aria-label="Default select example">
                         <option selected>Ordenar</option>
                         <option value="1">Orden Ascendente</option>
                         <option value="2">Orden Descendente</option>
                       </select>
                 </div>
-    
-                <div class="col-lg-2" id="box-hide">
-                    <input class="form-control detailed-input" type="date" name="" id="">
-                    <input class="form-control general-input" type="month" placeholder="Mes" style="display:none">
-                </div>
-    
-                <div class="col-lg-2 detailed-input">
-                    <input class="form-control" type="date" name="" id="">
-                </div>
+
     
                 <div class="col-lg-2">
-                    <select class="form-select category-filter" aria-label="Default select example">
-                        <option selected>Seleccione categoría</option>
-                        <option value="1">Todas</option>
-                        <option value="2">Jardinería</option>
-                        <option value="3">Línea Blanca</option>
-                        <option value="4">Zapatos</option>
-                        <option value="5">Libros</option>
-                        <option value="6">etc...</option>
-                      </select>
+                <select class="form-select category-filter" id="category-filter" aria-label="Filtro por categoría">
+                  <option value="">Todo</option>
+                    <?php 
+                    if(isset($cat) && !empty($cat)){
+                        foreach ($cat as $categoria): ?>
+                        <option value="<?php echo $categoria['cat_ID']; ?>">
+                            <?php echo htmlspecialchars($categoria['cat_name']); ?>
+                        </option>
+                        <?php endforeach; ?>
+                    <?php } else { ?>
+                        <option value="0">No encontré nada</option>
+                    <?php } ?>
+                </select>
                 </div>
                 
             </div>
@@ -75,6 +71,7 @@
                         <thead>
                           <tr>
                             <th scope="col">Resultado</th>
+                            <th scope="col">Acciones</th>
                             <th scope="col">Fecha de compra</th>
                             <th scope="col" style="max-width: 200px;">Thumbnail</th>
                             <th scope="col">Nombre del producto</th>
@@ -84,73 +81,32 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                      <tr>
       
+                      
+                        
+                      <td>001</td>
+
+                        <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" 
+                                  data-bs-target="#rateProductModal" 
+                                  onclick="openRatingModal(this)" 
+                                  data-product-id="001" 
+                                  data-product-name="Producto 1">
+                              Calificar/Estado
+                          </button>
+                      </td>
                             
-                            <td>001</td>
-                            <th scope="row">DD/MM/YYYY</th>
-                            <td>
-                              <a href="product-view.html"><img src="./src/src/img-placeholder.png" alt="" class="img-thumbnail"></a>
-                            </td>
-                            <td>Producto 1</td>
-                            <td>$45.00</td>
-                            <td>
-                                <a href="./profile-seller.html">USERSELLER001</a>
-                            </td>
-                          </tr>
-                          <tr>
-      
-                            <td>002</td>
-                            <th scope="row">DD/MM/YYYY</th>
-                            <td>
-                              <a href="product-view.html"><img src="./src/src/img-placeholder.png" alt="" class="img-thumbnail"></a>
-                            </td>
-                            <td>Producto 2</td>
-                            <td>$45.00</td>
-                            <td>
-                                <a href="./profile-seller.html">USERSELLER001</a>
-                            </td>
-                          </tr>
-                          <tr>
-    
-    
-                            <td>003</td>
-                            <th scope="row">DD/MM/YYYY</th>
-                            <td>
-                              <a href="product-view.html"><img src="./src/src/img-placeholder.png" alt="" class="img-thumbnail"></a>
-                            </td>
-                            <td>Producto 3</td>
-                            <td>$45.00</td>
-                            <td>
-                                <a href="./profile-seller.html">USERSELLER001</a>
-                            </td>
-                          </tr>
-    
-    
-                          <td>004</td>
-                            <th scope="row">DD/MM/YYYY</th>
-                            <td>
-                              <a href="product-view.html"><img src="./src/src/img-placeholder.png" alt="" class="img-thumbnail"></a>
-                            </td>
-                            <td>Producto 4</td>
-                            <td>$45.00</td>
-                            <td>
-                                <a href="./profile-seller.html">USERSELLER001</a>
-                            </td>
-                          </tr>
-    
-    
-                          <td>005</td>
-                            <th scope="row">DD/MM/YYYY</th>
-                            <td>
-                              <a href="product-view.html"><img src="./src/src/img-placeholder.png" alt="" class="img-thumbnail"></a>
-                            </td>
-                            <td>Producto 5</td>
-                            <td>$45.00</td>
-                            <td>
-                                <a href="./profile-seller.html">USERSELLER001</a>
-                            </td>
-                          </tr>
+                     <th scope="row">DD/MM/YYYY</th>
+                     <td>
+                       <a href="product-view.html"><img src="./src/src/img-placeholder.png" alt="" class="img-thumbnail"></a>
+                     </td>
+                     <td>Producto 1</td>
+                     <td>$45.00</td>
+                     <td>
+                         <a href="./profile-seller.html">USERSELLER001</a>
+                     </td>
+                   </tr>
+
                           
                         </tbody>
                       </table>
@@ -185,12 +141,57 @@
                 </div>
             </div>
 
-
-
-
-
-            
           </div>
+
+          <div class="modal fade" id="rateProductModal" tabindex="-1" aria-labelledby="rateProductLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rateProductLabel">Calificar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="rating-form">
+                    <input type="hidden" id="modal-product-id" name="product-id">
+
+                    <div class="mb-3">
+                        <label for="modal-product-name" class="form-label">Producto</label>
+                        <input type="text" class="form-control" id="modal-product-name" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product-rating" class="form-label">Calificación</label>
+                        <select class="form-select" id="product-rating" name="rating">
+                            <option value="5">5 - Excelente</option>
+                            <option value="4">4 - Bueno</option>
+                            <option value="3">3 - Regular</option>
+                            <option value="2">2 - Malo</option>
+                            <option value="1">1 - Muy Malo</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product-comment" class="form-label">Comentario</label>
+                        <textarea class="form-control" id="product-comment" name="comment" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product-status" class="form-label">Estado</label>
+                        <select class="form-select" id="product-status" name="status">
+                            <option value="received">Recibido</option>
+                            <option value="pending">Pendiente</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="submitRating()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
     
+<script src="../Views/src/js/consult-client.js"></script>
 </body>
 </html>

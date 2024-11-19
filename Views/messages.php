@@ -74,6 +74,8 @@
                       <div class="container">
                           <div class="row">
                               <div class="col-lg-10 col-sm-6">
+                                <input type="hidden" id="chatId" value="1">
+                                <input type="hidden" id="senderId" value="1">
                                   <input class="form-control form-control-md rounded-pill" type="text" name="message" id="newmessage" placeholder="Escribe un mensaje...">
                               </div>
                               <div class="col-lg-2 col-sm-2">
@@ -88,6 +90,6 @@
     </div>
     </div>
 
-    <script src="./src/js/messages.js"></script>
+    <script src="../Views/src/js/messages.js"></script>
 </body>
 </html>

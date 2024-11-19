@@ -46,10 +46,7 @@
                           <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="CreditPM" id="CreditPM" onclick="PaymentMethod()">
                           <label class="form-check-label" for="thirdRadio"><span><i class="bi bi-credit-card-fill"></i></span> Tarjeta de crédito</label>
                         </li>
-                          <!--<li class="list-group-item">
-                            <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="forthRadio">
-                            <label class="form-check-label" for="forthRadio"><span><i class="bi bi-coin"></i></span> Depósito</label>
-                          </li>-->
+
                       </ul>
                 </div>
 
@@ -175,7 +172,7 @@
             </div>
             <script>
               function Redirect(){
-                window.location.href="./shopping-cart.html";
+                window.location.href="./shopping-cart.php";
               }
             </script>
           </div>

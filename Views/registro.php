@@ -218,5 +218,6 @@
     <!--FIN CONTAINER REGISTRO CLIENTES-->
 
     <script src="./src/js/registro.js"></script>
+    <script type="module" src="../Views/src/js/firebase-register.js"></script>
 </body>
 </html>

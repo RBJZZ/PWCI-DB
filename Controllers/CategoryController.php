@@ -14,6 +14,10 @@ include_once '../Models/Conexion.php';
         include '../Views/advanced-search.php';
     } else if(isset($_GET['view'])&& $_GET['view']==='publicar') {
         include '../Views/publish-product.php';
+    }else if(isset($_GET['view']) && $_GET['view']==='consultas'){
+        include '../Views/consult-sales.php';
+    }else if(isset($_GET['view']) && $_GET['view']=='pedidos'){
+        include '../Views/consult-client.php';
     }
 
 

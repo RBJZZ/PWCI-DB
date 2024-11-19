@@ -61,7 +61,7 @@
             <!--LOGIN FORM START-->
             <form id="loginForm" method="post" action="../Controllers/UsuarioController.php?action=login">
                 <div class="input-group mb-3">
-                    <input id="userName" name="userName" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username / E-mail" required>
+                    <input id="key" name="key" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username / E-mail" required>
                 </div>
                 <div class="input-group mb-1">
                     <input id="password" name="password" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" required>
@@ -94,6 +94,7 @@
       </div>
 
       <script src="./src/js/index.js"></script>
+      <script type="module" src="../Views/src/js/firebase-login.js"></script>
   
 </body>
 </html>

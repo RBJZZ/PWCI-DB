@@ -115,8 +115,10 @@
                   </div>
                 </div>
 
-
+                
+                      <?php if(isset($producto['dt']['quotable']) && $producto['dt']['quotable']!=1){?>
                 <h4 class="m-2 px-2" style=>$<?php echo htmlspecialchars($producto['dt']['price']);?></h4>
+                      <?php }?>
               <div class="row justify-content-center justify-items-center text-center">
                 <div class="col-lg-9">
                   <button onclick="quitItem()" class="btn-action btn bg-light border shadow-sm" id="minus">-</button>
@@ -130,7 +132,12 @@
                   </svg></span></button>
                 </div>
                 <p class="mb-0 mt-2 fw-bold">Pieza(s) disponible(s): <?php echo htmlspecialchars($producto['dt']['stock']);?></p>
-                <p class="mb-3">¿Deseas hacer una cotización? Solicitala <span class="fw-bold"><a class="text-decoration-none" href="./messages.html">aquí</a></span></p>
+                <?php if(isset($producto['dt']['quotable'])&& $producto['dt']['quotable']!=0){?>
+                <p class="mb-3">¿Deseas hacer una cotización? Solicitala <span class="fw-bold"><a class="text-decoration-none createconv" href="../Views/messages.php"
+                data-us="<?php echo htmlspecialchars($user_id);?>"
+                data-p="<?php echo htmlspecialchars($producto['dt']['id']);?>"
+                data-s="<?php echo htmlspecialchars($producto['dt']['seller_id']);?>">aquí</a></span></p>
+                <?php }?>
               </div>
 
                 
@@ -156,8 +163,6 @@
 
 
                   </script>
-
-
 
                 <!--FIN DEL SCRIPT DE AUMENTO DE ITEMS-->
 
@@ -193,7 +198,10 @@
                                   </div>
                                   <div class="mb-3">
                                     <label for="Listdesc" class="form-label">Descripcion</label>
-                                    <textarea class="form-control" id="Listdesc" rows="3" placeholder="Ej:'Productos para la piel'"></textarea>
+                                    <textarea class="form-control" name="Listdesc" id="Listdesc" rows="3" placeholder="Ej:'Productos para la piel'"></textarea>
+                                  </div>
+                                  <div class="mb-3">
+                                  <input type="checkbox" name="ListVisible" id="ListVisible" class="form-check-input for"><span><label for="ListVisible" class="ms-1 p-1 pb-1 form-label">Privada </label></span>
                                   </div>
                                   <div class="mb-3 d-flex justify-content-center">
                                     <button class="btn btn-md btn-light rounded-pill" type="submit" disabled>Guardar</button>
@@ -232,7 +240,7 @@
 
                             </script>
 
-
+                            <div class="lists">
                             <div class="card text-bg-dark checkbox" id="1" onclick="ListClick(this)">
                               <img src="../Views/src/src/img2.png" class="card-img" alt="...">
                               <div class="card-img-overlay">
@@ -261,7 +269,7 @@
                               </div>
                             </div>
 
-                          
+                          </div>
                             
                           </div>
 
@@ -301,7 +309,7 @@
                   function toggleSelection(){
                     if(selectionID!=null){
                       console.log("Se enviará a la base de datos el ID:",selectionID);
-                      agregarALista(selectionID, <?php echo $producto['dt']['id']?>, <?php echo $user_id?>);
+                      agregarALista(selectionID, <?php echo $producto['dt']['id']?>);
                     }else{
                       console.log("No seleccionaste nada jaja");
                     }

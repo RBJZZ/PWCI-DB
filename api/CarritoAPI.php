@@ -42,27 +42,57 @@ switch ($method) {
             exit;
         }
 
-        $productoId = $data['producto_id'] ?? null;
-        $cantidad = $data['cantidad'] ?? 1;
-        $userid = $data['usuario'] ?? null;
+        if (isset($data['accion']) && $data['accion'] === 'procesar_pago') {
+            
+            $usuarioId = $_SESSION['user_id'] ?? null;
+            $metodoPago = $data['metodo_pago'] ?? null;
+            $total = $data['total'] ?? 0;
+    
+            if (!$usuarioId || !$metodoPago) {
+                header('Content-Type: application/json');
+                http_response_code(400);
+                echo json_encode(['success' => false, 'message' => 'Datos incompletos para el pago']);
+                exit;
+            }
+    
+            try {
+                
+                $resultado = $carrito->procesarPedido($usuarioId, $metodoPago);
+    
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true, 'message' => 'Pedido generado exitosamente', 'ordenes' => $resultado]);
+            } catch (Exception $e) {
+                header('Content-Type: application/json');
+                http_response_code(500);
+                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            }
 
-        if (!$productoId || !$userid) {
-            header('Content-Type: application/json');
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
-            exit;
+        }else{
+
+            $productoId = $data['producto_id'] ?? null;
+            $cantidad = $data['cantidad'] ?? 1;
+            $userid = $data['usuario'] ?? null;
+
+            if (!$productoId || !$userid) {
+                header('Content-Type: application/json');
+                http_response_code(400);
+                echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
+                exit;
+            }
+
+            $resultado=$carrito->AddToCart($userid, $productoId, $cantidad);
+
+            if ($resultado) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true]);
+            } else {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Error al agregar al carrito']);
+            }
+
         }
 
-    $resultado=$carrito->AddToCart($userid, $productoId, $cantidad);
-
-    if ($resultado) {
-        header('Content-Type: application/json');
-        echo json_encode(['success' => true]);
-    } else {
-        header('Content-Type: application/json');
-        echo json_encode(['success' => false, 'message' => 'Error al agregar al carrito']);
-    }
-
+       
     break;
 
     case 'DELETE':

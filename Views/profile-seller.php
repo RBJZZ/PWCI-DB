@@ -67,7 +67,7 @@
                       <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <div class="row justify-content-start my-2">
-                                <a href="../Views/consult-sales.php">Consulta de ventas</a>
+                                <a href="../Controllers/CategoryController.php?view=consultas">Consulta de ventas</a>
                             </div>
 
                         </div>

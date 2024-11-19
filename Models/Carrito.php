@@ -39,20 +39,46 @@ class Carrito{
 
     public function removeItems($cartDetailIds) {
         try {
-            // Convertir los IDs en cadena separada por comas
+          
             $ids = implode(',', array_map('intval', $cartDetailIds)); // Sanitizar los IDs
-            error_log('IDs enviados al procedimiento: ' . $ids); // Depuración
-    
-            // Llamar al procedimiento almacenado
-            $query = "CALL sp_removefromcart_batch('$ids')"; // Incluir los IDs directamente
+            error_log('IDs enviados al procedimiento: ' . $ids); 
+
+            $query = "CALL sp_removefromcart_batch('$ids')"; 
             $stmt = $this->conexion->prepare($query);
     
             return $stmt->execute();
         } catch (Exception $e) {
-            error_log('Error al eliminar ítems: ' . $e->getMessage()); // Registrar errores
+            error_log('Error al eliminar ítems: ' . $e->getMessage()); 
             return false;
         }
     }
+    
+    public function procesarPedido($usuarioId, $metodoPago) {
+        try {
+            
+            $stmt = $this->conexion->prepare("CALL sp_procesar_pedido(?, ?, @ordenes)");
+            $stmt->bind_param("is", $usuarioId, $metodoPago);
+    
+            if (!$stmt->execute()) {
+                throw new Exception("Error al ejecutar el procedimiento: " . $stmt->error);
+            }
+    
+            $result = $this->conexion->query("SELECT @ordenes AS ordenes");
+            if ($result) {
+                $row = $result->fetch_assoc();
+                if ($row && $row['ordenes']) {
+                    return json_decode($row['ordenes'], true); 
+                } else {
+                    throw new Exception('No se generaron órdenes.');
+                }
+            } else {
+                throw new Exception("Error al recuperar la salida: " . $this->conexion->error);
+            }
+        } catch (Exception $e) {
+            throw new Exception('Error al procesar el pedido: ' . $e->getMessage());
+        }
+    }
+    
     
    
 }

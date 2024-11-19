@@ -23,6 +23,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     togglePriceInput();
 
+   
+        $('.select2').select2({
+            placeholder: "Selecciona una categoría",
+            width: '100%' 
+        });
+  
+    
+
 });
 
 

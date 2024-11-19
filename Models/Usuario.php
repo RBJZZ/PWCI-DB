@@ -74,10 +74,95 @@ class Usuario{
             return $error;
         }
     }
+
+    public function editarUsuario($userId, $file = null) {
+        
+        $query = $this->conexion->prepare("SELECT us_pfp FROM USUARIOS WHERE us_ID = ?");
+        $query->bind_param("i", $userId);
+        $query->execute();
+        $result = $query->get_result();
+        
+        
+        if ($result && $result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            $this->pfp = $user['us_pfp']; 
+
+        } else {
+            
+            throw new Exception("Usuario no encontrado.");
+        }
+    
+        if (isset($file) && $file['error'] == UPLOAD_ERR_OK) {
+            $img_tmp = $file['tmp_name'];
+            $img_ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $img_name = $this->username . "_" . uniqid() . "." . $img_ext;
+            $this->pfp = "../Views/userprofiles/" . $img_name;
+    
+            if (!move_uploaded_file($img_tmp, $this->pfp)) {
+                $this->pfp = $user['us_pfp'];
+            }
+        }
+    
+        if (empty($this->password)) {
+            $query = $this->conexion->prepare("SELECT us_pass FROM USUARIOS WHERE us_ID = ?");
+            $query->bind_param("i", $userId);
+            $query->execute();
+            $result = $query->get_result();
+
+            if ($result && $result->num_rows > 0) {
+                $user = $result->fetch_assoc();
+                $hashedPassword = $user['us_pass'];
+            } else {
+                
+                throw new Exception("Usuario no encontrado.");
+            }
+        } else {
+            $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT); 
+        }
+    
+        $stmt = $this->conexion->prepare("CALL sp_editar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param(
+            "issssssssi",
+            $userId,
+            $this->username,
+            $hashedPassword,
+            $this->pfp,
+            $this->name,
+            $this->lname,
+            $this->fname,
+            $this->email,
+            $this->bday,
+            $this->gender
+        );
+    
+        if ($stmt->execute()) {
+            $stmt->close();
+            return "Usuario actualizado exitosamente.";
+        } else {
+            $error = "Error al actualizar el usuario: " . $stmt->error;
+            $stmt->close();
+            return $error;
+        }
+    }
+    
+    public function desactivarUsuario($userId) {
+        $stmt = $this->conexion->prepare("CALL sp_delete_usuario(?)");
+        $stmt->bind_param("i", $userId);
+    
+        if ($stmt->execute()) {
+            $stmt->close();
+            return "Usuario desactivado exitosamente.";
+        } else {
+            $error = "Error al desactivar el usuario: " . $stmt->error;
+            $stmt->close();
+            return $error;
+        }
+    }
+    
     //////////////////////////////////////// LOGIN ////////////////////////////////////////////////////////////
-    public function login($username, $password) {
+    public function login($key, $password) {
         $stmt = $this->conexion->prepare("CALL sp_login_usuario(?)");
-        $stmt->bind_param("s", $username);
+        $stmt->bind_param("s", $key);
         $stmt->execute();
         $result = $stmt->get_result();
         $userlog = $result->fetch_assoc();
@@ -110,6 +195,43 @@ class Usuario{
             return "No se pudo iniciar sesión. Verifique sus credenciales.";
         }
     }
+
+    public function loginE($key, $password) {
+        $stmt = $this->conexion->prepare("CALL sp_login_email(?)");
+        $stmt->bind_param("s", $key);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $userlog = $result->fetch_assoc();
+
+        if ($userlog && $userlog['us_estatus'] == 1) {
+            if (password_verify($password, $userlog['us_pass'])) {
+                
+                session_start();
+                $_SESSION["user_id"] = $userlog["id"];
+                $_SESSION["user_name"] = $userlog["nombre"];
+                $_SESSION["user_AP"] = $userlog["apellidoP"];
+                $_SESSION["user_AM"] = $userlog["apellidoM"];
+                $_SESSION["user_bday"] = $userlog["bday"];
+                $_SESSION["user_email"] = $userlog["email"];
+                $_SESSION["user_type"] = $userlog["tipo_usuario"];
+                $_SESSION["type_desc"] = $userlog["descripcion_rol"];
+                $_SESSION["user_logdate"] = $userlog["us_fecha"];
+                $_SESSION["user_pic"] = $userlog["photo_path"];
+                $_SESSION["username"] = $userlog["username"];
+                $_SESSION["usergender"] = $userlog["user_gender"];
+
+                $stmt->close();
+                return $_SESSION["user_type"];
+            } else {
+                $stmt->close();
+                return "Contraseña incorrecta. Verifique sus datos.";
+            }
+        } else {
+            $stmt->close();
+            return "No se pudo iniciar sesión. Verifique sus credenciales.";
+        }
+    }
+
 
     public function getSeller($id){
         $stmt=$this->conexion->prepare("CALL sp_sellerpf(?)");

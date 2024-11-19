@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/css/main.css">
     <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./src/css/lists.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="./src/js/bootstrap.js"></script>
     <link rel="icon" href="./src/src/logo1.png" type="image/x-icon">
@@ -31,17 +32,11 @@
 
                         <div class="list-options px-5 my-3">
                           
-                          <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">
-                              <i class="bi bi-search"></i>
-                            </span>
-                            <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="basic-addon1">
-                          </div>
 
 
                         </div>
 
-                        <div class="card-group mb-3">
+                        <div class="card-group mb-3 list-container">
                 
                           <div class="card mx-1 shadow-sm">
                             <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
@@ -86,47 +81,7 @@
                           
                         </div>
 
-                        <div class="card-group mb-3">
-                
-                          <div class="card mx-1 shadow-sm">
-                            <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                          <div class="card-body">
-                            <h5 class="card-title">Lista 1</h5>
-    
-                          </div>
-                        </div>
-                      
-                        <div class="card mx-1 shadow-sm">
-                        <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                          <h5 class="card-title">Lista 2</h5>
-    
-                        </div>
-                      </div>
-                      
-                        <div class="card mx-1 shadow-sm">
-                        <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                          <h5 class="card-title">Lista 3</h5>
-    
-                        </div>
-                      </div>
-                      
-                        <div class="card mx-1 shadow-sm">
-                        <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                          <h5 class="card-title">Lista 4</h5>
-    
-                        </div>
-                      </div>
-                     
-                        <div class="card mx-1 shadow-sm">
-                        <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                          <h5 class="card-title">Lista 5</h5>
-                        </div>
-                      </div>
-                     
+                        
                         
                           
                         </div>
@@ -146,6 +101,6 @@
                 
               </div>
         
-
+<script src="../Views/src/js/lists.js"></script>
 </body>
 </html>

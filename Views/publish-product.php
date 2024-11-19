@@ -9,12 +9,12 @@
     <script src="../Views/src/js/bootstrap.js"></script>
     <link rel="icon" href="../Views/src/src/logo1.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="vendor/select2/dist/js/select2.min.js"></script>
     <title>Publicar</title>
 </head>
 <body>
@@ -92,7 +92,7 @@
                                     <label for="quotable" class="form-label">Si es cotizable, activa el campo:</label>
                                       <div class="form-check form-switch d-flex justify-content-center">
                                         
-                                        <input class="form-check-input p-2 border" type="checkbox" role="switch" id="quotable">
+                                        <input class="form-check-input p-2 border" type="checkbox" role="switch" id="quotable" name="quotable">
                                         <label class="form-check-label ms-2" for="quotable">Cotizable</label>
                                       </div>
 
@@ -180,7 +180,7 @@
 
                                   <div class="mb-3">
                                     <label for="category-select" class="form-label">Selecciona una categoría</label>
-                                    <select class="form-select select2" id="category-select" name="category-select" aria-label="Default select example" multiple="multiple">
+                                    <select class="form-select select2 cat" id="category-select" name="category-select" aria-label="Default select example" multiple="multiple">
                                       
                                       <?php 
                                       if(isset($cat) && !empty($cat)){
@@ -198,7 +198,7 @@
 
                                     <script>
                                         $(document).ready(function() {
-                                            $('.select2').select2();
+                                            $('.cat').select2();
                                         });
                                     </script>
 

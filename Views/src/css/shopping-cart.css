@@ -3,3 +3,13 @@
     height: 80px !important; 
     object-fit: cover !important; 
 }
+
+.modal-content {
+    border-radius: 10px;
+}
+.list-group-item {
+    cursor: pointer;
+}
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}

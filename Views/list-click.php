@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/css/main.css">
     <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./src/css/list-click.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="./src/js/bootstrap.js"></script>
     <link rel="icon" href="./src/src/logo1.png" type="image/x-icon">
@@ -25,9 +26,19 @@
               
               <div class="col-lg-9">
         
-                <h1 class="mt-4 ">Lista 1</h1>
-                <h3 class="ms-4 ">@Usuario</h3>
-
+                
+                <div class="d-flex align-items-center mt-4">
+                    <h1 id="list-name" class="me-3">Lista 1</h1>
+                    <button class="btn btn-md btn-light border shadow-sm" onclick="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                        </svg>
+                    </button>
+                </div>
+              
+                
+                <h3 class="ms-4" id="user-name">@Usuario</h3>
+                
                 <div class="row justify-content-start">
 
                     <button id="editButton" class="btn btn-light btn-md border shadow-sm rounded-3 user-active mb-2 mt-2" style="width: 200px;">Editar lista</button>
@@ -79,7 +90,7 @@
                   </tbody>
                 </table>
         
-             
+            </div>
         
               </div>
               
@@ -89,7 +100,7 @@
         
          
         
-          </div>
+          
 
 
            <!--MODAL DE ADVERTENCIA-->
@@ -113,8 +124,6 @@
 
         <script>
 
-          /**eliminar**/
-
           var Editactive=false;
           var rowsToDelete=[];
           
@@ -136,16 +145,20 @@
               });
 
               document.getElementById('deleteButton').addEventListener('click', function() {
-                  rowsToDelete=[];
-                  var checkboxes = document.querySelectorAll('.delete-checkbox:checked');
-                  checkboxes.forEach(function(checkbox) {
-                      rowsToDelete.push(checkbox.closest('tr'));
-                  });
-
-                
-                  var modal =new bootstrap.Modal(document.getElementById('ModalConfirmDelete'));
-                  modal.show();
-
+                  const seleccionados=obtenerSeleccionados();
+                  if(seleccionados.length===0){
+                    alert('No hay items seleccionados');
+                    return
+                  }
+                  
+                  mostrarModalAdvertencia(
+                      'Eliminar Ítems',
+                      `¿Estás seguro de que deseas eliminar los ${seleccionados.length} ítems seleccionados?`,
+                      function () {
+                          eliminarSeleccionados(seleccionados);
+                      }
+                  );
+                  
               });
 
               document.querySelector('.modal-confirm').addEventListener('click', function(){
@@ -168,7 +181,7 @@
          </script>
 
 
-      <script src="./src/js/bootstrap.bundle.min.js"></script>
+      <script src="../Views/src/js/list-click.js"></script>
 
 </body>
 </html>
