@@ -25,6 +25,8 @@ switch($method) {
     break;
 
     case 'GET':
+
+       
         $chatId = $_GET['chat_id'] ?? null;
 
         if (!$chatId) {
@@ -32,9 +34,16 @@ switch($method) {
             exit();
         }
     
-        $mensajes = $message->obtenerMensajes($chatId);
-        echo json_encode(["success" => true, "messages" => $mensajes]);
-        
+        $data = $message->obtenerMensajes($chatId);
+    
+        echo json_encode([
+            "success" => true, 
+            "messages" => $data["mensajes"], 
+            "infoExtra" => $data["infoExtra"]
+        ]);
+
+
+
     break;
 
     case 'DELETE':

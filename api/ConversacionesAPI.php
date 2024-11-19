@@ -39,16 +39,40 @@ switch($method){
     break;
 
     case 'GET':
+        if (isset($_GET['list_conversations'])) {
+            $userId = $_GET['user_id'] ?? null;
+            if (!$userId) {
+                echo json_encode(["success" => false, "message" => "ID de usuario no proporcionado."]);
+                exit();
+            }
+    
+            $conversations = $conv->listarConversaciones($userId);
+    
+            echo json_encode([
+                "success" => true,
+                "conversations" => $conversations
+            ]);
+            exit();
 
-        $usuarioID = $_GET['user_id'] ?? null;
-        if ($usuarioID) {
-            $conversaciones = $conv->obtenerConversaciones($usuarioID);
-            echo json_encode(["success" => true, "conversations" => $conversaciones]);
-        } else {
-            echo json_encode(["success" => false, "message" => "Falta el ID del usuario."]);
         }
-
-    break;
+        
+        if(isset($_GET['seller_id'])) {
+            $sellerId = $_GET['seller_id'] ?? null;
+    
+            if (!$sellerId) {
+                echo json_encode(["success" => false, "message" => "ID del vendedor no proporcionado."]);
+                exit();
+            }
+    
+            $conversations = $conv->listarConversacionesVendedor($sellerId);
+    
+            echo json_encode([
+                "success" => true,
+                "conversations" => $conversations
+            ]);
+            exit();
+        }
+    
 
     case 'DELETE':
 

@@ -1,119 +1,127 @@
-function cargarMensajes(chatId) {
-    fetch(`../api/MessagesAPI.php?chat_id=${chatId}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                console.log(data);
-                const messageList = document.getElementById("message-list");
-                data.messages.forEach(message => {
-                    const li = document.createElement("li");
-                    li.className = "list-group-item m-2 p-2 rounded-pill";
-                    li.textContent = message.chat_content;
-                    messageList.appendChild(li);
-                });
-            } else {
-                console.error("Error al cargar mensajes:", data.message);
-            }
-        })
-        .catch(error => console.error("Error en la solicitud AJAX:", error));
-}
-
-document.getElementById("sendButton").addEventListener("click", function () {
-    const chatId = document.getElementById("chatId").value;
-    const senderId = document.getElementById("senderId").value; 
-    const messageContent = document.getElementById("newmessage").value;
-
-    if (!messageContent.trim()) {
-        alert("El mensaje no puede estar vacío.");
-        return;
-    }
-
-    fetch("/api/mensajes.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            sender_id: senderId,
-            content: messageContent,
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const messageList = document.getElementById("message-list");
-            const newMessage = document.createElement("li");
-            newMessage.className = "list-group-item m-2 p-2 rounded-pill balloon balloon-right";
-            newMessage.textContent = messageContent;
-            messageList.appendChild(newMessage);
-
-            document.getElementById("newmessage").value = "";
-        } else {
-            alert("Error al enviar el mensaje: " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error("Error en la solicitud:", error);
-        alert("Ocurrió un error al intentar enviar el mensaje.");
-    });
-});
-
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOMContentLoaded: La página se ha cargado completamente.");
+    console.log("La página se ha cargado completamente.");
 
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-
-    const chatId = getQueryParam('chat_id');
-    console.log("ID de la conversación:", chatId);
-
-    if (chatId) {
-        cargarMensajes(chatId);
-    } else {
-        console.warn("No se encontró el chat_id en la URL.");
-    }
-});
-
-document.addEventListener("DOMContentLoaded", function () {
+    const chatIdInput = document.getElementById("chatId");
+    const senderId = document.getElementById("senderId").value;
+    const conversationList = document.querySelector(".list-group");
     const messageList = document.getElementById("message-list");
-    const chatId = document.getElementById("chatId").value;
+    const sendButton = document.getElementById("sendButton");
+    const messageInput = document.getElementById("newmessage");
+    const productIdInput = document.getElementById('product-id');
+    const buyerIdInput = document.getElementById('buyer-id');
 
     function cargarMensajes(chatId) {
         fetch(`../api/MessagesAPI.php?chat_id=${chatId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    renderizarMensajes(data.messages);
+                   
+                    messageList.innerHTML = "";
+
+                    data.messages.forEach(message => {
+                        const li = document.createElement("li");
+                        li.textContent = message.chat_content;
+
+                        if (Number(message.chat_sender) === Number(senderId)) {
+                            li.className = "list-group-item m-2 p-2 rounded-pill balloon balloon-right";
+                        } else {
+                            li.className = "list-group-item m-2 p-2 rounded-pill balloon balloon-left";
+                        }
+
+                        messageList.appendChild(li);
+                    });
+
+                   
+                    const info = data.infoExtra;
+                    if (info) {
+                        document.getElementById("product-name").textContent = info.prod_name;
+                        document.getElementById("thumb-product").src = `../${info.prod_thumbnail}`;
+                        document.getElementById("cantidad").value = "1";
+                        document.getElementById("precio").value = info.prod_price;
+                    }
                 } else {
-                    console.error("Error al cargar mensajes:", data.message);
+                    console.warn("No se encontraron mensajes o datos adicionales.");
                 }
             })
-            .catch(error => console.error("Error en la solicitud AJAX:", error));
+            .catch(error => console.error("Error al cargar los mensajes:", error));
     }
 
-   
-    function renderizarMensajes(mensajes) {
-      
-        messageList.innerHTML = "";
-        mensajes.forEach(mensaje => {
-            const li = document.createElement("li");
-            li.className = `list-group-item m-2 p-2 rounded-pill balloon ${
-                mensaje.chat_sender === "1" ? "balloon-right" : "balloon-left"
-            }`;
-            li.textContent = mensaje.chat_content;
-            messageList.appendChild(li);
-        });
+
+    function cargarConversaciones(userId) {
+        fetch(`../api/ConversacionesAPI.php?list_conversations=1&user_id=${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                  
+                    conversationList.innerHTML = "";
+
+                   
+                    data.conversations.forEach(conversation => {
+                        const li = document.createElement("li");
+                        li.className = "list-group-item d-flex justify-content-between align-items-center p-3 my-1";
+                        li.dataset.chatId = conversation.chat_ID;
+                        li.innerHTML = `
+                            <span>${conversation.username}</span>
+                            <span class="badge text-bg-primary rounded-pill">${conversation.unread_messages}</span>
+                        `;
+
+
+                        li.addEventListener("click", function () {
+                            chatIdInput.value = conversation.chat_ID;
+                            cargarMensajes(conversation.chat_ID);
+                        });
+
+                        conversationList.appendChild(li);
+                    });
+                } else {
+                    console.warn("No se encontraron conversaciones.");
+                }
+            })
+            .catch(error => console.error("Error al cargar las conversaciones:", error));
     }
 
-    cargarMensajes(chatId);
+ 
+    function enviarMensaje() {
+        const chatId = chatIdInput.value;
+        const messageContent = messageInput.value.trim();
+
+        if (!chatId || !messageContent) {
+            alert("El mensaje no puede estar vacío o falta seleccionar un chat.");
+            return;
+        }
+
+        fetch("../api/MessagesAPI.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                sender_id: senderId,
+                content: messageContent,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                  
+                    const newMessage = document.createElement("li");
+                    newMessage.className = "list-group-item m-2 p-2 rounded-pill balloon balloon-right";
+                    newMessage.textContent = messageContent;
+                    messageList.appendChild(newMessage);
+
+                 
+                    messageInput.value = "";
+                } else {
+                    console.error("Error al enviar el mensaje:", data.message);
+                }
+            })
+            .catch(error => console.error("Error al enviar el mensaje:", error));
+    }
+
+    
+    const userId = senderId;
+    cargarConversaciones(userId);
+
+    sendButton.addEventListener("click", enviarMensaje);
 });
-
-

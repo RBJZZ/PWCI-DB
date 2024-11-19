@@ -25,7 +25,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-lg-3 bg-white" style="max-height: 70%;">
+            <div class="col-lg-3 bg-white" style="max-height: 70%;" style="display:none">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                       <h2 class="accordion-header">

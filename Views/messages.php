@@ -16,7 +16,9 @@
 
     
     <?php include 'navbar.php';?>
-
+    <?php if(isset($_SESSION['user_id'])&&$_SESSION['user_type']==='seller'){?>
+      <input type="text" id="sellerId" hidden value="<?php echo htmlspecialchars($_SESSION['user_id']);?>">
+      <?php } ?>
     <div class="container-fluid" style="margin-top: 58px;">
         <div class="row justify-content-center">
             <div class="col-lg-3 text-center border">
@@ -51,31 +53,58 @@
             <div class="col-lg-9 bg-light border">
 
                 <div class="row justify-content-center bg-light border">
-                    <h4 class="p-3 text-center">TEST</h4>
+                    <h4 class="p-3 text-center border">TEST</h4>
+                    <div class="row justify-content-center text-center bg-light">
+                      <div class="d-flex col-lg-7">
+                      
+                       <div class="col-1">
+                           <img src="../Views/src/src/img-placeholder.png" alt="" id="thumb-product" style="width:50px; height:50px; object-fit:contain;">
+                       </div> 
+                       
+                       <div class="col-4">
+                          <p style="margin-left:0%; margin-bottom:0%" id="product-name">Nombre del producto</p>
+                        </div>
+                       
+                       <div class="col-3">
+                         <input class="form-control" type="text" id="cantidad" name="cantidad" placeholder="0 pz">
+                       </div>
+                        
+                        <div class="col-3">
+                           <input class="form-control" type="text" id="precio" name="precio" placeholder="$0.00">
+                        </div>
+
+                        <div class="col-">
+                          <button type="submit" class="btn btn-md btn-light border shadow-sm" onclick=""><span><svg style="margin-left:3px; margin-bottom:4px;" xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16
+                             0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477
+                              9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97
+                               11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75
+                                0 0 0-.01-1.05z"/>
+                          </svg></span></button>
+                        </div>
+                      
+                        
+                      
+                         <input class="form-control" type="text" hidden id="product-id" name="product-id">
+                         <input class="form-control" type="text" hidden id="seller-id" name="seller-id">
+                      
+                        
+                       
+                      </form>
+                      </div>
+                    </div>
                 </div>
                 <div class="row justify-content-center">
                     <ul class="list-group p-2 m-2 d-flex flex-column" id="message-list">
-                        <li class="list-group-item m-2 p-2 rounded-pill balloon balloon-left">Buenas tardes</li>
-                        <li class="list-group-item m-2 p-2 rounded-pill balloon balloon-left">Me gustaría solicitar cotización de <span style="text-decoration: underline;"><a href="./product-view.html">este producto</a></span></li>
-                        <li class="list-group-item m-2 p-2 rounded-pill balloon balloon-right">Claro, ¿para cuántas piezas?</li>
-                        <li class="list-group-item m-2 p-2 rounded-pill balloon balloon-left">Serían 20, ¿se encuentran disponibles?</li>
-                        <li class="list-group-item m-2 p-2 rounded-pill balloon balloon-right">Sí, claro.</li>
-                        <li class="list-group-item m-2 p-2 rounded-pill balloon balloon-right">El costo por pieza sería de $1900</li>
-                        <li class="list-group-item m-2 p2 rounded-pill balloon balloon-left">Perfecto, ¿cuáles son sus métodos de pago?</li>
-                        <li class="list-group-item m-2 p2 rounded-pill balloon balloon-right">Aceptamos Paypal y transferencias.</li>
-                        <li class="list-group-item m-2 p2 rounded-pill balloon balloon-left">Será por medio de Paypal.</li>
-                        <li class="list-group-item m-2 p2 rounded-pill balloon balloon-left">De único favor, me gustaría una factura, por favor.</li>
-                        <li class="list-group-item m-2 p2 rounded-pill balloon balloon-right">Claro, sin problema. Quedo al pendiente del pago para procesar envío.</li>
-                        <li class="list-group-item m-2 p2 rounded-pill balloon balloon-left">Gracias, me estaré comunicando.</li>
-
+                        
                     </ul>
 
                     <div class="input-container">
                       <div class="container">
                           <div class="row">
                               <div class="col-lg-10 col-sm-6">
-                                <input type="hidden" id="chatId" value="1">
-                                <input type="hidden" id="senderId" value="1">
+                                <input type="hidden" id="chatId" value="">
+                                <input type="hidden" id="senderId" value="<?php echo ($user_id);?>">
                                   <input class="form-control form-control-md rounded-pill" type="text" name="message" id="newmessage" placeholder="Escribe un mensaje...">
                               </div>
                               <div class="col-lg-2 col-sm-2">

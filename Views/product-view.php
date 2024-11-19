@@ -46,6 +46,13 @@
                         <img src="../Views/<?php echo htmlspecialchars($imagen['img_url']);?>" class="d-block w-100 img-fluid" alt="...">
                       </div>
                       <?php endforeach;?>
+                      <div class="carousel-item">
+                      <iframe class="embed-responsive-item" 
+                              src="<?php echo htmlspecialchars($producto['dt']['videolink'])?>" 
+                              allowfullscreen 
+                              style="width: 100%; height: 500px; border: none;">
+                      </iframe>
+                      </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

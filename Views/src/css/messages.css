@@ -1,15 +1,21 @@
 .balloon {
     max-width: 60%;
     word-wrap: break-word;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .balloon-left {
     align-self: flex-start;
     background-color: #f1f0f0;
+    color: #333;
 }
+
 .balloon-right {
     align-self: flex-end;
-    background-color: #88aaa3 !important;
-    color: white !important;
+    background-color: #88aaa3;
+    color: #ffffff;
 }
 .input-container {
     position: fixed;

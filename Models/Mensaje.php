@@ -18,15 +18,21 @@ class Mensaje {
         $stmt = $this->conexion->prepare("CALL sp_obtener_mensajes(?)");
         $stmt->bind_param("i", $chatID);
         $stmt->execute();
-
+    
         $result = $stmt->get_result();
         $mensajes = [];
+    
         while ($row = $result->fetch_assoc()) {
             $mensajes[] = $row;
         }
-
+    
+        
+        $stmt->next_result(); 
+        $result = $stmt->get_result();
+        $infoExtra = $result->fetch_assoc();
+    
         $stmt->close();
-        return $mensajes;
+        return ["mensajes" => $mensajes, "infoExtra" => $infoExtra];
     }
 }
 ?>
