@@ -14,12 +14,15 @@
 </head>
 <body>
 
-    
+
+   
     <?php include 'navbar.php';?>
     <?php if(isset($_SESSION['user_id'])&&$_SESSION['user_type']==='seller'){?>
       <input type="text" id="sellerId" hidden value="<?php echo htmlspecialchars($_SESSION['user_id']);?>">
+      
       <?php } ?>
     <div class="container-fluid" style="margin-top: 58px;">
+    <input type="hidden" id="user-type" name="user-type" value="<?php echo htmlspecialchars($_SESSION['user_type'])?>">
         <div class="row justify-content-center">
             <div class="col-lg-3 text-center border">
                 <h4 class="mt-3 p-2">Mensajes</h4>
@@ -53,9 +56,14 @@
             <div class="col-lg-9 bg-light border">
 
                 <div class="row justify-content-center bg-light border">
-                    <h4 class="p-3 text-center border">TEST</h4>
+                    <h4 class="p-3 text-center border" id="convdisplayname">COTIZACIÓN DE PRODUCTO</h4>
                     <div class="row justify-content-center text-center bg-light">
+
+                    <?php if(isset($_SESSION['user_id']) && $_SESSION['user_type']==='seller'){?>
                       <div class="d-flex col-lg-7">
+
+                      <input type="hidden" id="product-id" value=""> 
+                      <input type="hidden" id="buyer-id" value=""> 
                       
                        <div class="col-1">
                            <img src="../Views/src/src/img-placeholder.png" alt="" id="thumb-product" style="width:50px; height:50px; object-fit:contain;">
@@ -74,7 +82,7 @@
                         </div>
 
                         <div class="col-">
-                          <button type="submit" class="btn btn-md btn-light border shadow-sm" onclick=""><span><svg style="margin-left:3px; margin-bottom:4px;" xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                          <button type="submit" id="generate-link-button" class="btn btn-md btn-light border shadow-sm" onclick=""><span><svg style="margin-left:3px; margin-bottom:4px;" xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16
                              0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477
                               9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97
@@ -92,6 +100,8 @@
                        
                       </form>
                       </div>
+
+                      <?php }?>
                     </div>
                 </div>
                 <div class="row justify-content-center">

@@ -168,6 +168,7 @@
               <thead>
                 <tr>
                   <th scope="col">Editar</th>
+                  <th scope="col">Eliminar</th>
                   <th scope="col">Publicado</th>
                   <th scope="col" style="max-width: 200px;">Thumbnail</th>
                   <th scope="col">Nombre del producto</th>

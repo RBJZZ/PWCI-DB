@@ -345,7 +345,36 @@ class Productos{
         }
     }
     
+    public function aprobarProducto($productID) {
+        $stmt = $this->conexion->prepare("CALL sp_approve_post(?)");
+        $stmt->bind_param("i", $productID);
 
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function contarProductosNoAprobados() {
+        $query = "SELECT COUNT(*) AS count FROM PRODUCTOS WHERE prod_verified = 0";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['count'] ?? 0;
+    }
+    
+    public function eliminarProducto($productID) {
+        $stmt = $this->conexion->prepare("CALL sp_delete_producto(?)");
+        $stmt->bind_param("i", $productID);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     private function actualizarMetodosPago($paymentMethods) {
        
         $this->conexion->query("DELETE FROM PRODUCTOS_METODOSPAGO WHERE prod_ID = $this->id");
@@ -387,6 +416,100 @@ class Productos{
             return false;
         }
     }
+
+    public function obtenerProductoID_ADMIN($id){
+        try {
+            $stmt = $this->conexion->prepare("CALL sp_fetch_productADMIN(?)");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+    
+            $result = [];
+            
+            $mainResult = $stmt->get_result();
+            $result['main'] = $mainResult->fetch_assoc();
+            $mainResult->close();
+    
+            $stmt->next_result();
+            $imagesResult = $stmt->get_result();
+            $result['images'] = $imagesResult->fetch_all(MYSQLI_ASSOC);
+            $imagesResult->close();
+    
+            $stmt->next_result();
+            $methodsResult = $stmt->get_result();
+            $result['methods'] = $methodsResult->fetch_all(MYSQLI_ASSOC);
+            $methodsResult->close();
+    
+            $stmt->close();
+            return $result;
+        } catch (Exception $e) {
+            error_log('Error al obtener detalles del producto: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function obtenerRatingProducto($id) {
+        $ratingsData = [];
+
+        $stmt = $this->conexion->prepare("CALL sp_ObtenerRatings(?)");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+    
+        // Obtener el resultado
+        $result = $stmt->get_result();
+        if ($result) {
+            $ratingsData = $result->fetch_assoc(); 
+            $result->free(); 
+        } else {
+            echo "Error al obtener el rating: " . $this->conexion->error;
+        }
+    
+        $stmt->close(); 
+        return $ratingsData; 
+    }
+    
+
+    public function obtenerComentariosProducto($id) {
+        $comentarios = [];
+    
+        $stmt = $this->conexion->prepare("CALL sp_ObtenerComentarios(?)");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+    
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $comentarios[] = $row; 
+            }
+            $result->free();
+        } else {
+            echo "Error al obtener comentarios: " . $this->conexion->error;
+        }
+    
+        $stmt->close();
+        return $comentarios; 
+    }
+
+    public function fetchPostsForApproval(){
+
+        $query = "CALL sp_fetch_posts_forapproval()";
+        $result = $this->conexion->query($query);
+
+        if ($result) {
+            $data = [];
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row; 
+            }
+            $result->free(); 
+            return $data; 
+        } else {
+            throw new Exception("Error al ejecutar el procedimiento almacenado.");
+        }
+       
+
+    }
+    
+    
 
     /////////////////////////////////////////////////////////// MÉTODOS SETTERS
     public function setProductId($id){

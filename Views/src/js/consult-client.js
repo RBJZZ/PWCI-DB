@@ -42,20 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function fetchPedidos() {
     const order = document.getElementById('consult-type').value === '1' ? 'asc' : 'desc';
-    const category = document.querySelector('.category-filter').value;
+    const categoryElement = document.querySelector('.category-filter');
+    const category = categoryElement.value === "" ? null : categoryElement.value; 
 
-    fetch(`../api/PedidosAPI.php?order=${order}&category=${category}`)
+    let url = `../api/PedidosAPI.php?order=${order}`;
+    if (category !== null) {
+        url += `&category=${category}`;
+    }
+
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
                 console.error('Error:', data.error);
             } else {
-                console.log(data)
+                console.log(data);
                 renderPedidos(data.pedidos);
             }
         })
         .catch(error => console.error('Error al obtener pedidos:', error));
 }
+
 
 function renderPedidos(pedidos) {
     const tbody = document.querySelector('#detailed-consult tbody');
@@ -81,7 +88,7 @@ function renderPedidos(pedidos) {
                     </a>
                 </td>
                 <td>${pedido.product_name}</td>
-                <td>$${pedido.product_price}</td>
+                <td>$${pedido.unitary_price}</td>
                 <td>
                     <a href="../Controllers/SellerController.php?view=sellerpf&uid=${pedido.seller_id}">${pedido.seller_name}</a>
                 </td>

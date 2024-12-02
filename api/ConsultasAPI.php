@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
     $vendedorId = $_SESSION['user_id'];
-    $categoriaId = $data['categoriaId'] ?? null;
-    $fechaInicio = $data['fechaInicio'] ?? null;
-    $fechaFin = $data['fechaFin'] ?? null;
+    $categoriaId = isset($data['categoriaId']) && $data['categoriaId'] !== '' ? $data['categoriaId'] : null;
+    $fechaInicio = isset($data['fechaInicio']) && $data['fechaInicio'] !== '' ? $data['fechaInicio'] : null;
+    $fechaFin = isset($data['fechaFin']) && $data['fechaFin'] !== '' ? $data['fechaFin'] : null;
     $tipoConsulta = $data['tipoConsulta'] ?? null;
 
     if ($tipoConsulta === null || !in_array($tipoConsulta, ['1', '2', '3'])) {
@@ -34,16 +34,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($fechaInicio !== null && !strtotime($fechaInicio)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Fecha de inicio no válida.']);
+        exit;
+    }
+
+    if ($fechaFin !== null && !strtotime($fechaFin)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Fecha de fin no válida.']);
+        exit;
+    }
+
     try {
+
         $resultados = $consulta->consultarVentas($vendedorId, $categoriaId, $fechaInicio, $fechaFin, $tipoConsulta);
-        echo json_encode($resultados);
+        
+        echo json_encode([
+            'success' => true,
+            'data' => $resultados
+        ]);
     } catch (Exception $e) {
+
         error_log($e->getMessage(), 3, '/path/to/error.log');
+        
         http_response_code(500);
         echo json_encode(['error' => 'Error en la consulta: ' . $e->getMessage()]);
     }
     exit;
 }
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

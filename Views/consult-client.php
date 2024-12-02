@@ -57,7 +57,7 @@
                         </option>
                         <?php endforeach; ?>
                     <?php } else { ?>
-                        <option value="0">No encontré nada</option>
+                        <option value="">No encontré nada</option>
                     <?php } ?>
                 </select>
                 </div>

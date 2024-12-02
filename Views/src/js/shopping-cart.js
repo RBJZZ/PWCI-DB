@@ -61,7 +61,7 @@ function renderizarTabla(items) {
     }
 
     items.forEach((item) => {
-        const precio = parseFloat(item.prod_price);
+        const precio = parseFloat(item.final_price);
         const sellerName = item.us_user || 'Vendedor desconocido'; 
         const sellerId = item.prod_seller;
 

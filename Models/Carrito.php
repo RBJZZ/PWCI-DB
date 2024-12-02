@@ -30,7 +30,7 @@ class Carrito{
         $items = $result->fetch_all(MYSQLI_ASSOC);
 
         foreach ($items as &$item) {
-            $item['prod_price'] = (float) $item['prod_price'];
+            $item['final_price'] = (float) $item['final_price'];
         }
 
         $stmt->close();
@@ -78,6 +78,22 @@ class Carrito{
             throw new Exception('Error al procesar el pedido: ' . $e->getMessage());
         }
     }
+    
+    public function agregarProducto($buyerId, $productId, $cantidad, $precio) {
+        $stmt = $this->conexion->prepare("CALL sp_agregar_carrito_auto(?, ?, ?, ?)");
+        $stmt->bind_param("iiid", $buyerId, $productId, $cantidad, $precio); // 'd' para valores decimales
+        $result = $stmt->execute();
+    
+        if ($result) {
+            $stmt->close();
+            return "Producto agregado correctamente";
+        } else {
+            $error = $stmt->error;
+            $stmt->close();
+            return "Error al agregar el producto: " . $error;
+        }
+    }
+    
     
     
    

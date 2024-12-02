@@ -44,7 +44,7 @@
               </li>
             </ul>
 
-            <a href="./index.html"><button class=" mx-1 btn btn-light rounded-pill" type="button">Inicia Sesión</button></a>
+            <a href="./index.php"><button class=" mx-1 btn btn-light rounded-pill" type="button">Inicia Sesión</button></a>
           </div>
         </div>
       </nav>

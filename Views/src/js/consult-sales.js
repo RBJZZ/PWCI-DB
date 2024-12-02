@@ -118,7 +118,12 @@ function ToggleDivs() {
         : "Editar artículo completo";
 }
 
-function renderDetailedResults(data) {
+function renderDetailedResults(response) {
+    if (!response || !Array.isArray(response.data)) {
+        console.error("Error: los datos no son un arreglo válido", response);
+        return;
+    }
+    const data = response.data; 
     const tbody = document.querySelector('#detailed-consult tbody');
     tbody.innerHTML = ''; 
 
@@ -146,7 +151,13 @@ function renderDetailedResults(data) {
 }
 
 
-function renderGeneralResults(data) {
+
+function renderGeneralResults(response) {
+    if (!response || !Array.isArray(response.data)) {
+        console.error("Error: los datos no son un arreglo válido", response);
+        return;
+    }
+    const data = response.data;
     const tbody = document.querySelector('#general-results');
     tbody.innerHTML = ''; 
 
@@ -166,6 +177,7 @@ function renderGeneralResults(data) {
     document.getElementById('general-consult').classList.remove('d-none'); 
 }
 
+
 function cargarDetallesProducto(productId) {
     fetch(`../api/ProductosAPI.php?id=${productId}`)
         .then(response => {
@@ -175,7 +187,7 @@ function cargarDetallesProducto(productId) {
             return response.json();
         })
         .then(data => {
-            console.log('Datos recibidos:', data); // Depurar datos recibidos
+            console.log('Datos recibidos:', data); 
             if (data.error) {
                 alert(`Error: ${data.error}`);
             } else {
@@ -263,6 +275,48 @@ function loadProductData(button) {
     
 }
 
+
+function EliminarProducto(button) {
+    const productId = button.getAttribute('data-product-id');
+
+    if (productId) {
+        if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+            fetch('../api/ProductosAPI.php', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json', },
+                body: JSON.stringify({ productID: productId })                
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.message || 'Error al eliminar el producto');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Producto eliminado exitosamente.');
+                    
+                    const productRow = button.closest('tr'); 
+                    if (productRow) {
+                        productRow.remove();
+                    }
+                } else {
+                    alert(`Error: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error al intentar eliminar el producto.');
+            });
+        }
+    } else {
+        alert('ID del producto no encontrado.');
+    }
+}
+
+
 function renderDisponibilityResults(data) {
     const tbody = document.querySelector('#disponibility-consult tbody');
     tbody.innerHTML = ''; 
@@ -279,6 +333,11 @@ function renderDisponibilityResults(data) {
                             onclick="loadProductData(this)">
                         <span><i class="bi bi-pencil-square"></i></span>
                     </button>
+                </td>
+                <td>
+                <button class="btn btn-danger" data-product-id="${producto.ProductoID}" onclick="EliminarProducto(this)">
+                <span><i class="bi bi-trash3-fill"></i></span>
+                </button>
                 </td>
                 <td>${producto.FechaPublicacion}</td>
                 <td>
@@ -301,7 +360,7 @@ document.getElementById('consult-button').addEventListener('click', () => {
     const tipoConsulta = document.getElementById('consult-type').value;
     const fechaInicio = document.getElementById('fecha-inicio').value || null;
     const fechaFin = document.getElementById('fecha-fin').value || null;
-    const categoriaId = document.getElementById('category-filter').value || null;
+    const categoriaId = document.getElementById('category-filter').value || null; 
 
     if (!tipoConsulta) {
         alert("Selecciona un tipo de consulta.");
@@ -336,7 +395,11 @@ document.getElementById('consult-button').addEventListener('click', () => {
         })
         .catch(error => console.error('Error:', error));
     } else if (tipoConsulta === "3") {
-        fetch(`../api/ConsultasAPI.php?categoriaId=${encodeURIComponent(categoriaId)}`, {
+        const url = categoriaId 
+            ? `../api/ConsultasAPI.php?categoriaId=${encodeURIComponent(categoriaId)}`
+            : '../api/ConsultasAPI.php';
+        
+        fetch(url, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -361,6 +424,7 @@ document.getElementById('consult-button').addEventListener('click', () => {
         });
     }
 });
+
 
 function editarProducto() {
     const form = document.getElementById('edit-product-form');

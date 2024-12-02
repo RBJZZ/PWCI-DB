@@ -19,6 +19,8 @@
     <?php include 'navbar.php';?>
 
       <div class="container-fluid" style="margin-top: 60px; padding-top:20px;">
+      <input type="hidden" id="producto-id" value="<?php echo htmlspecialchars($product_id)?>">
+
         <div class="row justify-content-center">
 
             <div class="col-lg-1 col-sm-3 m-2 product-thumbnail">
@@ -81,43 +83,6 @@
                     </div>
 
 
-                    <!--ESTRELLAS PARA CALIFICAR-->
-
-                    <div class="hidden">
-                    <button class="star">&#9734;</button>
-                    <button class="star">&#9734;</button>
-                    <button class="star">&#9734;</button>
-                    <button class="star">&#9734;</button>
-                    <button class="star">&#9734;</button>
-                   
-                    <script>
-                      const allStars=document.querySelectorAll('.star');
-                      console.log(allStars);
-                      
-                      allStars.forEach((star,i)=>{
-                        star.onclick=function(){
-                     
-                          let current_star_level=i+1;
-                          console.log(current_star_level);
-                          allStars.forEach((star,j)=>{
-                            if(current_star_level>=j+1){
-                              star.innerHTML='&#9733';
-                            }else{
-                              star.innerHTML="&#9734";
-                            }
-
-                          })
-                        }
-                      })
-                      
-
-                    </script>
-                    </div>
-                    
-
-                    <!--FIN DE LAS ESTRELLAS PARA CALIFICAR-->
-
-
                     <a class="link-secondary text-decoration-none" href="../Controllers/SearchController.php?c=<?php echo htmlspecialchars($producto['dt']['category'])?>"><h5>#<?php echo htmlspecialchars($producto['dt']['category']);?></h5></a>
                   </div>
                 </div>
@@ -147,8 +112,6 @@
                 <?php }?>
               </div>
 
-                
-                <!--SCRIPT PARA AUMENTO DE ITEMS DE LA COMPRA-->
 
                   <script>
 
@@ -171,7 +134,7 @@
 
                   </script>
 
-                <!--FIN DEL SCRIPT DE AUMENTO DE ITEMS-->
+               
 
                 <!--MODAL PARA AGREGAR A NUEVA LISTA-->
 
@@ -459,103 +422,9 @@
        
         <div class="row justify-content-center m-3">
            
-            <div class="col-lg-10 col-sm-11">
-                <article class="media">
-                    <figure class="media-left">
-                      <p class="image is-64x64">
-                        <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
-                      </p>
-                    </figure>
-                    <div class="media-content">
-                      <div class="content">
-                        <p>
-                          <strong>Barbara Middleton</strong>
-                          <br />
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros
-                          lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris
-                          sit amet dolor blandit rutrum. Nunc in tempus turpis.
-                          <br />
-                          <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-                        </p>
-                      </div>
-                  
-                      <article class="media">
-                        <figure class="media-left">
-                          <p class="image is-48x48">
-                            <img src="https://bulma.io/assets/images/placeholders/96x96.png" />
-                          </p>
-                        </figure>
-                        <div class="media-content">
-                          <div class="content">
-                            <p>
-                              <strong>Sean Brown</strong>
-                              <br />
-                              Donec sollicitudin urna eget eros malesuada sagittis. Pellentesque
-                              habitant morbi tristique senectus et netus et malesuada fames ac
-                              turpis egestas. Aliquam blandit nisl a nulla sagittis, a lobortis
-                              leo feugiat.
-                              <br />
-                              <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-                            </p>
-                          </div>
-                  
-                          <article class="media">
-                            Vivamus quis semper metus, non tincidunt dolor. Vivamus in mi eu lorem
-                            cursus ullamcorper sit amet nec massa.
-                          </article>
-                  
-                          <article class="media">
-                            Morbi vitae diam et purus tincidunt porttitor vel vitae augue.
-                            Praesent malesuada metus sed pharetra euismod. Cras tellus odio,
-                            tincidunt iaculis diam non, porta aliquet tortor.
-                          </article>
-                        </div>
-                      </article>
-                  
-                      <article class="media">
-                        <figure class="media-left">
-                          <p class="image is-48x48">
-                            <img src="https://bulma.io/assets/images/placeholders/96x96.png" />
-                          </p>
-                        </figure>
-                        <div class="media-content">
-                          <div class="content">
-                            <p>
-                              <strong>Kayli Eunice </strong>
-                              <br />
-                              Sed convallis scelerisque mauris, non pulvinar nunc mattis vel.
-                              Maecenas varius felis sit amet magna vestibulum euismod malesuada
-                              cursus libero. Vestibulum ante ipsum primis in faucibus orci luctus
-                              et ultrices posuere cubilia Curae; Phasellus lacinia non nisl id
-                              feugiat.
-                              <br />
-                              <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-                            </p>
-                          </div>
-                        </div>
-                      </article>
-                    </div>
-                  </article>
-                  
-                  <article class="media">
-                    <figure class="media-left">
-                      <p class="image is-64x64">
-                        <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
-                      </p>
-                    </figure>
-                    <div class="media-content">
-                      <div class="field">
-                        <p class="control">
-                          <textarea class="textarea" placeholder="Escribe un comentario..." style="background-color: white; color: black;"></textarea>
-                        </p>
-                      </div>
-                      <div class="field">
-                        <p class="control">
-                          <button class="button">Publicar comentario</button>
-                        </p>
-                      </div>
-                    </div>
-                  </article>
+            <div id="comentarios-dinamicos" class="col-lg-10 col-sm-11">
+               
+            
             </div>
         
         </div>

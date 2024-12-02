@@ -43,7 +43,7 @@ switch($method){
     
     
         case 'GET':
-            
+
             if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'user') {
                 http_response_code(401); 
                 header('Content-Type: application/json');
@@ -51,12 +51,10 @@ switch($method){
                 exit;
             }
         
-            
             $customerId = $_SESSION['user_id'];
             $order = $_GET['order'] ?? 'desc';
-            $category = $_GET['category'] ?? null;
+            $category = isset($_GET['category']) && $_GET['category'] !== '' ? $_GET['category'] : null;
         
-            
             $order = strtolower($order);
             if (!in_array($order, ['asc', 'desc'])) {
                 http_response_code(400); 
@@ -73,10 +71,8 @@ switch($method){
             }
         
             try {
-               
                 $pedidos = $consultas->obtenerPedidosCliente($customerId, $order, $category);
         
-              
                 if (!empty($pedidos)) {
                     header('Content-Type: application/json');
                     echo json_encode(['pedidos' => $pedidos]);
@@ -91,6 +87,7 @@ switch($method){
                 echo json_encode(['error' => 'Error al obtener pedidos: ' . $e->getMessage()]);
             }
             break;
+        
         
 
     default:

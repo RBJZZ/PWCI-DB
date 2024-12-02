@@ -65,7 +65,46 @@ switch($method){
 
     case 'GET':
 
-        $productId = isset($_GET['id']) ? intval($_GET['id']) : null;
+        if (isset($_GET['comments']) && isset($_GET['id'])) {
+            $productId = intval($_GET['id']); 
+    
+            try {
+                
+                $comentarios = $productosapi->obtenerComentariosProducto($productId);
+    
+                if ($comentarios) {
+                    echo json_encode($comentarios); 
+                } else {
+                    http_response_code(404);
+                    echo json_encode(['error' => 'No se encontraron comentarios para este producto.']);
+                }
+            } catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode(['error' => 'Error del servidor: ' . $e->getMessage()]);
+            }
+            
+        } else if (isset($_GET['ratings']) && isset($_GET['id'])) {
+           
+            $productId = intval($_GET['id']);
+
+            try {
+                $ratingsData = $productosapi->obtenerRatingProducto($productId);
+    
+                if ($ratingsData) {
+                    $ratingsData['avg_rating'] = isset($ratingsData['avg_rating']) ? (float)$ratingsData['avg_rating'] : 0; 
+                    echo json_encode($ratingsData);
+                } else {
+                    http_response_code(404);
+                    echo json_encode(['error' => 'No se encontraron calificaciones para este producto.']);
+                }
+            } catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode(['error' => 'Error del servidor: ' . $e->getMessage()]);
+            }
+
+
+        } else {
+            $productId = isset($_GET['id']) ? intval($_GET['id']) : null;
 
         if (!$productId) {
             http_response_code(400);
@@ -73,7 +112,7 @@ switch($method){
             exit;
         }
     
-        if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'seller') {
+        if (!isset($_SESSION['user_id']) || ($_SESSION['user_type'] !== 'seller')) {
             http_response_code(401);
             echo json_encode(['error' => 'No autorizado']);
             exit;
@@ -94,9 +133,42 @@ switch($method){
             http_response_code(500);
             echo json_encode(['error' => 'Error del servidor: ' . $e->getMessage()]);
         }
+        }
+
     break;
 
+
     case 'DELETE':
+
+        $input = json_decode(file_get_contents('php://input'), true);
+
+    if (isset($input['productID'])) {
+        $productID = intval($input['productID']);
+
+        if ($productID <= 0) {
+            http_response_code(400);
+            echo json_encode(['error' => 'ID del producto inválido']);
+            exit;
+        }
+
+        try {
+            $result = $productosapi->eliminarProducto($productID);
+
+            if ($result) {
+                http_response_code(200); 
+                echo json_encode(['status' => 'success', 'message' => 'Producto eliminado exitosamente']);
+            } else {
+                http_response_code(404); 
+                echo json_encode(['status' => 'error', 'message' => 'Producto no encontrado']);
+            }
+        } catch (Exception $e) {
+            http_response_code(500); 
+            echo json_encode(['status' => 'error', 'message' => 'Error del servidor: ' . $e->getMessage()]);
+        }
+    } else {
+        http_response_code(400); 
+        echo json_encode(['error' => 'ID del producto es obligatorio']);
+    }
         
     break;
 

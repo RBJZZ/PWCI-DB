@@ -48,35 +48,33 @@ class Conversations{
         return $conversaciones;
     }
 
-    public function listarConversaciones($userId) {
-        $stmt = $this->conexion->prepare("
-            SELECT c.chat_ID, u.us_user AS username, u.us_pfp AS user_profile, 
-                   (SELECT COUNT(*) FROM MENSAJES WHERE chat_ID = c.chat_ID AND chat_read = 0) AS unread_messages
-            FROM CONVERSACIONES c
-            JOIN USUARIOS u ON c.chat_us2 = u.us_ID
-            WHERE c.chat_us1 = ? OR c.chat_us2 = ?
-        ");
-        $stmt->bind_param("ii", $userId, $userId);
+    public function listarConversaciones($userId, $userType) {
+        $stmt = $this->conexion->prepare("CALL sp_listar_conversaciones(?, ?)");
+        $stmt->bind_param("is", $userId, $userType);
         $stmt->execute();
         $result = $stmt->get_result();
-    
+        
         $conversations = [];
         while ($row = $result->fetch_assoc()) {
             $conversations[] = $row;
         }
-    
+        
         $stmt->close();
         return $conversations;
     }
     
+    
+    
     public function listarConversacionesVendedor($sellerId) {
         $stmt = $this->conexion->prepare("
-            SELECT c.chat_ID, u.us_user AS username, u.us_pfp AS user_profile, 
-                   p.prod_name AS product_name, p.prod_ID AS product_id, 
-                   (SELECT COUNT(*) FROM MENSAJES WHERE chat_ID = c.chat_ID AND chat_read = 0) AS unread_messages
+            SELECT 
+                c.chat_ID,
+                u1.us_name AS display_name,
+                p.prod_name AS product_name,
+                (SELECT COUNT(*) FROM MENSAJES WHERE chat_ID = c.chat_ID AND chat_read = 0) AS unread_messages
             FROM CONVERSACIONES c
-            JOIN USUARIOS u ON c.chat_us1 = u.us_ID
-            JOIN PRODUCTOS p ON c.chat_product = p.prod_ID
+            LEFT JOIN USUARIOS u1 ON c.chat_us1 = u1.us_ID
+            LEFT JOIN PRODUCTOS p ON c.chat_product = p.prod_ID
             WHERE c.chat_us2 = ?
         ");
         $stmt->bind_param("i", $sellerId);
@@ -91,6 +89,9 @@ class Conversations{
         $stmt->close();
         return $conversations;
     }
+    
+    
+    
     
 }
 ?>
