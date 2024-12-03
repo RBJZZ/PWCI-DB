@@ -38,45 +38,7 @@
 
                         <div class="card-group mb-3 list-container">
                 
-                          <div class="card mx-1 shadow-sm">
-                            <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                          <div class="card-body">
-                            <h5 class="card-title">Lista 1</h5>
-    
-                          </div>
-                        </div>
-                      
-                        <div class="card mx-1 shadow-sm">
-                        <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                          <h5 class="card-title">Lista 2</h5>
-    
-                        </div>
-                      </div>
-                      
-                        <div class="card mx-1 shadow-sm">
-                        <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                          <h5 class="card-title">Lista 3</h5>
-    
-                        </div>
-                      </div>
-                      
-                        <div class="card mx-1 shadow-sm">
-                        <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                          <h5 class="card-title">Lista 4</h5>
-    
-                        </div>
-                      </div>
-                     
-                        <div class="card mx-1 shadow-sm">
-                        <a href="./list-click.html"><img src="./src/src/img-placeholder.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                          <h5 class="card-title">Lista 5</h5>
-                        </div>
-                      </div>
-                     
+                        <h3> No hay listas disponibles :(</h3>
                         
                           
                         </div>

@@ -80,7 +80,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     let displayName = usertype === "seller" 
                         ? conversation.client_name 
                         : conversation.product_name;
-    
+                    
+                    
+                        
                     li.innerHTML = `
                         <span>${displayName +' : '+ conversation.product_name}</span>
                         <span class="badge text-bg-primary rounded-pill">${conversation.unread_messages}</span>
@@ -129,9 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     newMessage.className = "list-group-item m-2 p-2 rounded-pill balloon balloon-right";
                     newMessage.textContent = messageContent;
                     messageList.appendChild(newMessage);
-
-                 
                     messageInput.value = "";
+
                 } else {
                     console.error("Error al enviar el mensaje:", data.message);
                 }

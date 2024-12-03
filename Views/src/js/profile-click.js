@@ -3,6 +3,7 @@ function obtenerPerfilId() {
     return params.get('perfil_id') || null;
 }
 
+
 function renderizarListas(lists) {
     const container = document.getElementById('user-lists-container');
     container.innerHTML = ''; 
@@ -28,7 +29,9 @@ function renderizarListas(lists) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const usid = document.getElementById('usid').value;
     const apiURL = '../api/ListasAPI.php';
+    console.log(apiURL);
 
     fetch(apiURL)
         .then(response => {
@@ -43,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            renderizarListas(data.data);
+            renderizarListas(data.data, data.esPropietario);
         })
         .catch(error => console.error('Error al cargar las listas del usuario:', error));
 });

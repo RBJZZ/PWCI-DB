@@ -21,7 +21,7 @@
         <div class="row justify-content-center justify-items-center">
             <div class="col-lg-4 p-4 m-4">
                 <div class="row justify-items-center justify-content-center text-center p-2">
-
+                    <input type="hidden" id="usid" value="<?php echo htmlspecialchars($user_id)?>">
                     <div class="col-lg-8 bg-light p-3 rounded-4">
                         <img id="img-preview" class="img-fluid border border-rounded rounded-pill m-1" src="./<?php echo htmlspecialchars($user_pic)?>" alt="user(name) profile" style="width: 100px; height:100px;">
                         <h2 class="m-0 mb-2"><?php echo htmlspecialchars($user_name);?></h2>

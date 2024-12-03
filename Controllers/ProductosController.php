@@ -12,8 +12,15 @@ if (isset($_GET['id'])) {
     $producto = $productosModel->previewProductos($product_id);
 
     if ($producto) {
-        
-        include '../Views/product-view.php';
+
+        $sellerid=$producto['dt']['seller_id'];
+        $prodvend=$productosModel->getProductosPorVendedor($sellerid);
+        if($prodvend){
+            include '../Views/product-view.php';
+        }else{
+            echo 'No hay más productos disponibles.';
+        }
+       
         
     } else {
         echo 'No se encontró el producto :(';
@@ -57,7 +64,10 @@ if (isset($_GET['id'])) {
 
 } else {
 
+    //mostrar productos en dashboard
+    //todos los productos
     $resultado=$productosModel->obtenerProductos();
+    $recientes=$productosModel->obtenerProductosRecientes();
     $productos=$resultado['productos'];
     include '../Views/dashboard.php';
 }

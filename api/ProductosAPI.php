@@ -2,6 +2,7 @@
 include_once '../Models/Conexion.php';
 include_once '../Models/Productos.php';
 
+
 $conexion=new Conexion();
 $productosapi=new Productos($conexion->conn);
 session_start();
@@ -10,6 +11,7 @@ $method=$_SERVER['REQUEST_METHOD'];
 
 switch($method){
     case 'POST':
+
         header('Content-Type: application/json');
 
         if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'seller') {
@@ -64,6 +66,8 @@ switch($method){
     break;
 
     case 'GET':
+
+        
 
         if (isset($_GET['comments']) && isset($_GET['id'])) {
             $productId = intval($_GET['id']); 

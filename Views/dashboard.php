@@ -161,7 +161,7 @@
        
         
         <div class="text-center m-2">
-          <h2 style="margin-left:0px; background-color: white;">Basados en tu última visita</h2>
+          <h2 style="margin-left:0px; background-color: white;">Publicados recientemente</h2>
         </div>
 
         <div class="row justify-content-center mx-2 px-5">
@@ -169,101 +169,38 @@
           <div class="horizontal-scroll-container2">
             <div class="horizontal-scroll2">
   
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img1.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img2.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img3.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img4.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
+            <?php
+
+
+            if(isset($recientes) && !empty($recientes)){
+            foreach ($recientes as $rec) {
+                ?>
+                
+                    <div class="card shadow-md rounded-0" style="width: 18rem;">
+                      
+                        <div class="img-container">
+                        <img src="<?php echo htmlspecialchars($rec['prod_thumbnail']); ?>" class="card-img-top rounded-0 img-thumbnail" alt="Product Image">
+                        </div>
+                        
+                        <div class="card-body">
+                            
+                            <h5 class="card-title"><?php echo htmlspecialchars($rec['prod_name']); ?></h5>
+                            
+                            <p class="card-text">$<?php echo number_format($rec['prod_price'], 2); ?></p>
+                            
+                            <a href="../Controllers/ProductosController.php?id=<?php echo $rec['prod_ID'];?>" class="btn btn-card rounded-0">Ver Producto</a>
+                        </div>
+                    </div>
               
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img1.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
+                <?php
+            }
+            }else{
+              echo "<p>No se encontraron productos. </p>";
+
               
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img2.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
+            }
+            ?>
               
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img3.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
-              
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img4.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img1.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
-              <div class="card shadow-md rounded-0" style="width: 18rem;">
-                <img src="../Views/src/src/img2.png" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">$$$</p>
-                  <a href="./product-view.php" class="btn btn-card rounded-0">Go somewhere</a>
-                </div>
-              </div>
-  
-  
             </div>
           </div>
 

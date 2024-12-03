@@ -1,12 +1,24 @@
-function checkRememberedUser() {
-    var rememberedUser = localStorage.getItem('username');
-    if (rememberedUser) {
-        document.getElementById('userName').value = rememberedUser;
-        document.getElementById('formCheck').checked = true;
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const keyInput = document.getElementById('key');
+    const rememberCheckbox = document.getElementById('formCheck');
+
+
+    if (localStorage.getItem('rememberMe') === 'true') {
+        keyInput.value = localStorage.getItem('key') || '';
+        rememberCheckbox.checked = true;
     }
-}
 
-document.getElementById('loginForm').addEventListener('submit', Login);
+   
+    loginForm.addEventListener('submit', () => {
+        const rememberMe = rememberCheckbox.checked;
 
-window.onload = checkRememberedUser;
-
+        if (rememberMe) {
+            localStorage.setItem('key', keyInput.value); 
+            localStorage.setItem('rememberMe', 'true'); 
+        } else {
+            localStorage.removeItem('key'); 
+            localStorage.removeItem('rememberMe');
+        }
+    });
+});

@@ -32,8 +32,6 @@ if(isset($_GET['id'])){
             die("ID de vendedor no válido");
         }
 
-        
-
         if($usuario->getSeller($seller)){
 
             $publicaciones = $productos->getProductosPorVendedor($seller);

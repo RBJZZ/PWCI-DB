@@ -42,31 +42,36 @@ switch ($method) {
     break;
 
     case 'GET':
-
         if (!isset($_SESSION['user_id'])) {
             http_response_code(401);
             echo json_encode(['success' => false, 'message' => 'Usuario no autenticado']);
             exit;
         }
     
-        $usuarioId = $_SESSION['user_id'];
-        
+        $usuarioSesionId = $_SESSION['user_id'];
+    
         if (isset($_GET['id'])) {
-          
             $listaId = intval($_GET['id']);
-            $items = $lista->obtenerItemsDeLista($usuarioId, $listaId);
+            $propietarioId = isset($_GET['ul']) ? intval($_GET['ul']) : $usuarioSesionId;
+    
+            if ($propietarioId !== $usuarioSesionId) {
+                $items = $lista->obtenerItemsDeLista($propietarioId, $listaId);
+                $esPropietario = false;
+            } else {
+                $items = $lista->obtenerItemsDeLista($usuarioSesionId, $listaId);
+                $esPropietario = true;
+            }
     
             header('Content-Type: application/json');
             if ($items) {
-                echo json_encode(['success' => true, 'data' => $items]);
+                echo json_encode(['success' => true, 'data' => $items, 'esPropietario' => $esPropietario]);
             } else {
                 http_response_code(404);
                 echo json_encode(['success' => false, 'message' => 'Lista no encontrada o sin ítems']);
             }
         } else {
-           
-            $listas = $lista->obtenerListas($usuarioId);
-
+            $listas = $lista->obtenerListas($usuarioSesionId);
+    
             header('Content-Type: application/json');
             if ($listas) {
                 echo json_encode(['success' => true, 'data' => $listas]);
@@ -75,8 +80,9 @@ switch ($method) {
                 echo json_encode(['success' => false, 'message' => 'No se encontraron listas']);
             }
         }
+    
+        break;
 
-    break;
 
     case 'PUT':
 

@@ -57,6 +57,35 @@ class Productos{
         return ['productos' => $productos, 'precios' => $precios];
     }
 
+    public function obtenerProductosRecientes() {
+        $productos = [];
+        
+        $stmt = $this->conexion->prepare("CALL sp_Obtener_productos_recientes()");
+        
+        if ($stmt) {
+            $stmt->execute();
+            
+            
+            $result = $stmt->get_result();
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $productos[] = $row;
+                }
+                $result->free();
+            } else {
+                echo "Error al obtener resultados: " . $this->conexion->error;
+            }
+
+          
+
+            $stmt->close();
+        } else {
+            echo "Error en la preparación de la consulta: " . $this->conexion->error;
+        }
+
+        return $productos;
+    }
+
     public function previewProductos($id){
 
         $stmt = $this->conexion->prepare("CALL sp_productopreview(?)");
@@ -175,31 +204,34 @@ class Productos{
         return $productos;
     }
     public function buscarProductos($keyword){
+        $usuarios=[];
         $productos = [];
         $precios = ['precio_minimo' => null, 'precio_maximo' => null];
     
-        $stmt = $this->conexion->prepare("CALL sp_buscar_productos(?)");
+        $stmt = $this->conexion->prepare("CALL sp_buscar_usuarios_productos(?)");
         $stmt->bind_param("s", $keyword);
     
         if ($stmt) {
             $stmt->execute();
     
           
-            $result = $stmt->get_result();
-            if ($result) {
-                while ($row = $result->fetch_assoc()) {
+            $resultados = $stmt->get_result();
+            if ($resultados) {
+                while ($row = $resultados->fetch_assoc()) {
                     $productos[] = $row;
                 }
-                $result->free();
             }
-    
-            
-            if ($stmt->next_result()) {
-                $result = $stmt->get_result();
-                if ($result) {
-                    $precios = $result->fetch_assoc();
-                    $result->free();
+            $stmt->next_result();
+            $resultados = $stmt->get_result();
+            if ($resultados) {
+                while ($row = $resultados->fetch_assoc()) {
+                    $usuarios[] = $row;
                 }
+            }
+            $stmt->next_result(); 
+            $resultados = $stmt->get_result();
+            if ($resultados) {
+                $precios = $resultados->fetch_assoc();
             }
     
             $stmt->close();
@@ -207,7 +239,7 @@ class Productos{
             echo "Error en la preparación de la consulta: " . $this->conexion->error;
         }
     
-        return ['productos' => $productos, 'precios' => $precios];
+        return ['productos' => $productos, 'precios' => $precios, 'usuarios' => $usuarios];
     }
 
     public function buscarAvanzado($keyword, $category, $minPrice, $maxPrice, $rating){

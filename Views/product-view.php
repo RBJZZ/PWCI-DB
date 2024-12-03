@@ -431,70 +431,37 @@
         <!--OTROS ARTICULOS-->
         <div class="row justify-content-center text-center mx-5">
           
-          <h2 class="my-5">Otros artículos similares de <span><a href="#"><?php echo htmlspecialchars($producto['dt']['seller_name']);?></a></span></h2>
-          <div class="col-lg-2 col-md-6 mb-3">
-            <div class="card shadow-lg" style="width: 18rem;">
-              <img src="./src/src/img1.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="./product-view.html" class="btn btn-secondary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6 mb-3">
-            <div class="card shadow-lg" style="width: 18rem;">
-              <img src="./src/src/img2.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="./product-view.html" class="btn btn-secondary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6 mb-3">
-            <div class="card shadow-lg" style="width: 18rem;">
-              <img src="./src/src/img3.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="./product-view.html" class="btn btn-secondary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6">
-            <div class="card shadow-lg" style="width: 18rem;">
-              <img src="./src/src/img4.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="./product-view.html" class="btn btn-secondary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6">
-            <div class="card shadow-lg" style="width: 18rem;">
-              <img src="./src/src/img1.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="./product-view.html" class="btn btn-secondary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6">
-            <div class="card shadow-lg" style="width: 18rem;">
-              <img src="./src/src/img2.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="./product-view.html" class="btn btn-secondary">Go somewhere</a>
-              </div>
+          <h2 class="my-5">Otros artículos de <span><a href="#"><?php echo htmlspecialchars($producto['dt']['seller_name']);?></a></span></h2>
+          
+          <div class="horizontal-scroll-container">
+            <div class="horizontal-scroll">
+  
+            <?php
+          if(isset($prodvend) && !empty($prodvend)){
+          foreach ($prodvend as $p) {
+              ?>
+                  <div class="card shadow-md rounded-0" style="width: 18rem;">
+                    
+                      <div class="img-container">
+                      <img src="../<?php echo htmlspecialchars($p['thumb']); ?>" class="card-img-top rounded-0 img-thumbnail" alt="Product Image">
+                      </div>
+                      
+                      <div class="card-body">
+                          
+                          <h5 class="card-title"><?php echo htmlspecialchars($p['title']); ?></h5>
+                          
+                          <p class="card-text">$<?php echo number_format($p['price'], 2); ?></p>
+                          
+                          <a href="../Controllers/ProductosController.php?id=<?php echo $p['id'];?>" class="btn btn-card rounded-0">Ver Producto</a>
+                      </div>
+                  </div>
+            
+              <?php
+          }
+          }else{
+            echo "<p>No se encontraron productos. </p>";
+          }
+          ?>
             </div>
           </div>
 

@@ -8,26 +8,37 @@ function actualizarDatosLista(nombreLista, nombreUsuario) {
     userNameElement.textContent = `@${nombreUsuario}`;
 }
 
-function obtenerIdLista() {
+function obtenerParametrosLista() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('id');
+    return {
+        id: params.get('id'),
+        ul: params.get('ul') 
+    };
 }
 
+function obtenerIdLista() {
+    const id = new URLSearchParams(window.location.search);
+    return id.get('id');
+}
+
+
 function cargarItemsLista() {
-    const listaId = obtenerIdLista();
-    if (!listaId) {
+    const { id, ul } = obtenerParametrosLista();
+    if (!id) {
         console.error("No se proporcionó un ID de lista.");
         return;
     }
 
-    fetch(`../api/ListasAPI.php?id=${listaId}`, {
+    const url = ul ? `../api/ListasAPI.php?id=${id}&ul=${ul}` : `../api/ListasAPI.php?id=${id}`;
+
+    fetch(url, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            renderizarItems(data.data);
+            renderizarItems(data.data, data.esPropietario);
         } else {
             console.error('Error al cargar ítems de la lista:', data.message);
         }
@@ -35,11 +46,12 @@ function cargarItemsLista() {
     .catch(error => console.error('Error al cargar los ítems:', error));
 }
 
-function renderizarItems(items) {
+
+function renderizarItems(items, esPropietario) {
     const tbody = document.querySelector('table tbody');
     const listNameElement = document.getElementById('list-name');
     const userNameElement = document.getElementById('user-name');
-    tbody.innerHTML = ''; 
+    tbody.innerHTML = '';
 
     if (items.length === 0) {
         tbody.innerHTML = `
@@ -55,12 +67,16 @@ function renderizarItems(items) {
     listNameElement.textContent = items[0].lista_nombre;
     userNameElement.textContent = `@${items[0].usuario_nombre}`;
 
-    items.forEach(item => {
+    items.forEach((item, index )=> {
         const precio = parseFloat(item.prod_price);
         tbody.innerHTML += `
             <tr>
-                <td><input type="checkbox" class="delete-checkbox form-check-input hide-column" style="visibility: hidden;" data-id="${item.listdt_ID}"></td>
-                <th scope="row">${item.cantidad}</th>
+                ${
+                    esPropietario
+                        ? `<td><input type="checkbox" class="delete-checkbox form-check-input" data-id="${item.listdt_ID}"></td>`
+                        : `<td></td>`
+                }
+                <th scope="row">${index+1}</th>
                 <td>
                     <a href="product-view.html?id=${item.prod_ID}">
                         <img src="${item.prod_thumbnail || './src/src/img-placeholder.png'}" alt="${item.prod_name}" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
@@ -71,7 +87,13 @@ function renderizarItems(items) {
             </tr>
         `;
     });
+
+    if (!esPropietario) {
+        document.querySelector('.btn.btn-light.border.shadow-sm').style.display = 'none';
+        document.getElementById('editButton').style.display='none';
+    }
 }
+
 
 function obtenerSeleccionados() {
     const checkboxes = document.querySelectorAll('.delete-checkbox:checked');
@@ -159,6 +181,7 @@ document.querySelector('.btn.btn-light.border.shadow-sm').addEventListener('clic
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarItemsLista();
+
 });
 
 

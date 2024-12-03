@@ -67,11 +67,10 @@ class Usuario{
     
         if ($stmt->execute()) {
             $stmt->close();
-            return "Usuario registrado exitosamente.";
+            return true; 
         } else {
-            $error = "Error al registrar el usuario: " . $stmt->error;
             $stmt->close();
-            return $error;
+            return false; 
         }
     }
 
@@ -158,6 +157,27 @@ class Usuario{
             return $error;
         }
     }
+
+    public function obtenerDetallesUsuario($usuarioId) {
+        try {
+           
+            $query = "CALL sp_get_user_details(?)";
+            $stmt = $this->conexion->prepare($query);
+            $stmt->bind_param("i", $usuarioId);
+            $stmt->execute();
+    
+           
+            $result = $stmt->get_result();
+            $usuario = $result->fetch_assoc();
+            $stmt->close();
+    
+            return $usuario;
+        } catch (Exception $e) {
+            error_log('Error al obtener detalles del usuario: ' . $e->getMessage());
+            return false;
+        }
+    }
+    
     
     //////////////////////////////////////// LOGIN ////////////////////////////////////////////////////////////
     public function login($key, $password) {

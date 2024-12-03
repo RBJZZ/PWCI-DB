@@ -1,6 +1,7 @@
 <?php 
 include_once '../Models/Conexion.php';
 include_once '../Models/Productos.php';
+require_once '../Middlewares/AuthMiddleware.php';
 
 $conexion=new Conexion();
 $posts=new Productos($conexion->conn);
@@ -11,6 +12,8 @@ $method=$_SERVER["REQUEST_METHOD"];
 switch($method){
 
     case 'POST':
+
+        AuthMiddleware::verificarUsuario('admin');
 
         header('Content-Type: application/json'); 
 

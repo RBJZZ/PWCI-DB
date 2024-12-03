@@ -84,68 +84,38 @@
 
             </div>
             
-            <div class="result-pf-row row justify-content-center text-center m-3 p-2" id="usertype" style="display:none">
-              <h2 class="ms-0 mt-3 mb-4">Usuarios de D&B</h2>
+            <div class="result-user-row row justify-content-center text-center m-3 p-2" id="user-container">
+              <h2 class="ms-0 mt-3 mb-4">Usuarios Encontrados</h2>
+              <?php if (!empty($usuarios)): ?>
+                  <?php foreach ($usuarios as $usuario): ?>
+                  <div class="col-lg-2 col-md-4 mb-4">
+                      <div class="card shadow-md border rounded-0">
+                        <div class="img-user">
+                          <img src="../Views/<?php echo htmlspecialchars($usuario['pfp']); ?>" class="card-img-top" alt="Foto de perfil">
+                        </div>  
+                          <div class="card-body">
+                              <h5 class="card-title"><?php echo htmlspecialchars($usuario['username']); ?></h5>
+                              <p class="card-text"><?php echo htmlspecialchars($usuario['role']); ?></p>
+                              <p class="card-text"><small class="text-body-secondary">Desde: <?php echo htmlspecialchars(date('d/m/Y', strtotime($usuario['join_date']))); ?></small></p>
 
-              <div class="card-group">
-                
-                    <div class="card mx-1 shadow-lg">
-                      <a href="./profile-click.html"><img src="./src/src/avatar.png" class="card-img-top" alt="..."></a>
-                    <div class="card-body">
-                      <h5 class="card-title">Usuario</h5>
-                      <p class="card-text">Cliente</p>
-                      <p class="card-text"><small class="text-body-secondary">Since DD/MM/YY</small></p>
-                    </div>
+                              <?php if ($usuario['role'] === 'seller'): ?>
+                                  <a href="../Controllers/SellerController.php?view=sellerpf&uid=<?php echo htmlspecialchars($usuario['id']); ?>" 
+                                    class="btn btn-card rounded-0">Ver Productos</a>
+                              <?php elseif ($usuario['role'] === 'user'): ?>
+                                  
+                                  <a href="../Controllers/UsuarioController.php?action=view&id=<?php echo htmlspecialchars($usuario['id']); ?>" 
+                                    class="btn btn-card rounded-0">Ver Perfil</a>
+                              <?php endif; ?>
+                              
+                          </div>
+                      </div>
                   </div>
-                
-                  <div class="card mx-1 shadow-sm">
-                  <a href="./profile-click.html"><img src="./src/src/avatar.png" class="card-img-top" alt="..."></a>
-                  <div class="card-body">
-                    <h5 class="card-title">Usuario</h5>
-                    <p class="card-text">Cliente</p>
-                    <p class="card-text"><small class="text-body-secondary">Since DD/MM/YY</small></p>
-                  </div>
-                </div>
-                
-                  <div class="card mx-1 shadow-sm">
-                  <a href="./profile-click.html"><img src="./src/src/avatar.png" class="card-img-top" alt="..."></a>
-                  <div class="card-body">
-                    <h5 class="card-title">Usuario</h5>
-                    <p class="card-text">Vendedor</p>
-                    <p class="card-text"><small class="text-body-secondary">Since DD/MM/YY</small></p>
-                  </div>
-                </div>
-                
-                  <div class="card mx-1 shadow-sm">
-                  <a href="./profile-click.html"><img src="./src/src/avatar.png" class="card-img-top" alt="..."></a>
-                  <div class="card-body">
-                    <h5 class="card-title">Usuario</h5>
-                    <p class="card-text">Vendedor</p>
-                    <p class="card-text"><small class="text-body-secondary">Since DD/MM/YY</small></p>
-                  </div>
-                </div>
-               
-                  <div class="card mx-1 shadow-sm">
-                  <a href="./profile-click.html"><img src="./src/src/avatar.png" class="card-img-top" alt="..."></a>
-                  <div class="card-body">
-                    <h5 class="card-title">Usuario</h5>
-                    <p class="card-text">Vendedor</p>
-                    <p class="card-text"><small class="text-body-secondary">Since DD/MM/YY</small></p>
-                  </div>
-                </div>
-               
-                  <div class="card mx-1 shadow-sm">
-                  <a href="./profile-click.html"><img src="./src/src/avatar.png" class="card-img-top" alt="..."></a>
-                  <div class="card-body">
-                    <h5 class="card-title">Usuario</h5>
-                    <p class="card-text">Cliente</p>
-                    <p class="card-text"><small class="text-body-secondary">Since DD/MM/YY</small></p>
-                  </div>
-                </div>
-                
-              </div>
-              
+                  <?php endforeach; ?>
+              <?php else: ?>
+                  <p style="margin-left:0px">No se encontraron usuarios relacionados con la búsqueda.</p>
+              <?php endif; ?>
             </div>
+
   
   
       </div>
@@ -200,6 +170,8 @@
               <label class="btn btn-outline-secondary rounded-pill mb-1" for="btn-check-ranking">&#9733;&#9733;&#9733;&#9733;+
               </label><br>
 
+             
+
               <div class="mt-4 mb-2" id="priceRangeSlider"></div>
               <span>Precio mínimo:$<span id="minPriceDisplay"></span></span>
               <span>Precio máximo:$<span id="maxPriceDisplay"></span></span>
@@ -227,6 +199,11 @@
 
       </div>
      <script>
+
+              <?php
+              $precioMinimo = isset($precios['precio_minimo']) ? $precios['precio_minimo'] : 0;
+              $precioMaximo = isset($precios['precio_maximo']) ? $precios['precio_maximo'] : 0;
+              ?>
       const precioMinimo = parseFloat(<?php echo json_encode($precios['precio_minimo']); ?>);
       const precioMaximo = parseFloat(<?php echo json_encode($precios['precio_maximo']); ?>);
 
